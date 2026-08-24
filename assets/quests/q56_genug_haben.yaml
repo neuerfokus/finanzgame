@@ -1,0 +1,85 @@
+id: q56_genug_haben
+title: Wann ist genug genug?
+location: monetaria.heimathafen
+reward:
+  cash_cents: 2000
+  xp: 300
+topic: psychologie
+prerequisites:
+  - q20_geld_vs_glueck
+  - q44_gewinne_laufen
+steps:
+  - id: intro
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Wow, du hast richtig was aufgebaut. Respekt!"
+      - "Mal eine Frage, die sich kaum jemand stellt:"
+      - "Wofür sammelst du das Geld eigentlich?"
+      - "Geld ist ein Werkzeug — kein Ziel an sich."
+
+  - id: dein_ziel
+    type: choice
+    prompt: "Was willst du mit deinem Vermögen?"
+    options:
+      - id: frei
+        label: "Frei sein — selbst entscheiden, was ich mache."
+      - id: sicher
+        label: "Sicherheit — nie wieder Geldsorgen."
+      - id: mehr
+        label: "Einfach immer mehr. Geht doch immer mehr."
+
+  - id: was_ist_fire
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Es gibt einen Punkt, der heißt 'finanziell frei'."
+      - "Das ist, wenn die Erträge aus deinem Vermögen reichen,"
+      - "um deine Lebenskosten zu zahlen — ohne dass du arbeiten musst."
+      - "Ab da arbeitest du, weil du WILLST, nicht weil du MUSST."
+
+  - id: fire_quiz
+    type: quiz
+    question: "Was bedeutet 'finanziell frei'?"
+    options:
+      - id: ertraege
+        label: "Die Erträge aus dem Vermögen decken die Lebenskosten."
+      - id: million
+        label: "Genau eine Million auf dem Konto haben."
+      - id: nie
+        label: "Nie wieder Geld ausgeben müssen."
+    correct: ertraege
+    explanation: >-
+      Finanziell frei heißt nicht 'unendlich reich'. Es heißt: deine
+      Erträge (Zinsen, Dividenden, Mieten) reichen für dein Leben. Wer
+      bescheiden lebt, wird früher frei als ein Vielverdiener, der alles
+      ausgibt.
+
+  - id: lifestyle
+    type: choice
+    prompt: "Du verdienst jetzt mehr. Was machst du?"
+    options:
+      - id: gleich
+        label: "Lebe weiter wie bisher, lege den Rest an."
+      - id: bisschen
+        label: "Gönne mir etwas mehr, der Rest wird angelegt."
+      - id: alles
+        label: "Teureres Zimmer, teurere Sachen — ich kann es mir leisten."
+
+  - id: lifestyle_falle
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Aufgepasst vor der 'Lifestyle-Falle':"
+      - "Wer bei mehr Geld auch immer mehr ausgibt, kommt nie an."
+      - "Das Ziel rückt mit jedem Euro Ausgabe weiter weg."
+      - "Ein bisschen gönnen ist okay — aber halte den Abstand."
+
+  - id: schluss
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Du musst nicht der Reichste sein."
+      - "Du musst nur genug haben, um frei zu entscheiden."
+      - "Und 'genug' kennt nur, wer sich die Frage überhaupt stellt."
+      - "Stark, dass du das mit deinem Alter schon tust."

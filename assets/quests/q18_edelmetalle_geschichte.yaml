@@ -1,0 +1,32 @@
+id: q18_edelmetalle_geschichte
+title: Warum vertrauen Menschen seit 5000 Jahren auf Gold?
+location: monetaria.goldmine
+prerequisites: [q12_gold_als_schutz]
+reward:
+  cash_cents: 500
+  xp: 80
+topic: edelmetalle
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gold und Silber sind seit 5000 Jahren Zahlungsmittel. Warum?
+      - Gold rostet nicht, ist selten, weltweit erkennbar und teilbar.
+      - Wenn Papiergeld an Wert verliert, behält Gold meist seine Kaufkraft.
+      - Aber Achtung - Gold gibt keine Zinsen und keine Dividenden.
+  - id: quiz
+    type: quiz
+    question: Warum war und ist Gold ein begehrter Wertspeicher?
+    options:
+      - { id: a, label: Weil es Strom leitet und in jeder Elektronik steckt }
+      - { id: b, label: Weil es selten ist, nicht rostet und weltweit anerkannt wird }
+      - { id: c, label: Weil die Regierung den Preis garantiert }
+    correct: b
+    explanation: Gold ist knapp, beständig und kulturell etabliert - kein Staat garantiert den Preis.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Silber, Platin und Palladium sind ähnlich, aber auch industriell stark gefragt.
+      - 5 bis 10 Prozent Edelmetalle im Portfolio sind ein klassischer Inflationsschutz.

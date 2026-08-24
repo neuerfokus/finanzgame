@@ -1,0 +1,62 @@
+id: q55_fake_shop_phishing
+title: Das zu gute Angebot
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1000
+  xp: 200
+topic: betrug
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Boah, schau mal! Dieser Shop hat das neue Handy für 99 € statt 1000 €!"
+      - "Steht nur noch 2 Minuten im Angebot. Ich kauf das jetzt schnell!"
+
+  - id: fake_shop_quiz
+    type: quiz
+    question: "Ein unbekannter Shop bietet ein 1000-€-Handy für 99 €. Was tust du?"
+    options:
+      - id: kaufen
+        label: "Sofort kaufen, bevor es weg ist!"
+      - id: skeptisch
+        label: "Skeptisch sein — zu gut um wahr zu sein ist meist Betrug."
+      - id: daten
+        label: "Erst alle meine Daten eingeben, dann schauen."
+    correct: skeptisch
+    explanation: >-
+      Fake-Shops locken mit Traum-Preisen und Zeitdruck ("nur noch
+      2 Minuten!"). Du zahlst und bekommst nichts. Faustregel: zu gut um
+      wahr zu sein = Finger weg. Vorher Bewertungen prüfen.
+
+  - id: zwischendialog
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Hm, stimmt... und jetzt kam noch eine Mail:"
+      - "'Dein Konto wurde gesperrt! Klick hier und gib dein Passwort ein.'"
+      - "Soll ich da mein Passwort eingeben?"
+
+  - id: phishing_quiz
+    type: quiz
+    question: "Eine Mail will, dass du auf einen Link klickst und dein Passwort eingibst. Was ist richtig?"
+    options:
+      - id: eingeben
+        label: "Passwort eingeben — sonst bleibt das Konto gesperrt."
+      - id: nicht_klicken
+        label: "Nicht klicken — echte Firmen fragen so nie nach Passwörtern."
+      - id: weiterleiten
+        label: "Die Mail an Freunde weiterleiten."
+    correct: nicht_klicken
+    explanation: >-
+      Das ist Phishing: Betrüger wollen dein Passwort klauen. Echte
+      Anbieter fragen NIE per Mail oder Link danach. Nicht klicken —
+      lieber selbst die offizielle Seite oder App öffnen und dort
+      nachsehen.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Puh, gut dass ich gefragt hab. Fast hätte ich Geld verloren UND mein Konto."
+      - "Zu gut um wahr zu sein, und niemals Passwörter rausgeben. Gemerkt!"

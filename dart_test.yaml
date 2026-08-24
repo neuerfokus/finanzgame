@@ -1,0 +1,11 @@
+# Test-Runner-Konfiguration (wird von `flutter test` gelesen).
+#
+# Globaler Timeout: hängende Tests scheitern nach 90 s, statt die ganze
+# Suite zu blockieren (history: order-abhängige „Cannot use Ref after
+# disposed"-Flakes nach async-Gaps — siehe CLAUDE.md Lektionen).
+timeout: 90s
+
+# Bei seltenen Flakes 1× automatisch wiederholen, bevor rot gemeldet wird.
+# Deckt die wenigen verbleibenden Order-/Timing-Wackler ab, ohne echte
+# Fehler zu verstecken (ein echter Fehler scheitert auch beim Retry).
+retry: 1

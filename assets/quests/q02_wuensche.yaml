@@ -1,0 +1,48 @@
+id: q02_wuensche
+title: Wünsche und Notwendigkeiten
+location: monetaria.heimathafen
+prerequisites:
+  - q01_sparschwein
+reward:
+  cash_cents: 150
+  xp: 40
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir vor, du hast 100 Euro für den ganzen Monat.
+      - Drei Dinge willst du - Sprit fürs Moped, mit Freunden weggehen, und neue Schuhe.
+      - Aber 100 Euro reichen nicht für alles. Du musst dich entscheiden.
+      - Frag dich bei jedem - was passiert, wenn ich es weglasse?
+  - id: classify
+    type: quiz
+    question: Ohne welche dieser Sachen kommst du nicht mehr zurecht?
+    options:
+      - { id: a, label: Neue Schuhe }
+      - { id: b, label: Sprit fürs Moped }
+      - { id: c, label: Mit Freunden weggehen }
+    correct: b
+    explanation: Ohne Sprit steht dein Moped - und damit bricht plötzlich vieles weg - der Weg zur Arbeit, zur Schule, zu Freunden. Das ist eine Notwendigkeit - ohne sie funktioniert der Rest nicht. Schuhe und Weggehen sind schön, aber es geht auch ohne - das sind Wünsche.
+  - id: graubereich
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Übrigens - neue Schuhe waren eben ein Wunsch.
+      - Aber wenn deine einzigen Schuhe komplett durchgelaufen sind? Dann sind neue plötzlich eine Notwendigkeit.
+      - Es kommt nicht auf das Ding an - sondern darauf, ob du ohne nicht mehr klarkommst.
+      - So schnell kann sich eine Priorität ändern. Stell dir die Frage deshalb immer neu.
+  - id: priority
+    type: choice
+    prompt: Der Tank ist voll, 60 Euro sind noch übrig. Was machst du damit?
+    options:
+      - { id: weggehen, label: Mit Freunden weggehen }
+      - { id: schuhe, label: Neue Schuhe kaufen }
+      - { id: sparen, label: Etwas zurücklegen für nächsten Monat }
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Merk dir die Frage - "Bricht ohne das der Rest zusammen?" Wenn ja, ist es eine Notwendigkeit. Wenn nein, ein Wunsch.
+      - Notwendigkeiten kommen zuerst, Wünsche danach - mit dem, was übrig bleibt.
+      - Und das wächst mit dir - ziehst du mal aus, kommen Miete und Essen dazu. Auch das sind dann Notwendigkeiten, nur größere.

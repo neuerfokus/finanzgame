@@ -1,0 +1,30 @@
+id: q38_buy_and_hold
+title: Buy and Hold - die langweilige Strategie
+location: monetaria.aktien_archipel
+prerequisites: [q34_panik_vermeiden]
+reward:
+  cash_cents: 500
+  xp: 110
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Buy and Hold - kaufen und halten. Klingt simpel. Ist es auch.
+      - Strategie - Aktien oder ETFs kaufen, jahrzehntelang behalten, durch alle Krisen.
+      - Vorteil - keine Gebühren fürs ständige Umschichten, Steuern erst beim Verkauf.
+      - Nachteil - du musst Nerven haben wenn der Kurs fällt.
+  - id: quiz
+    type: quiz
+    question: Welche Eigenschaft macht Buy-and-Hold so wirksam?
+    options:
+      - { id: a, label: Tages-Trading mit Hebel }
+      - { id: b, label: Jahrzehntelange Anlagedauer + niedrige Kosten }
+      - { id: c, label: Schnelles Reagieren auf News }
+    correct: b
+    explanation: Zeit + niedrige Kosten = Buy-and-Hold-Magie.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Langweilig + diszipliniert = oft den höchsten Gewinn. Nichts tun ist hier eine Strategie.

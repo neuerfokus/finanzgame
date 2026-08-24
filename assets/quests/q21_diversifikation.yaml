@@ -1,0 +1,45 @@
+id: q21_diversifikation
+title: Nicht alles auf eine Karte
+location: monetaria.heimathafen
+prerequisites:
+  - q15_einzelaktie_risiko
+reward:
+  cash_cents: 130
+  xp: 35
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gerade hast du gelernt - nicht alles auf ein Pferd setzen.
+      - Anders gesagt - setz nicht alles auf eine Karte. Geht die eine schief, hast du nichts mehr.
+      - Die Lösung ist einfach - verteil dein Geld auf viele verschiedene Sachen.
+  - id: erklaerung
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Profis nennen das Diversifikation.
+      - Ein langes Wort für eine einfache Sache - dein Geld auf viele verschiedene Anlagen verteilen, statt auf eine einzige.
+      - Auf Deutsch heißt das Streuung. Merk dir einfach das.
+  - id: warum
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Warum hilft das? Stell dir vor, du setzt auf zehn Pferde statt auf eins.
+      - Stürzt eines, laufen die anderen neun weiter. Du verlierst nur einen kleinen Teil.
+      - Genau so dämpft Streuung deine Verluste - kein einzelner Sturz reißt dich um.
+  - id: question
+    type: quiz
+    question: Warum ist es klug, sein Geld breit zu streuen?
+    options:
+      - { id: a, label: Weil es kompliziert aussieht }
+      - { id: b, label: Geht eine Anlage schlecht, tragen dich die anderen }
+      - { id: c, label: Weil die Bank das vorschreibt }
+    correct: b
+    explanation: Streuung dämpft Verluste. Fällt ein Pferd, laufen die anderen weiter - dein Geld ist nicht auf einen Schlag weg.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Streuung ist langweilig - aber sie schützt deine Nerven und dein Geld.
+      - Das Beste - es gibt etwas, das diese Streuung ganz automatisch für dich macht. Dazu kommen wir noch.

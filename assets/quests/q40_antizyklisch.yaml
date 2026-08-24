@@ -1,0 +1,46 @@
+id: q40_antizyklisch
+title: Wenn alle rennen
+location: monetaria.vulkan
+prerequisites: [q34_panik_vermeiden]
+reward:
+  cash_cents: 500
+  xp: 110
+topic: psychologie
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir vor, deine Lieblings-Sneaker sind plötzlich 30 Prozent günstiger. Du freust dich und schlägst zu.
+      - An der Börse machen die Leute das Gegenteil. Fallen die Kurse, rennen alle in Panik raus.
+      - Dabei ist ein Crash für einen Sparer wie ein großer Schlussverkauf - alles im Angebot.
+  - id: masse
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Masse macht es fast immer falsch herum.
+      - Ist alles teuer und alle euphorisch, drängeln sie sich rein und kaufen zu Höchstpreisen.
+      - Kracht es und alle haben Angst, verkaufen sie panisch - genau im Ausverkauf.
+  - id: zeitung
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Eine Faustregel - wenn sogar die große Zeitung am Kiosk schreit "Jetzt kaufen!", ist die Party meist schon vorbei.
+      - Und wenn überall "Alles verloren, der Untergang!" steht, ist oft der bessere Moment zum Einsteigen.
+      - Lass dich von der Stimmung der Masse nicht anstecken - weder von der Gier noch von der Angst.
+  - id: quiz
+    type: quiz
+    question: Die Kurse sind gerade stark gefallen und alle reden vom Untergang. Was tut ein kluger Langzeit-Sparer?
+    options:
+      - { id: a, label: Panisch alles verkaufen wie alle anderen }
+      - { id: b, label: Ruhig bleiben und weiter ETF sparen — jetzt mehr Anteile fürs Geld }
+      - { id: c, label: Warten bis die Zeitung "Jetzt kaufen" schreibt }
+    correct: b
+    explanation: Im Crash bekommst du für denselben Betrag mehr ETF-Anteile - wie im Schlussverkauf. Stur weitersparen schlägt panisches Mitrennen.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Du musst nicht den perfekten Tiefpunkt erraten - das schafft niemand.
+      - Es reicht, ruhig zu bleiben und einfach weiterzusparen, während die anderen kopflos rennen.
+      - Antizyklisch heißt - nicht mit der Herde mitlaufen, sondern den eigenen Kopf behalten.

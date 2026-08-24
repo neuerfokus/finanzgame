@@ -1,0 +1,33 @@
+id: q35_etf_ter_kosten
+title: ETF-Kostenfalle - wie 1 Prozent dich Tausende kostet
+location: monetaria.etf_insel
+prerequisites: [q31_kostenfalle]
+reward:
+  cash_cents: 800
+  xp: 110
+topic: etf
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Jeder ETF kostet eine kleine jährliche Gebühr - die TER (Total Expense Ratio).
+      - Gute ETFs - 0.07 bis 0.20 Prozent. Schlechte - 1.5 Prozent oder mehr.
+      - Klingt klein - macht aber riesig viel aus.
+      - Beispiel - 10000 Euro investiert, 7 Prozent Gewinn pro Jahr, 30 Jahre. TER 0.2 = ca 70000 Euro Endkapital. TER 1.5 = ca 50000 Euro.
+      - Die teurere TER hat dich 20000 Euro gekostet!
+  - id: quiz
+    type: quiz
+    question: Welche TER ist gut für einen Welt-ETF?
+    options:
+      - { id: a, label: 0.07 bis 0.20 Prozent pro Jahr }
+      - { id: b, label: 1.5 bis 2.5 Prozent pro Jahr }
+      - { id: c, label: TER ist egal solange der Gewinn stimmt }
+    correct: a
+    explanation: Bei breiten Index-ETFs sollte die TER unter 0.25 Prozent liegen.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Bei Sparplänen achte zusätzlich auf Ausführungs-Gebühren beim Broker.
+      - 1 Euro pro Sparrate ist schon viel wenn du nur 25 Euro im Monat anlegst - 4 Prozent Kosten.

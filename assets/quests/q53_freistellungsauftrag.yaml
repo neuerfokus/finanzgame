@@ -1,0 +1,84 @@
+id: q53_freistellungsauftrag
+title: Freistellungsauftrag — kein Steuer-Klau
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1000
+  xp: 200
+topic: steuer
+prerequisites:
+  - q24_steuer_basics
+steps:
+  - id: szene
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "Du hast ETFs gekauft — gut so."
+      - "Aber eins musst du noch machen: Freistellungsauftrag bei der Bank."
+      - "Sonst zieht die Bank automatisch 25 Prozent Steuern ab,"
+      - "auch wenn du eigentlich gar nichts zahlen müsstest."
+
+  - id: pauschbetrag
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "Der Sparerpauschbetrag ist 1000 Euro pro Jahr."
+      - "Heisst — die ersten 1000 Euro Gewinn aus Aktien, ETFs oder"
+      - "Zinsen sind komplett steuerfrei."
+      - "Aber nur wenn du den Freistellungsauftrag stellst!"
+
+  - id: was_ist_quiz
+    type: quiz
+    question: "Was ist ein Freistellungsauftrag?"
+    options:
+      - id: anweisung
+        label: "Anweisung an die Bank — die ersten 1000 € Gewinn nicht versteuern."
+      - id: kredit
+        label: "Ein Kredit mit niedrigen Zinsen."
+      - id: konto
+        label: "Ein Spezial-Sparkonto."
+      - id: rabatt
+        label: "Ein Rabatt beim Aktienkauf."
+    correct: anweisung
+    explanation: >-
+      Freistellungsauftrag = du sagst deiner Bank: 'Bis 1000 Euro
+      Gewinn pro Jahr bitte nicht versteuern.' Sonst zieht die Bank
+      automatisch ab — du holst es erst Jahre später per
+      Steuererklärung zurück.
+
+  - id: rechnen
+    type: quiz
+    question: >-
+      Ohne Freistellungsauftrag: Du hast 400 € Gewinn aus ETFs. Wie
+      viel zieht die Bank an Steuern ab?
+    options:
+      - id: hundert
+        label: "Etwa 100 € (25 % von 400 €)."
+      - id: nichts
+        label: "Nichts — die ersten 1000 € sind eh steuerfrei."
+      - id: alles
+        label: "Alle 400 € — Aktien-Gewinne sind komplett steuerpflichtig."
+      - id: vierzig
+        label: "40 € — pauschal 10 %."
+    correct: hundert
+    explanation: >-
+      Ohne Freistellungsauftrag knöpft die Bank dir 25 Prozent ab —
+      egal ob du unter dem Pauschbetrag bist. Mit Freistellungsauftrag
+      bleiben die 400 € komplett bei dir.
+
+  - id: praxis
+    type: choice
+    prompt: "Was machst du als Nächstes?"
+    options:
+      - id: einrichten
+        label: "Bank-App öffnen + Freistellungsauftrag stellen."
+      - id: spaeter
+        label: "Mache ich später — nervt jetzt."
+      - id: fragen
+        label: "Papa fragen ob er hilft."
+
+  - id: abschluss
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "1000 Euro pro Jahr steuerfrei — über 30 Jahre sind das viele tausend Euro."
+      - "Einmal einrichten, lebenslang sparen. Mach das, sobald du kannst."

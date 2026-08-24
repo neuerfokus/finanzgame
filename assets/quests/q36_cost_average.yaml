@@ -1,0 +1,32 @@
+id: q36_cost_average
+title: Cost-Average - die Schönwetter-Falle
+location: monetaria.etf_insel
+prerequisites: [q32_sparplan_dca]
+reward:
+  cash_cents: 600
+  xp: 90
+topic: sparplan
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Cost-Average = du legst regelmäßig fixen Betrag an. Bei hohen Kursen weniger Anteile, bei niedrigen mehr.
+      - Auf lange Sicht oft besser als Markt-Timing - keiner weiß wann der Crash kommt.
+      - Aber - wenn du sofort 10000 Euro hast, ist Einmalanlage statistisch oft besser als 12 Raten.
+      - Cost-Average ist gut bei monatlichem Einkommen oder unsicheren Märkten.
+  - id: quiz
+    type: quiz
+    question: Wann hilft Cost-Average besonders?
+    options:
+      - { id: a, label: Wenn du regelmäßig sparen willst, ohne Markt zu raten }
+      - { id: b, label: Nur wenn Kurse hoch sind }
+      - { id: c, label: Wenn du sofort reich werden willst }
+    correct: a
+    explanation: Cost-Average glättet Schwankungen — du kaufst mal teuer, mal günstig, im Schnitt fair. Markt-Timing schlägt man so kaum.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein langfristiger Sparplan auf einen Welt-ETF ist die simpelste und effektivste Strategie für die meisten.
+      - 50 bis 100 Euro im Monat über 30 Jahre können zu 6-stelligen Beträgen wachsen.

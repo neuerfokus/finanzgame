@@ -1,0 +1,46 @@
+id: q37_volatilitaet
+title: Schwanken ist nicht Verlieren
+location: monetaria.aktien_archipel
+prerequisites: [q34_panik_vermeiden]
+reward:
+  cash_cents: 450
+  xp: 100
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Viele verwechseln zwei Dinge - Schwanken und Verlieren. Das ist nicht dasselbe.
+      - Stell dir ein großes, stabiles Schiff im Sturm vor. Es schaukelt heftig, die Wellen sind hoch, dir wird flau.
+      - Aber es geht nicht unter - es kommt durch den Sturm. Das Schaukeln fühlt sich schlimm an, ist es aber nicht.
+  - id: zwei_begriffe
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Das Schaukeln nennt man Schwankung - Profis sagen Volatilität. Wie stark der Kurs hoch und runter geht.
+      - Echtes Risiko ist etwas anderes - dass dein Geld dauerhaft weg ist, wie bei einem Schiff, das wirklich sinkt.
+      - Ein breiter Welt-ETF schwankt täglich. Aber langfristig ist er bisher immer durch jeden Sturm gekommen.
+  - id: freund
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Und jetzt der Trick - wenn du regelmäßig sparst, ist das Schwanken sogar dein Freund.
+      - Fällt der Kurs, bekommst du für deine 50 Euro mehr Anteile. Steigt er, weniger. Im Schnitt fährst du gut.
+      - Je mehr es schaukelt, desto mehr günstige Anteile sammelst du in den Tälern ein - solange du dranbleibst.
+  - id: quiz
+    type: quiz
+    question: Dein Welt-ETF schwankt stark. Du sparst jeden Monat denselben Betrag. Was bedeutet die Schwankung für dich?
+    options:
+      - { id: a, label: Sie ist gefährlich, ich verliere bestimmt Geld }
+      - { id: b, label: Eher mein Freund — in Tälern kaufe ich günstiger ein }
+      - { id: c, label: Ich sollte sofort aufhören zu sparen }
+    correct: b
+    explanation: Schwankung ist nicht Verlust. Beim regelmäßigen Sparen sammelst du in den Tälern günstige Anteile - das Schaukeln arbeitet für dich, solange das Schiff solide ist.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wichtig ist nur, dass dein Schiff solide ist - breit gestreut, an die Substanz darfst du glauben.
+      - Für ein marodes Boot kann der Seegang den Untergang bedeuten. Für ein gutes Schiff ist er nur unangenehm.
+      - Das Dümmste wäre, als Kapitän von Bord zu springen, obwohl dein Schiff sicher durch den Sturm kommt.
+      - Bei einem soliden, breiten ETF gilt deshalb - ruhig bleiben, weitersparen, den Sturm aussitzen.

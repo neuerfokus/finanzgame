@@ -1,0 +1,78 @@
+id: q59_erster_job_vertrag
+title: Der erste Arbeitsvertrag
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 220
+topic: praxis
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Ich hab einen Mini-Job in der Eisdiele bekommen! Sie geben mir einen Vertrag zum Unterschreiben."
+      - "Soll ich einfach unterschreiben? Ich will ja sofort loslegen."
+
+  - id: lesen_quiz
+    type: quiz
+    question: "Bevor du einen Arbeitsvertrag unterschreibst — was machst du?"
+    options:
+      - id: blind
+        label: "Sofort unterschreiben, sonst krieg ich den Job nicht."
+      - id: lesen
+        label: "Erst lesen: Stundenlohn, Stundenzahl, Aufgaben, Kündigung."
+      - id: foto
+        label: "Ein Foto machen und später vielleicht lesen."
+    correct: lesen
+    explanation: >-
+      Ein Vertrag ist eine Vereinbarung, an die ihr beide gebunden seid.
+      Lies IMMER zuerst: Wie viel Lohn pro Stunde? Wie viele Stunden? Welche
+      Aufgaben? Wie kann man kündigen? Bei Unklarheit nachfragen — niemand
+      darf dich zu sofortigem Unterschreiben drängen.
+
+  - id: stundenlohn_dialog
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Hier steht: 12 € pro Stunde, 6 Stunden am Samstag."
+      - "Was verdiene ich dann an einem Samstag?"
+
+  - id: stundenlohn_quiz
+    type: quiz
+    question: "12 € pro Stunde × 6 Stunden — was kommt am Samstag raus?"
+    options:
+      - id: f18
+        label: "18 €"
+      - id: f72
+        label: "72 €"
+      - id: f120
+        label: "120 €"
+    correct: f72
+    explanation: >-
+      12 € × 6 Stunden = 72 €. Beim Stundenlohn zählt: Lohn pro Stunde ×
+      gearbeitete Stunden. So kannst du vorher ausrechnen, ob sich der Weg
+      und die Zeit für dich lohnen.
+
+  - id: minijob_quiz
+    type: quiz
+    question: "Du machst einen Mini-Job. Was ist beim Mini-Job typisch?"
+    options:
+      - id: viel_steuer
+        label: "Es geht die Hälfte für Steuern weg."
+      - id: grenze
+        label: "Bis zu einer Monatsgrenze bleibt der Lohn steuerfrei — du bekommst (fast) alles."
+      - id: kein_geld
+        label: "Man arbeitet umsonst zum Üben."
+    correct: grenze
+    explanation: >-
+      Beim Mini-Job bleibt der Verdienst bis zu einer monatlichen Grenze
+      steuer- und abgabenfrei — du bekommst praktisch deinen vollen Lohn.
+      Trotzdem gilt: aufschreiben, was du verdienst, und einen Teil direkt
+      zur Seite legen (pay yourself first).
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Also erst lesen, Lohn ausrechnen, und ein Teil wandert sofort aufs Sparkonto."
+      - "Mein erster eigener Verdienst — und ich weiß genau, was im Vertrag steht!"

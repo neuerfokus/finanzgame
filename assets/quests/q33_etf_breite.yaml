@@ -1,0 +1,45 @@
+id: q33_etf_breite
+title: Nicht jeder ETF ist gleich breit
+location: monetaria.etf_insel
+prerequisites: [q28_was_ist_etf]
+reward:
+  cash_cents: 400
+  xp: 90
+topic: etf
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Irrtum, der viele kostet - "ETF ist gleich ETF, immer schön breit gestreut."
+      - Stimmt nicht. Es gibt Welt-ETFs mit über tausend Firmen aus aller Welt - sehr breit.
+      - Aber auch ETFs, die nur EIN Land abbilden oder nur EINE Branche. Die sind viel enger.
+  - id: parkplatz
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir einen ETF vor, der nur Firmen aus einem einzigen Land hält - sagen wir der Türkei.
+      - Bevor du investierst, stell dir eine ehrliche Frage - wie wahrscheinlich ist es, dass aus diesem Land mal ein Parkplatz wird?
+      - Krieg, Krise, Politik - ist diese Gefahr zu hoch, ist so ein ETF eine riskante Wette, kein sicheres Fundament.
+  - id: prinzip
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Länder-ETF ist nur ein großes Pferd - kein ganzer Stall voller Pferde aus aller Welt.
+      - Je enger ein ETF gefasst ist, desto mehr hängt an einer einzigen Sache - Land, Branche, Thema.
+      - Fürs ruhige Fundament nimmt man das Breiteste - einen Welt-ETF. Enge ETFs nur als kleine Beimischung, wenn überhaupt.
+  - id: quiz
+    type: quiz
+    question: Welcher ETF ist am breitesten gestreut und am wenigsten von einem einzelnen Land abhängig?
+    options:
+      - { id: a, label: Ein ETF nur auf türkische Aktien }
+      - { id: b, label: Ein ETF nur auf eine einzige Branche }
+      - { id: c, label: Ein weltweiter ETF mit Firmen aus vielen Ländern }
+    correct: c
+    explanation: Der Welt-ETF verteilt auf viele Länder und Branchen. Ein Länder- oder Branchen-ETF hängt dagegen am Schicksal einer einzigen Sache.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Schau bei einem ETF immer nach, was wirklich drin ist - die ganze Welt oder nur eine kleine Ecke davon.
+      - Der Name "ETF" allein sagt dir noch nicht, wie breit du wirklich gestreut bist.

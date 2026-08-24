@@ -1,0 +1,26 @@
+Ein Lernspiel über Geld für Jugendliche ab etwa 13 Jahren. Taschengeld einteilen, sparen, anlegen, abwarten — und sehen, was daraus wird.
+
+Wichtig: Das ist eine Simulation zum Lernen und keine Anlageberatung. Alle Kurse, Firmen, Renditen und Preise im Spiel sind erfunden. Echtes Geld verhält sich anders.
+
+WAS DICH ERWARTET
+
+• Tageszyklus statt Echtzeit — es passiert nichts, während das Handy in der Tasche liegt. Ein Tag endet, wenn du auf "Schlafen" tippst.
+• Elf Anlageklassen mit eigenem Charakter: Sparkonto, ETFs, Einzelaktien, Krypto, Edelmetalle, Immobilien, Vorsorge, Sammlerobjekte, Bäume — jede auf einer eigenen Insel.
+• Über 60 Story-Quests zu echten Alltagsthemen: Abo-Falle, Phishing, Fake-Shops, Ratenkauf, Gruppenzwang, erster Minijob, Freistellungsauftrag.
+• Tagesfrage, Wissens-Quiz und ein Glossar, das mitschreibt, was du schon gelernt hast.
+• Zeitreise: Jahre vorspulen und den eigenen Vermögensverlauf ansehen.
+• Brücke ins echte Leben: echte Sparziele eintragen, von einem Elternteil bestätigen lassen, im Spiel dafür belohnt werden.
+
+HALTUNG
+
+• Keine echten Marken, keine echten Aktien — alles fiktiv.
+• Keine Lootboxen, keine Käufe im Spiel, keine Glücksspiel-Mechaniken.
+• Kein Tracking, kein Analytics, keine Cloud. Die App sendet nichts.
+• Geschlechtsneutral, ohne Abfrage: weibliche und männliche Figuren stehen gleichwertig und zu denselben Kosten nebeneinander.
+• Anti-Konsum als Haltung, ohne Moralkeule — konsumieren ist spielbar und zeigt seine Folgen.
+
+DATENSCHUTZ
+
+Alles bleibt auf dem Gerät. Kein Konto, keine Registrierung, keine personenbezogenen Daten. Die App fordert die Internet-Berechtigung gar nicht erst an — Android lässt sie damit keine Verbindung aufbauen. Die App fragt nie nach Geschlecht, Adresse oder E-Mail. Der Spielername darf ein Spitzname sein.
+
+Freie Software unter der GPL-3.0.

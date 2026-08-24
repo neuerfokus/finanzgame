@@ -1,0 +1,37 @@
+id: q10_compound_magic
+title: Die Zinseszins-Magie
+location: monetaria.spar_insel
+prerequisites: [q05_zinseszins]
+reward:
+  cash_cents: 400
+  xp: 80
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Erinnerst du dich an die Bohne, die sich Jahr für Jahr selbst neu pflanzt?
+      - Jetzt das Wichtigste daran - es kommt nicht darauf an, wie VIELE Bohnen du am Anfang hast.
+      - Es kommt darauf an, wie viele JAHRE sie sich verdoppeln können. Zeit ist der eigentliche Zaubertrick.
+  - id: frueh
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir zwei Leute vor. Der eine pflanzt seine Bohne mit 14, der andere erst mit 40.
+      - Der Erste legt vielleicht weniger Geld an - hat aber viel mehr Jahre, in denen es sich verdoppelt.
+      - Am Ende hat der Frühe oft mehr, obwohl er weniger eingezahlt hat. Nur weil er früher angefangen hat.
+  - id: quiz
+    type: quiz
+    question: Was ist beim Zinseszins der wichtigste Faktor?
+    options:
+      - { id: a, label: Ein möglichst hoher Zins }
+      - { id: b, label: Möglichst viel Zeit }
+      - { id: c, label: Möglichst viel Startgeld }
+    correct: b
+    explanation: Zeit schlägt fast alles. Je früher du anfängst, desto öfter kann sich deine Bohne verdoppeln - das ist stärker als ein hoher Zins oder viel Startkapital.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Deshalb ist dein größter Vorteil gerade dein Alter - du hast die meiste Zeit von allen.
+      - Je früher die erste Bohne in die Erde kommt, desto weniger musst du später nachlegen.

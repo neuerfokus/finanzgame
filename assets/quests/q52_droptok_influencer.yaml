@@ -1,0 +1,85 @@
+id: q52_droptok_influencer
+title: Der DropTok-Trick
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 200
+topic: psychologie
+prerequisites:
+  - q20_geld_vs_glueck
+  - q34_panik_vermeiden
+steps:
+  - id: video
+    type: dialog
+    speaker: "Influencer 'LuxxyLife'"
+    lines:
+      - "Was geht meine Squad! Heute neue Drop-Empfehlung."
+      - "Diese SnipeShot Sneaker — limitiert auf 1000 Stück."
+      - "120 Euro — kostet sonst 250. Nur noch heute!"
+      - "Wer das nicht kauft, ist raus. Link in der Bio."
+
+  - id: erste_reaktion
+    type: choice
+    prompt: "Was geht dir durch den Kopf?"
+    options:
+      - id: kaufen
+        label: "Krass billig! Sofort bestellen."
+      - id: pruefen
+        label: "Limitiert? 'Nur heute'? Hmm..."
+      - id: ignorieren
+        label: "Brauche keine neuen Sneaker. Habe schon welche."
+
+  - id: knappheit_quiz
+    type: quiz
+    question: "Was ist die Verkaufs-Masche 'Nur heute, limitiert' eigentlich?"
+    options:
+      - id: ehrlich
+        label: "Ehrliches Angebot — wenn knapp, dann eben."
+      - id: druck
+        label: "Künstliche Knappheit — soll dich zum Schnellkauf drängen."
+      - id: rabatt
+        label: "Standard-Rabatt, jeder Shop macht das."
+    correct: druck
+    explanation: >-
+      Künstliche Knappheit + Zeit-Druck sind klassische Verkaufs-
+      Tricks. Sie schalten dein Nachdenken aus. Wer impulsiv kauft,
+      kauft oft Sachen die er nicht braucht. Schlaf lieber eine Nacht
+      drüber — wenn du es morgen noch willst, kauf es.
+
+  - id: bedarf_check
+    type: choice
+    prompt: "Was checkst du als Erstes?"
+    options:
+      - id: bedarf
+        label: "Brauche ich die Sneaker überhaupt?"
+      - id: kontostand
+        label: "Habe ich 120 Euro übrig — nach Notgroschen + Sparen?"
+      - id: vergleich
+        label: "Kostet das woanders wirklich 250 Euro?"
+
+  - id: lehrgeld
+    type: dialog
+    speaker: "Du (denkst)"
+    lines:
+      - "Influencer wird bezahlt für den Hype."
+      - "Wahrscheinlich ist 120 Euro der Normalpreis — und 250 erfunden."
+      - "Sneaker geht höchstens über Inflation hoch. Kein Investment."
+
+  - id: entscheidung
+    type: choice
+    prompt: "Deine Entscheidung?"
+    options:
+      - id: pass
+        label: "Lass mal — ich passe. Geld lieber sparen."
+      - id: ueberlegen
+        label: "Frage Papa + schlafe eine Nacht drüber."
+      - id: kaufen
+        label: "Klick. 120 Euro weg, neue Sneaker da."
+
+  - id: schluss
+    type: dialog
+    speaker: "Du (denkst)"
+    lines:
+      - "Konsum-Druck von Influencern = Marketing, kein Freundes-Tipp."
+      - "Erst Notgroschen, dann Investieren, dann erst Wünsche."
+      - "120 Euro im ETF in 30 Jahren = über 1200 Euro (Zinseszins)."

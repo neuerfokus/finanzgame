@@ -1,0 +1,30 @@
+id: q22_immobilienkredit
+title: Immobilien-Kauf - Cash oder Kredit?
+location: monetaria.wohnviertel
+prerequisites: [q17_bausparer]
+reward:
+  cash_cents: 600
+  xp: 130
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Eine Immobilie kostet schnell hunderttausende Euro. Wer hat so viel auf Cash?
+      - Lösung - Bank-Kredit. Du zahlst monatlich Tilgung plus Zinsen ab.
+      - Faustregel - mindestens 20 Prozent als Eigenkapital, sonst wird der Kredit teuer.
+      - Wer kauft - bindet sich oft 25-30 Jahre lang an die Zahlungen.
+  - id: quiz
+    type: quiz
+    question: Wieviel Eigenkapital sollte man für eine Immobilie haben?
+    options:
+      - { id: a, label: Mindestens 20 Prozent vom Kaufpreis }
+      - { id: b, label: Gar keins - die Bank zahlt alles }
+      - { id: c, label: Maximal 5 Prozent }
+    correct: a
+    explanation: 20 Prozent Eigenkapital ist die übliche Banker-Faustregel.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Erst sparen, dann kaufen. So bist du sicher und sparst Zinsen.

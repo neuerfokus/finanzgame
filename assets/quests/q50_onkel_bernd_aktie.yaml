@@ -1,0 +1,85 @@
+id: q50_onkel_bernd_aktie
+title: Onkel Bernds heißer Tipp
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1500
+  xp: 250
+topic: einzelaktie
+prerequisites:
+  - q11_was_ist_aktie
+  - q15_einzelaktie_risiko
+steps:
+  - id: ankunft
+    type: dialog
+    speaker: "Onkel Bernd"
+    lines:
+      - "Hey Kumpel! Lange nicht gesehen."
+      - "Ich hab da was Heißes für dich — Aktien von SnipeShot AG."
+      - "Mein Kumpel arbeitet da, der sagt: die gehen voll durch die Decke."
+      - "500 Euro rein, in einem Jahr machste 1500 draus. Versprochen!"
+
+  - id: erste_reaktion
+    type: choice
+    prompt: "Was sagst du?"
+    options:
+      - id: sofort_ja
+        label: "Klingt geil! Sofort ja."
+      - id: nachfragen
+        label: "Hmm... woher weißt du das so genau?"
+      - id: ablehnen
+        label: "Garantierter Gewinn? Klingt komisch."
+
+  - id: nachfrage_check
+    type: quiz
+    question: "Wann ist ein 'garantierter' Gewinn von 200 Prozent ein Warnzeichen?"
+    options:
+      - id: immer
+        label: "Immer. Hohe Gewinne ohne Risiko gibt es nicht."
+      - id: nur_aktien
+        label: "Nur bei Aktien."
+      - id: nie
+        label: "Nie. Wenn der Onkel das sagt, stimmt das."
+    correct: immer
+    explanation: >-
+      Faustregel: Wer 'garantierten' hohen Gewinn verspricht, luegt
+      oder hat keine Ahnung. Echte Anlagen werben mit Chancen + Risiken
+      — nicht mit Garantien.
+
+  - id: papa_anrufen
+    type: choice
+    prompt: "Was machst du als Naechstes?"
+    options:
+      - id: papa
+        label: "Papa anrufen + fragen was er denkt."
+      - id: alleine
+        label: "Selber recherchieren — Kurs der Firma ansehen."
+      - id: spontan
+        label: "Egal, 500 Euro rein. Onkel hat noch nie geluegt."
+
+  - id: erinnerung_streuen
+    type: dialog
+    speaker: "Du (denkst nach)"
+    lines:
+      - "Diversifikation — alle Eier in einem Korb ist schlecht."
+      - "Wenn SnipeShot pleite geht, sind 500 Euro weg. Komplett."
+      - "Bei einem Welt-ETF waeren 500 Euro auf hunderte Firmen verteilt."
+      - "Eine Firma kann fallen — hundert Firmen nicht alle gleichzeitig."
+
+  - id: finale_entscheidung
+    type: choice
+    prompt: "Deine finale Entscheidung?"
+    options:
+      - id: ablehnen
+        label: "Danke Onkel, ich passe — zu riskant."
+      - id: klein
+        label: "OK, aber nur 50 Euro — als Lehrgeld."
+      - id: voll
+        label: "Voll rein, 500 Euro. Onkel weiß schon."
+
+  - id: schluss
+    type: dialog
+    speaker: "Onkel Bernd"
+    lines:
+      - "Naja, ist deine Entscheidung. Cleverer Junge."
+      - "Wenn du investierst, dann lieber breit + langfristig."
+      - "Heisse Tipps von Verwandten sind meistens kalter Kaffee."

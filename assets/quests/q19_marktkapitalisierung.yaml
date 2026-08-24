@@ -1,0 +1,46 @@
+id: q19_marktkapitalisierung
+title: Marktkapitalisierung - wie groß ist eine Firma wirklich?
+location: monetaria.aktien_archipel
+prerequisites: [q11_was_ist_aktie]
+reward:
+  cash_cents: 500
+  xp: 80
+topic: aktien
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Erinnerst du dich an die Werkstatt? 100 Anteile zu je 1000 Euro - macht 100.000 Euro.
+      - Diese Gesamtsumme nennt man Marktkapitalisierung - was die ganze Firma wert ist.
+      - Die Formel ist einfach - Preis pro Anteil mal Anzahl aller Anteile.
+  - id: trugschluss
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Jetzt ein häufiger Denkfehler - ist eine 90-Euro-Aktie teurer als eine 5-Euro-Aktie?
+      - Nein! Es kommt darauf an, in wie viele Stücke die Firma geteilt ist.
+      - Eine kleine Firma kann eine teure Aktie haben, ein Riese eine billige. Der Stückpreis allein sagt nichts.
+  - id: vw
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Beispiel VW - eine Aktie kostet rund 90 Euro. Klingt machbar.
+      - Aber VW ist in rund 500 Millionen Aktien geteilt und insgesamt etwa 45 Milliarden Euro wert.
+      - Legst du 1000 Euro an, gehören dir etwa 11 Aktien - ein Stück von 500 Millionen.
+      - Das sind 0,000002 Prozent. Du bist echter Mit-Eigentümer - aber ein winziger Tropfen im Konzern.
+  - id: quiz
+    type: quiz
+    question: Wie berechnet man die Marktkapitalisierung - also den Wert der ganzen Firma?
+    options:
+      - { id: a, label: Aktienkurs mal Anzahl aller Aktien }
+      - { id: b, label: Nur der Aktienkurs - je höher, desto größer die Firma }
+      - { id: c, label: Jahresumsatz mal 10 }
+    correct: a
+    explanation: Marktkapitalisierung = Kurs mal Anzahl aller Aktien. Ein hoher Kurs allein heißt nicht große Firma - die Stückzahl entscheidet mit.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Große Firmen (Large-Cap) sind meist stabiler. Kleine (Small-Cap) wachsen oft schneller, aber riskanter.
+      - Und genau weil dein einzelnes Stück so winzig ist - kauf nicht nur eine Firma. Streu breit. Dazu kommen wir noch.

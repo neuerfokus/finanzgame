@@ -1,0 +1,29 @@
+id: q12_gold_als_schutz
+title: Gold - Schutz vor Inflation?
+location: monetaria.goldmine
+prerequisites: [q06_inflation_brot]
+reward:
+  cash_cents: 350
+  xp: 70
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gold wird seit tausenden Jahren als Wertspeicher genutzt.
+      - In Krisenzeiten oder bei hoher Inflation steigt der Gold-Preis oft.
+      - "Aber: Gold zahlt keine Zinsen und keine Dividende - es liegt nur da."
+  - id: quiz
+    type: quiz
+    question: Was bringt physisches Gold im Tresor?
+    options:
+      - { id: a, label: Monatliche Zinsen }
+      - { id: b, label: Keine laufenden Erträge }
+      - { id: c, label: Garantierter Gewinn }
+    correct: b
+    explanation: Gold hat keine Cashflows - reine Wertaufbewahrung.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gold kann ein Baustein sein - aber kein Ersatz für ETFs und Cash.

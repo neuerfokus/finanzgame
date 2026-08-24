@@ -1,0 +1,44 @@
+id: q44_gewinne_laufen
+title: Gewinne laufen lassen
+location: monetaria.aktien_archipel
+prerequisites: [q42_wann_trennen]
+reward:
+  cash_cents: 500
+  xp: 110
+topic: psychologie
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Eine alte Börsenweisheit - Gewinne laufen lassen, Verluste begrenzen.
+      - Klingt logisch. Aber die meisten machen genau das Gegenteil - und merken es nicht mal.
+  - id: fehler
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Läuft ein Pferd gut, verkaufen viele schnell - aus Angst, der Gewinn könnte wieder weg sein.
+      - Läuft ein Pferd schlecht, halten sie ewig - aus Hoffnung, es erholt sich schon.
+      - Das Ergebnis - sie schneiden ihre Gewinner ab und schleppen ihre Verlierer mit. Genau falsch herum.
+  - id: richtig
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Richtig wäre - ein gutes Pferd laufen lassen, solange es läuft. Nicht aus Angst zu früh absteigen.
+      - Und ein totes Pferd loslassen, statt aus Hoffnung weiterzureiten.
+      - Wichtig - das gilt für einzelne Wetten. Bei einem breiten Welt-ETF lässt du sowieso einfach alles laufen und tust nichts.
+  - id: quiz
+    type: quiz
+    question: Welchen Fehler machen viele Anleger bei Einzelaktien?
+    options:
+      - { id: a, label: Gewinner zu früh verkaufen, Verlierer zu lang halten }
+      - { id: b, label: Gewinner zu lang halten, Verlierer zu früh verkaufen }
+      - { id: c, label: Immer alles sofort verkaufen }
+    correct: a
+    explanation: Aus Angst werden Gewinner früh abgestoßen, aus Hoffnung Verlierer zu lange gehalten. Die Weisheit dreht das um - Gewinne laufen lassen, Verluste begrenzen.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Angst und Hoffnung sind schlechte Ratgeber an der Börse.
+      - Bei einzelnen Wetten hilft ein kühler Kopf. Beim breiten ETF hilft - einfach nichts tun und liegen lassen.

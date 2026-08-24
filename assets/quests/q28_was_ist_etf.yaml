@@ -1,0 +1,54 @@
+id: q28_was_ist_etf
+title: Was ist ein ETF?
+location: monetaria.heimathafen
+prerequisites:
+  - q25_was_ist_fonds
+reward:
+  cash_cents: 250
+  xp: 60
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Letztes Mal die Frage - wie funktioniert ein Team ganz ohne Trainer?
+      - Wenn niemand entscheidet, wer ins Team kommt - was dann?
+      - Die Antwort - eine feste Regel macht es automatisch. Schau.
+  - id: index
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Kennst du die Bundesliga-Tabelle? Oben die Besten, unten die Schwächsten.
+      - An der Börse gibt es so eine Tabelle für Firmen.
+      - Die Tabelle der größten deutschen Firmen heißt DAX.
+      - So eine Börsen-Tabelle nennt man Index - merk dir einfach - Index = Rangliste.
+  - id: laender
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Jedes Land hat seine eigene Tabelle.
+      - Die USA den S&P 500, Japan den Nikkei.
+      - Alles dasselbe Prinzip - eine Rangliste der größten Firmen.
+  - id: quiz
+    type: quiz
+    question: Wie heißt der Index der größten DEUTSCHEN Unternehmen?
+    options:
+      - { id: a, label: S&P 500 }
+      - { id: b, label: DAX }
+      - { id: c, label: Nikkei }
+    correct: b
+    explanation: Richtig - der DAX. Der S&P 500 ist die USA, der Nikkei ist Japan.
+  - id: selbstreinigend
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Und wie in der Tabelle - wer absteigt, fliegt raus.
+      - Wird eine Firma zu klein, rückt eine größere nach.
+      - Das passiert automatisch - kein Trainer muss es entscheiden.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Jetzt der Trick - ein ETF kauft einfach alle Firmen aus dieser Tabelle nach.
+      - Kaufst du einen DAX-ETF, gehören dir mit einem Schlag Anteile an allen.
+      - Kein Manager, kaum Gebühren - die Tabelle macht die Arbeit von selbst.

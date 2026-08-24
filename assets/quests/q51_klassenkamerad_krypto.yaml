@@ -1,0 +1,89 @@
+id: q51_klassenkamerad_krypto
+title: Maxis Krypto-Hype
+location: monetaria.vulkan
+reward:
+  cash_cents: 1500
+  xp: 250
+topic: krypto
+prerequisites:
+  - q41_krypto_casino
+  - q43_bitcoin_halving
+steps:
+  - id: pause
+    type: dialog
+    speaker: "Maxi (Klassenkamerad)"
+    lines:
+      - "Alter, du musst jetzt einsteigen!"
+      - "MoonCoin geht ab — gestern 50 Cent, heute schon 2 Euro."
+      - "In einer Woche zehn Mal so viel, hat der TikToker gesagt."
+      - "Ich hab schon 200 Euro reingesteckt. Du auch?"
+
+  - id: erste_reaktion
+    type: choice
+    prompt: "Wie reagierst du?"
+    options:
+      - id: cool
+        label: "Krass! 4x in einem Tag — sofort kaufen!"
+      - id: skeptisch
+        label: "Hmm... 4x an einem Tag? Das ist ne Menge."
+      - id: ablehnen
+        label: "Klingt nach Glücksspiel. Lass mal."
+
+  - id: volatilitaet_quiz
+    type: quiz
+    question: "Was bedeutet es wenn etwas heute +300 Prozent macht?"
+    options:
+      - id: gut
+        label: "Sicherer Gewinn — schnell rein!"
+      - id: schwankt
+        label: "Hohe Volatilität — kann morgen auch -50 Prozent fallen."
+      - id: dauerhaft
+        label: "Wird so weitergehen, Trend hält ein Jahr."
+    correct: schwankt
+    explanation: >-
+      Volatilität = wie stark der Preis schwankt. +300 Prozent heute
+      bedeutet auch -50 Prozent morgen ist möglich. Krypto ist extrem
+      volatil. Wer am Hoch einsteigt, verliert oft schnell.
+
+  - id: nachfrage
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Komm schon! Alle steigen ein. Du verpasst die Chance!"
+      - "Ich hab schon 50 Euro Plus gemacht in einer Stunde."
+
+  - id: fomo_check
+    type: quiz
+    question: "Maxis Angst dass du etwas verpasst nennt man auch...?"
+    options:
+      - id: fomo
+        label: "FOMO — Fear Of Missing Out. Klassische Anlage-Falle."
+      - id: gewinn
+        label: "Gewinn-Mitnahme."
+      - id: spar
+        label: "Spar-Strategie."
+    correct: fomo
+    explanation: >-
+      FOMO treibt Anleger zu Spät-Käufen am Hoch. Wer wegen FOMO
+      einsteigt, ist meistens der Letzte und verliert. Profis steigen
+      antizyklisch ein — wenn alle Angst haben, nicht wenn alle gierig
+      sind.
+
+  - id: entscheidung
+    type: choice
+    prompt: "Deine Entscheidung?"
+    options:
+      - id: ablehnen
+        label: "Danke nein. Krypto nur mit Spielgeld, nicht im Hype."
+      - id: klein
+        label: "20 Euro Bitcoin — der hat wenigstens Substanz."
+      - id: gross
+        label: "500 Euro MoonCoin, Mond ahoi!"
+
+  - id: schluss
+    type: dialog
+    speaker: "Du (denkst)"
+    lines:
+      - "MoonCoin = Casino-Coin ohne echten Wert."
+      - "Wer am Hype kauft, kauft am Hoch. Wer ruhig bleibt, gewinnt."
+      - "Bitcoin höchstens kleiner Teil. MoonCoin? Vergiss es."

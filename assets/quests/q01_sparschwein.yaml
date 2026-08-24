@@ -1,0 +1,40 @@
+id: q01_sparschwein
+title: Das Sparschwein erwacht
+location: monetaria.heimathafen
+prerequisites: []
+reward:
+  cash_cents: 200
+  xp: 50
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Willkommen in Monetaria! Ich bin Magister Aureus.
+      - Schau dir das Eichhörnchen an. Im Herbst sammelt es Nüsse und vergräbt sie.
+      - Nicht weil es heute Hunger hat - sondern für den Winter, wenn nichts mehr wächst.
+      - Genau das ist Sparen - etwas zurücklegen, damit du später nicht leer dastehst.
+  - id: what_is_saving
+    type: quiz
+    question: Was bedeutet sparen?
+    options:
+      - { id: a, label: Alles Geld sofort ausgeben }
+      - { id: b, label: Geld zur Seite legen für später }
+      - { id: c, label: Geld verstecken und vergessen }
+    correct: b
+    explanation: Sparen heißt zurücklegen für später - wie das Eichhörnchen mit seinen Nüssen. Nicht alles sofort verbrauchen, aber auch nicht vergraben und vergessen.
+  - id: allowance_choice
+    type: choice
+    prompt: Du bekommst dein Taschengeld. Was machst du?
+    options:
+      - { id: spend, label: Sofort komplett ausgeben }
+      - { id: save_half, label: Hälfte sparen, Hälfte behalten }
+      - { id: save_all, label: Alles sparen }
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gute Wahl. Es gibt kein falsch hier - nur Konsequenzen.
+      - Wer alles sofort verbraucht, hat im Winter nichts. Wer alles vergräbt, hat heute nichts vom Geld.
+      - Das Eichhörnchen frisst genug, um satt zu sein - und legt genug zurück, um den Winter zu überstehen.
+      - Finde dein Gleichgewicht. Bis bald.

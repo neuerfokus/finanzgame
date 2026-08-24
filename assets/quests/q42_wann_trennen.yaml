@@ -1,0 +1,44 @@
+id: q42_wann_trennen
+title: Wann trenne ich mich?
+location: monetaria.aktien_archipel
+prerequisites: [q39_totes_pferd]
+reward:
+  cash_cents: 500
+  xp: 110
+topic: psychologie
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Totes Pferd, also absteigen - aber Vorsicht, nicht jede Anlage ist gleich.
+      - Ob du aussteigen solltest, hängt davon ab, WAS du hältst.
+      - Schauen wir uns vier Fälle an - vom einzelnen Pferd bis zur ganzen Herde.
+  - id: pferd_stall
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Eine Einzelaktie ist EIN Pferd. Es kann sterben - die Firma geht pleite. Dann - absteigen.
+      - Ein aktiver Fonds ist ein Stall mit Trainer. Taugt der Trainer nichts und verliert jahrelang, während er Gebühren frisst - dann raus, rüber zum ETF.
+  - id: koppel_herde
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Länder-ETF - etwa nur Türkei - ist eine Koppel in einer einzigen Gegend. Brennt die Gegend, brennt die Koppel. Da musst du das Risiko ehrlich abwägen.
+      - Ein Welt-ETF dagegen ist die ganze Herde, weltweit. Der stirbt nur, wenn die ganze Weltwirtschaft stirbt.
+      - Und wenn das passiert, hast du sowieso ganz andere Probleme als dein Depot. Deshalb - durchhalten.
+  - id: quiz
+    type: quiz
+    question: Bei welcher Anlage ist "einfach durchhalten" am ehesten richtig?
+    options:
+      - { id: a, label: Eine einzelne Firma, die seit Jahren nur fällt }
+      - { id: b, label: Ein breit gestreuter Welt-ETF nach einem Crash }
+      - { id: c, label: Ein Fonds mit schlechtem Manager und hohen Gebühren }
+    correct: b
+    explanation: Der Welt-ETF ist die ganze Herde - nach einem Crash stand sie historisch immer wieder auf. Eine einzelne Firma oder ein schwacher Fonds kann dagegen dauerhaft am Boden bleiben.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Faustregel - je breiter gestreut, desto eher halten. Je enger die Wette, desto kritischer hinschauen.
+      - Ein Pferd kann sterben. Die ganze Herde nicht.

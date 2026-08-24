@@ -1,0 +1,30 @@
+id: q07_versicherungen
+title: Welche Versicherungen wirklich nötig?
+location: monetaria.heimathafen
+prerequisites: [q03_notgroschen]
+reward:
+  cash_cents: 400
+  xp: 90
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Es gibt unzählige Versicherungen, aber nur wenige sind wirklich Pflicht.
+      - Top-Drei in deinem Leben - Haftpflicht, Krankenkasse, Berufsunfähigkeit.
+      - Haftpflicht ist kostenlos fast - Krankenkasse ist Pflicht in Deutschland - BU ist freiwillig aber extrem wichtig.
+      - Nicht nötig für junge Leute - Lebensversicherung, Kapitalbildende Police, Sterbegeld.
+  - id: quiz
+    type: quiz
+    question: Welche Versicherung ist für einen 20-jährigen am wichtigsten?
+    options:
+      - { id: a, label: Sterbegeldversicherung }
+      - { id: b, label: Berufsunfähigkeitsversicherung }
+      - { id: c, label: Rücktritts-versicherung }
+    correct: b
+    explanation: BU schützt vor dem größten Risiko - Verlust der Arbeitskraft.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Versicherungen nicht aus Angst kaufen - nur die für echte Existenz-Risiken.

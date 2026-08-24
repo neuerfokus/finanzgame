@@ -1,0 +1,43 @@
+id: q25_was_ist_fonds
+title: Was ist ein Fonds?
+location: monetaria.heimathafen
+prerequisites:
+  - q21_diversifikation
+reward:
+  cash_cents: 250
+  xp: 60
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Du hast gelernt - nicht alles auf eine Aktie setzen.
+      - Aber wer kauft schon 10 Aktien einzeln? Lösung - ein Fonds.
+      - Ein Fonds ist ein Korb voller Aktien. Mit einem Kauf besitzt du viele Firmen gleichzeitig.
+      - Stell dir den Korb wie eine Fußballmannschaft vor - jeder Spieler im Team steht für eine Aktie.
+  - id: manager
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der Trainer der Mannschaft ist wie ein Fondsmanager - er entscheidet, welche Spieler ins Team kommen.
+      - Er ist Profi - er kennt die Stärken und Schwächen jeder einzelnen Aktie.
+      - Dafür will er bezahlt werden (TER - Total Expense Ratio).
+      - Bei klassischen Fonds oft 1,5% pro Jahr - jedes Jahr - egal ob der Fonds Gewinn oder Verlust macht.
+  - id: quiz
+    type: quiz
+    question: Du legst 1000 Euro in einen Fonds mit 1,5% Managergebühr. Wieviel Gebühr pro Jahr?
+    options:
+      - { id: a, label: 1,50 Euro }
+      - { id: b, label: 15 Euro }
+      - { id: c, label: 150 Euro }
+    correct: b
+    explanation: 1,5% von 1000 sind 15 Euro pro Jahr. Klingt wenig - summiert sich aber über die Jahre.
+  - id: bridge
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Gibt es etwas besseres als einen Fondsmanager?
+      - Studien zeigen - die meisten Manager schlagen den Markt langfristig NICHT.
+      - Deshalb gibt es eine clevere Alternative - den ETF.
+      - ETF = derselbe Korb, aber OHNE Manager - und damit viel günstiger.
+      - Wie ein Team ganz ohne Trainer funktioniert, siehst du im nächsten Quest.

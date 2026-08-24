@@ -1,0 +1,45 @@
+id: q14_geldwert_sachwert
+title: Geldwert oder Sachwert?
+location: monetaria.heimathafen
+prerequisites: [q06_inflation_brot]
+reward:
+  cash_cents: 400
+  xp: 90
+topic: grundlagen
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir zwei Dinge in der prallen Sonne vor - einen Eiswürfel und einen Stein.
+      - Der Eiswürfel schmilzt langsam weg. Der Stein bleibt einfach liegen, ihm macht die Sonne nichts.
+      - Die Sonne ist die Inflation. Und dein Geld kann entweder ein Eiswürfel sein - oder ein Stein.
+  - id: geldwert
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Geldwert ist der Eiswürfel - alles, was auf einen festen Geld-Betrag lautet.
+      - Bargeld, Sparkonto, Bausparer, Lebensversicherung.
+      - 1000 Euro bleiben 1000 Euro - aber kaufen kannst du dir damit jedes Jahr ein bisschen weniger. Er schmilzt.
+  - id: sachwert
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Sachwert ist der Stein - ein echtes Ding mit eigenem Wert.
+      - Aktien (Anteile an Firmen), Immobilien, Gold, Rohstoffe.
+      - Steigen die Preise, steigt meist auch ihr Wert mit. Der Stein bleibt liegen, egal wie heiß die Sonne scheint.
+  - id: quiz
+    type: quiz
+    question: Was schützt dein Geld besser gegen Inflation?
+    options:
+      - { id: a, label: Geldwerte wie das Sparkonto }
+      - { id: b, label: Sachwerte wie Aktien, Immobilien oder Gold }
+      - { id: c, label: Bargeld unter der Matratze }
+    correct: b
+    explanation: Sachwerte (der Stein) halten ihren Wert meist mit der Inflation. Geldwerte (der Eiswürfel) verlieren langsam an Kaufkraft.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Beides hat seinen Platz - Geldwerte sind sicher und schnell verfügbar, gut für den Notgroschen.
+      - Aber wer langfristig Vermögen aufbauen will, braucht Sachwerte - sonst schmilzt das Ersparte in der Sonne weg.

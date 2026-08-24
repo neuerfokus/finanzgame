@@ -1,0 +1,45 @@
+id: q15_einzelaktie_risiko
+title: Alles auf ein Pferd?
+location: monetaria.heimathafen
+prerequisites:
+  - q11_was_ist_aktie
+reward:
+  cash_cents: 130
+  xp: 35
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Eine Einzelaktie zu kaufen ist wie beim Pferderennen alles auf ein einziges Pferd zu setzen.
+      - Gewinnt dein Pferd, kassierst du fett. Stürzt es, ist dein Einsatz weg.
+      - Bei der Aktie heißt das - geht es der Firma gut, wirst du reich. Geht sie pleite, ist dein Geld futsch.
+  - id: fan
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Warum macht man das trotzdem? Oft, weil man an eine Firma glaubt.
+      - Du zockst die Spiele der Game AG, du findest sie großartig - also kaufst du ihre Aktie.
+      - Du bist wie ein Fan und freust dich, wenn es deinem Verein gut geht. Das ist völlig in Ordnung.
+  - id: konsequenz
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Aber selbst das beste Pferd kann stürzen - auch eine tolle Firma kann pleitegehen.
+      - Deshalb die Regel - setz aufs Lieblingspferd, wenn es dir Spaß macht. Aber nur einen kleinen Einsatz.
+      - Nie dein ganzes Geld auf ein Pferd. Dann tut ein Sturz nicht weh.
+  - id: question
+    type: quiz
+    question: Du steckst dein ganzes Geld in die Game AG. Die Firma geht pleite. Was passiert?
+    options:
+      - { id: a, label: Du verlierst nichts, es war ja nur eine Firma }
+      - { id: b, label: Du verlierst fast dein ganzes Geld }
+      - { id: c, label: Andere Aktien gleichen den Verlust aus }
+    correct: b
+    explanation: Wer alles auf ein Pferd setzt, verliert alles, wenn es stürzt. Ein kleiner Einsatz aus Überzeugung ist okay - aber nie die ganze Kasse.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Einzelaktien dürfen Spaß machen - als kleiner Teil, mit dem du mitfieberst.
+      - Und der Rest deines Geldes? Den setzt du klüger - nicht auf ein Pferd, sondern auf viele. Dazu gleich mehr.

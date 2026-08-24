@@ -1,0 +1,45 @@
+id: q17_bausparer
+title: Bausparer - lohnt sich das?
+location: monetaria.wohnviertel
+prerequisites: [q10_compound_magic]
+reward:
+  cash_cents: 350
+  xp: 80
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Ein Bausparer ist wie eine Reservierung für einen günstigen Kredit.
+      - Du sparst erst ein paar Jahre an - dann hast du Anrecht auf ein Darlehen zu einem niedrigen Zins.
+      - Klingt nach einem guten Deal. Aber schau genauer hin.
+  - id: inflation
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Das Geld, das du ansparst, wird kaum verzinst - oft unter einem halben Prozent pro Jahr.
+      - Und der Vertrag bindet dein Geld lange - meist rund 7 Jahre.
+      - Erinnerst du dich an den Eiswürfel? In diesen 7 Jahren knabbert die Inflation an deinem Ersparten - es schmilzt langsam weg.
+  - id: zweckbindung
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Und der günstige Kredit am Ende? Den bekommst du nicht für alles.
+      - Er ist zweckgebunden - nur fürs Wohnen. Hauskauf, Renovierung, sogar eine neue Einbauküche zählt.
+      - Aber ein Auto oder eine Reise? Dafür gibt es das Bauspar-Darlehen nicht.
+  - id: quiz
+    type: quiz
+    question: Wofür darfst du den günstigen Bauspar-Kredit verwenden?
+    options:
+      - { id: a, label: Für alles, was du willst }
+      - { id: b, label: Nur fürs Wohnen - Haus, Renovierung, Einbauküche }
+      - { id: c, label: Nur für ein neues Auto }
+    correct: b
+    explanation: Das Bauspar-Darlehen ist zweckgebunden - es muss ins Wohnen fließen. Ein Auto kannst du damit nicht kaufen.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der Bausparer ist ein lahmer Sparer - sein einziger echter Wert ist der günstige Kredit fürs Wohnen.
+      - Lohnt sich also nur, wenn du ziemlich sicher bauen oder renovieren willst.
+      - Willst du einfach Vermögen aufbauen - ein ETF wächst, statt in der Sonne zu schmelzen.

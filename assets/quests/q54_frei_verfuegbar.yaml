@@ -1,0 +1,93 @@
+id: q54_frei_verfuegbar
+title: Was bleibt am Ende übrig?
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1000
+  xp: 200
+topic: grundlagen
+prerequisites:
+  - q24_steuer_basics
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "Schau mal deinen Lohnzettel an."
+      - "Da stehen viele Zahlen: Brutto, Netto, Sozialabgaben, Steuer."
+      - "Aber wichtig ist eine andere Zahl: das frei verfügbare Einkommen."
+
+  - id: definition_quiz
+    type: quiz
+    question: "Was ist 'frei verfügbares Einkommen'?"
+    options:
+      - id: brutto
+        label: "Dein Bruttolohn (alles was du verdienst)."
+      - id: netto
+        label: "Dein Nettolohn (nach Steuern + Sozialabgaben)."
+      - id: rest
+        label: "Netto minus Fixkosten (Miete, Essen, Versicherung)."
+      - id: spar
+        label: "Wieviel du sparen musst."
+    correct: rest
+    explanation: >-
+      Frei verfügbar = Netto-Lohn minus alle Fixkosten (Miete, Strom,
+      Essen, Versicherungen). Das ist was am Ende WIRKLICH übrig
+      bleibt — für Wünsche oder zum Investieren.
+
+  - id: rechnen
+    type: quiz
+    question: >-
+      Du verdienst 2500 € brutto, 1700 € netto. Miete + Essen + Versicherung
+      kosten 1200 € im Monat. Was bleibt frei verfügbar?
+    options:
+      - id: zwei500
+        label: "2500 €"
+      - id: ein700
+        label: "1700 €"
+      - id: rest500
+        label: "500 €"
+      - id: rest1200
+        label: "1200 €"
+    correct: rest500
+    explanation: >-
+      1700 € Netto − 1200 € Fixkosten = 500 € frei verfügbar. Aus diesen
+      500 € zahlst du Wünsche + Investieren + Notgroschen. Klingt
+      wenig? Genau deshalb ist die Sparquote wichtig.
+
+  - id: reihenfolge
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "Faustregel — was du mit deinem frei verfügbaren Geld machen solltest:"
+      - "1. Notgroschen aufbauen (3 Monatsausgaben)."
+      - "2. Hohe Schulden tilgen (Dispo, Kredite)."
+      - "3. Langfristig investieren (ETF-Sparplan)."
+      - "4. Wünsche kaufen — wenn noch was übrig ist."
+
+  - id: priorisieren
+    type: quiz
+    question: >-
+      Du hast 200 € frei verfügbar diesen Monat. Notgroschen ist leer.
+      Was machst du ZUERST?
+    options:
+      - id: notgroschen
+        label: "Notgroschen — zumindest 100-200 € sparen."
+      - id: aktie
+        label: "Direkt in Aktien — wegen Zinseszins."
+      - id: sneaker
+        label: "Neue Sneaker — Belohnung für meine Mühe."
+      - id: krypto
+        label: "Krypto — kleines Geld, hohes Risiko."
+    correct: notgroschen
+    explanation: >-
+      Erst Notgroschen, dann investieren. Wenn dein Handy kaputt geht
+      und du keinen Notgroschen hast, musst du ETFs verkaufen — und
+      vielleicht im Crash mit Verlust. Erst Reserve, dann Aufbau.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Papa"
+    lines:
+      - "Frei verfügbar zu kennen ist mehr wert als Brutto-Zahlen."
+      - "Wer weiß, was wirklich übrig bleibt, kann planen + sparen."
+      - "Schau dir das mal in der Stats-App an — da steht es jetzt drin."

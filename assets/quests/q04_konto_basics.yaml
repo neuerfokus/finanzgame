@@ -1,0 +1,38 @@
+id: q04_konto_basics
+title: Was ist ein Bankkonto?
+location: monetaria.heimathafen
+prerequisites:
+  - q01_sparschwein
+reward:
+  cash_cents: 150
+  xp: 40
+steps:
+  - id: intro
+    type: dialog
+    speaker: Bankier Krösus
+    lines:
+      - Dein Sparschwein ist voll - aber Münzen unterm Kopfkissen wachsen nicht.
+      - Ein Bankkonto ist wie ein digitales Sparschwein bei der Bank.
+      - Du gibst der Bank dein Geld - sie verleiht es weiter und zahlt dir dafür Zinsen.
+  - id: zinsen
+    type: dialog
+    speaker: Bankier Krösus
+    lines:
+      - Zins ist der Preis fürs Leihen von Geld. Klein, aber jedes Jahr.
+      - Bei 2% Zinsen auf 100 Euro - bekommst du nach einem Jahr 2 Euro geschenkt.
+      - Hört sich wenig an? Stimmt. Bei der Bank ist Sicherheit wichtiger als Gewinn.
+  - id: quiz
+    type: quiz
+    question: Du legst 200 Euro aufs Konto. Die Bank zahlt 3% Zinsen pro Jahr. Wieviel Zins bekommst du nach einem Jahr?
+    options:
+      - { id: a, label: 3 Euro }
+      - { id: b, label: 6 Euro }
+      - { id: c, label: 30 Euro }
+    correct: b
+    explanation: 3% von 200 sind 6 Euro. Zinssatz mal Geldbetrag - das ist die Zinsformel.
+  - id: outro
+    type: dialog
+    speaker: Bankier Krösus
+    lines:
+      - Merke - Konto = sicher + langsam.
+      - Im nächsten Schritt zeige ich dir den Trick wie aus Zinsen MEHR Zinsen werden.

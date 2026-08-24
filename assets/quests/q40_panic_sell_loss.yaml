@@ -1,0 +1,30 @@
+id: q40_panic_sell_loss
+title: Der teure Panic-Sell
+location: monetaria.vulkan
+prerequisites: []
+reward:
+  cash_cents: 0
+  xp: 80
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Du hast während des Crashes verkauft.
+      - Der Markt steht jetzt wieder höher als zu deinem Verkaufs-Preis.
+      - Das ist der Klassiker - Buchverlust in echten Verlust verwandelt.
+  - id: quiz
+    type: quiz
+    question: Was lehrt uns dieser Moment?
+    options:
+      - { id: a, label: Beim nächsten Crash sofort verkaufen, schneller sein }
+      - { id: b, label: Halten, weil Märkte sich historisch erholt haben }
+      - { id: c, label: Nie wieder investieren }
+    correct: b
+    explanation: Halten zahlt sich oft aus. Der Verlust war nur auf Papier - bis du verkauft hast.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Crashes sind Setup. Erholung ist die Punchline.
+      - Wer dabei bleibt, sieht beide.

@@ -1,0 +1,30 @@
+id: q08_notgroschen_drill
+title: Notgroschen-Drill
+location: monetaria.heimathafen
+prerequisites: [q03_notgroschen]
+reward:
+  cash_cents: 400
+  xp: 100
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Quizfrage - wie schnell musst du an deinen Notgroschen rankommen?
+      - Antwort - innerhalb von 1-2 Tagen, maximal eine Woche.
+      - Deshalb gehört er auf ein Spar- oder Tagesgeldkonto, NICHT in ETFs.
+      - ETF-Kurse können am falschen Tag tief stehen - dann verkaufst du mit Verlust.
+  - id: quiz
+    type: quiz
+    question: Wo gehört der Notgroschen hin?
+    options:
+      - { id: a, label: Auf das Sparkonto }
+      - { id: b, label: Komplett in Bitcoin }
+      - { id: c, label: In einem Welt-ETF }
+    correct: a
+    explanation: Notgroschen = jederzeit verfügbar, sicher, kein Markt-Risiko.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Notgroschen ist langweilig - genau das soll er sein.

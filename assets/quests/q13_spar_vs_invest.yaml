@@ -1,0 +1,30 @@
+id: q13_spar_vs_invest
+title: Sparen oder Investieren?
+location: monetaria.spar_insel
+prerequisites: [q08_notgroschen_drill]
+reward:
+  cash_cents: 350
+  xp: 80
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Sparen + Investieren sind nicht dasselbe.
+      - Sparen = Geld sicher halten, kaum Gewinn, jederzeit verfügbar.
+      - Investieren = Geld arbeiten lassen, mehr Gewinn, dafür Risiko + Zeit-Bindung.
+      - Profi-Regel - erst Notgroschen sparen, dann mit dem Rest investieren.
+  - id: quiz
+    type: quiz
+    question: Was kommt zuerst?
+    options:
+      - { id: a, label: Alles in ETF investieren }
+      - { id: b, label: Notgroschen aufs Spar, dann investieren }
+      - { id: c, label: Krypto vor allem }
+    correct: b
+    explanation: Sicherheit zuerst, Gewinn später. Reihenfolge ist entscheidend.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Beide brauchst du. Sparen für Sicherheit, Investieren für Wachstum.

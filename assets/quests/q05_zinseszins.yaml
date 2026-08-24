@@ -1,0 +1,40 @@
+id: q05_zinseszins
+title: Der Zinseszins-Trick
+location: monetaria.heimathafen
+prerequisites:
+  - q04_konto_basics
+reward:
+  cash_cents: 100
+  xp: 30
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir vor, du pflanzt eine Bohne ein. Sie wächst und bringt zwei neue Bohnen.
+      - Jetzt der Trick - du isst sie nicht, du pflanzt beide wieder ein. Und jede dieser Bohnen bringt selbst wieder zwei.
+      - So wird aus 1 die 2, aus 2 die 4, aus 4 die 8, dann 16, dann 32 ... jede Ernte verdoppelt sich.
+      - Du hast nie eine einzige Bohne nachgekauft. Die Ernte vermehrt sich ganz von selbst.
+  - id: prinzip
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Genau so funktioniert Zinseszins bei Geld.
+      - Dein Geld bringt Zinsen - und diese Zinsen bringen im nächsten Jahr selbst wieder Zinsen.
+      - In echt verdoppelt sich's natürlich nicht jedes Jahr - meist sind es nur ein paar Prozent.
+      - Aber das Prinzip ist dasselbe - nur langsamer. Und genau deshalb zählt jedes Jahr.
+  - id: question
+    type: quiz
+    question: Du legst 100 Münzen an, jedes Jahr 5% Zinsen - auch auf die alten Zinsen. Was passiert nach 10 Jahren?
+    options:
+      - { id: a, label: Aus 100 werden ca. 150 }
+      - { id: b, label: Aus 100 werden ca. 163 }
+      - { id: c, label: Aus 100 werden 1000 }
+    correct: b
+    explanation: Würdest du die Zinsen jedes Jahr ausgeben, hättest du nur 150 (10 x 5). Lässt du sie drin, ernten sie selbst mit - so werden es ca. 163. Der Unterschied wächst mit jedem Jahr.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Je früher du die erste Bohne einpflanzt, desto öfter kann sich die Ernte verdoppeln.
+      - Deshalb sagen Erwachsene immer - früh anfangen. Nicht das viele Geld zählt, sondern die Zeit.

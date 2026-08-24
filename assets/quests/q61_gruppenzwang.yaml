@@ -1,0 +1,63 @@
+id: q61_gruppenzwang
+title: Alle haben es
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 220
+topic: psychologie
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "In der Klasse haben jetzt alle das DropTok-Premium-Abo + den Limited-Skin."
+      - "Ich bin der Einzige ohne. Fühlt sich blöd an."
+      - "Soll ich das auch holen, um dazuzugehören?"
+
+  - id: warum_quiz
+    type: quiz
+    question: "Warum willst du den Skin wirklich — ehrlich?"
+    options:
+      - id: brauch
+        label: "Weil ich ihn wirklich brauche und lange Freude dran habe."
+      - id: dazu
+        label: "Vor allem, um dazuzugehören und nicht außen vor zu sein."
+      - id: egal
+        label: "Ist mir eigentlich egal, ich kauf trotzdem."
+    correct: dazu
+    explanation: >-
+      Das nennt man Gruppenzwang: der Druck, etwas zu kaufen, weil alle es
+      haben. Firmen bauen Hype + künstliche Knappheit ('nur diese Woche!')
+      gezielt, damit du aus Angst, etwas zu verpassen, schnell kaufst.
+
+  - id: hype_dialog
+    type: dialog
+    speaker: "Du (denkst)"
+    lines:
+      - "Letztes Mal war der 'Must-have'-Skin nach 3 Wochen vergessen."
+      - "Das Geld war weg, der Hype auch."
+      - "Was hilft gegen diesen Sofort-kaufen-Druck?"
+
+  - id: trick_quiz
+    type: quiz
+    question: "Was ist ein guter Trick gegen den 'Alle-haben-es'-Druck?"
+    options:
+      - id: sofort
+        label: "Sofort kaufen, bevor es weg ist."
+      - id: warten
+        label: "Eine Woche warten — will ich es dann noch, ist es echt; wenn nicht, war's nur der Hype."
+      - id: mehr
+        label: "Gleich zwei kaufen, dann bin ich sicher dabei."
+    correct: warten
+    explanation: >-
+      Der Eine-Woche-Trick entlarvt den Hype: Echte Wünsche bleiben, Hype
+      verfliegt. Du entscheidest selbst, was dir wichtig ist — nicht die
+      Klasse und nicht die Werbung. Dazugehören kostet nicht immer Geld.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Ich warte eine Woche. Wetten, der Skin ist mir dann egal?"
+      - "Und meine echten Freunde mögen mich auch ohne Limited-Skin."
+      - "Selbst entscheiden fühlt sich besser an als mitlaufen."

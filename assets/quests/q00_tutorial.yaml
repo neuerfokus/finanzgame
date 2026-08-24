@@ -1,0 +1,35 @@
+id: q00_tutorial
+title: Willkommen in Monetaria
+location: monetaria.heimathafen
+reward:
+  cash_cents: 500
+  xp: 200
+topic: tutorial
+steps:
+  - id: welcome
+    type: dialog
+    speaker: "Käpt'n Heimathafen"
+    lines:
+      - "Ahoy! Willkommen in Monetaria."
+      - "Hier wachsen Inseln, wenn dein Geld wächst. Los geht's auf der Spar-Insel."
+  - id: spar
+    type: dialog
+    speaker: "Käpt'n Heimathafen"
+    lines:
+      - "Pflanze Salat, ernte Geld - so wie Sparen mit Zinsen wächst."
+      - "Salat ist günstig und schnell. Teurere Pflanzen zahlen mehr."
+  - id: schlafen
+    type: dialog
+    speaker: "Käpt'n Heimathafen"
+    lines:
+      - "Druck auf Schlafen beendet den Tag: Pflanzen wachsen, Zinsen kommen."
+      - "Neue Inseln schalten sich frei, wenn du XP sammelst. Ich erklär sie dir dann."
+  - id: reward
+    type: quiz
+    question: "Was ist die wichtigste Regel?"
+    options:
+      - { id: a, label: "Alles auf Krypto setzen" }
+      - { id: b, label: "Breit streuen und langfristig denken" }
+      - { id: c, label: "Möglichst schnell viel Geld ausgeben" }
+    correct: b
+    explanation: "Diversifikation und langer Atem - die zwei wichtigsten Regeln."

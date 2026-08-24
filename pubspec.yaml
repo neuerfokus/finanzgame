@@ -1,0 +1,113 @@
+name: finanzgame
+description: "Lernspiel über Geld für Jugendliche ab etwa 13. Pixel-Art-Insel-Simulation, offline, ohne Tracking."
+publish_to: 'none'
+version: 1.10.0+185
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^3.0.0
+  riverpod_annotation: ^4.0.0
+
+  # Data
+  drift: ^2.20.0
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+  # Welle-8 Round 16: Wunschliste-Foto-Picker.
+  image_picker: ^1.1.2
+
+  # Welle-8 Round 20: JSON-Export/Import (manuelle Spielstand-Sicherung).
+  share_plus: ^10.1.2
+  file_picker: ^8.1.4
+
+  # Welle-8 Round 23: Auto-Save auf Handy (überlebt Deinstall).
+  permission_handler: ^11.3.1
+
+  # Welle-8 Round 28 v3: Save-Bundle (DB + Wunschlisten-Fotos als ZIP).
+  # ^3.x weil flame_tiled → tiled archive ^3.3.0 pinnt.
+  archive: ^3.6.1
+
+  # SHA-256 für den Eltern-PIN (Klartext lag sonst lesbar in der .fgsave).
+  crypto: ^3.0.3
+
+  # Modeling
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
+
+  # Routing
+  go_router: ^14.2.0
+
+  # i18n
+  intl: ^0.20.0
+
+  # Animations
+  flutter_animate: ^4.5.0
+
+  # Game engine for Monetaria
+  flame: ^1.18.0
+  flame_tiled: ^1.20.0
+  flame_audio: ^2.10.0
+  audioplayers: ^6.1.0
+
+  # YAML for declarative quests (Sprint 5+)
+  yaml: ^3.1.2
+
+  cupertino_icons: ^1.0.8
+  package_info_plus: ^9.0.1
+
+  # Freiwilliger Spende-Link (Settings) — externer Browser.
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  custom_lint: ^0.8.0
+  riverpod_lint: ^3.0.0
+
+  build_runner: ^2.4.13
+  riverpod_generator: ^4.0.0
+  freezed: ^3.0.0
+  json_serializable: ^6.8.0
+  drift_dev: ^2.20.0
+
+  golden_toolkit: ^0.15.0
+  flame_test: ^1.18.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  fonts:
+    - family: KenneyPixel
+      fonts:
+        - asset: assets/fonts/KenneyPixel.ttf
+    - family: KenneyMini
+      fonts:
+        - asset: assets/fonts/KenneyMini.ttf
+    - family: KenneyFuture
+      fonts:
+        - asset: assets/fonts/KenneyFuture.ttf
+    - family: KenneyFutureNarrow
+      fonts:
+        - asset: assets/fonts/KenneyFutureNarrow.ttf
+
+  assets:
+    - assets/images/islands_composite/
+    - assets/images/ships/
+    - assets/images/furniture/
+    - assets/quests/
+    - assets/sfx/
+    - assets/music/

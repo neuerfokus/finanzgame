@@ -1,0 +1,30 @@
+id: q20_geld_vs_glueck
+title: Geld + Glück
+location: monetaria.heimathafen
+prerequisites: [q13_spar_vs_invest]
+reward:
+  cash_cents: 300
+  xp: 70
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Forschung sagt - mehr Geld macht glücklicher, aber nur bis zu einem Punkt.
+      - Wer von wenig zu genug kommt, ist deutlich glücklicher.
+      - Wer von genug zu sehr viel kommt, kaum noch.
+      - Geld ist ein Werkzeug, kein Ziel.
+  - id: quiz
+    type: quiz
+    question: Was steigert Lebenszufriedenheit am stärksten?
+    options:
+      - { id: a, label: Immer mehr Geld }
+      - { id: b, label: Sicherheit + Freiheit Entscheidungen zu treffen }
+      - { id: c, label: Teure Statussymbole }
+    correct: b
+    explanation: Finanzielle Sicherheit + Entscheidungsfreiheit > teure Statussymbole.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Lerne mit Geld umzugehen, ohne dich davon definieren zu lassen. Das ist das eigentliche Ziel.

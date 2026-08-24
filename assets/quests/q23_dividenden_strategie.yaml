@@ -1,0 +1,32 @@
+id: q23_dividenden_strategie
+title: Dividenden - wie Aktien dir jährlich Geld zahlen
+location: monetaria.aktien_archipel
+prerequisites: [q16_dividende]
+reward:
+  cash_cents: 700
+  xp: 100
+topic: aktien
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Manche Firmen zahlen jedes Jahr einen Teil ihres Gewinns an die Aktionäre aus - Dividende.
+      - Beispiel - du hast Aktien für 1000 Euro. Firma zahlt 3 Prozent Dividende = 30 Euro pro Jahr.
+      - Bei Wachstumsaktien fließen die Gewinne meist zurück ins Unternehmen statt zur Auszahlung.
+      - Beides ist gut - Dividenden geben sofortiges Einkommen, Wachstum vermehrt langfristig den Wert.
+  - id: quiz
+    type: quiz
+    question: Was ist eine Dividende?
+    options:
+      - { id: a, label: Eine Strafzahlung wenn der Aktienkurs fällt }
+      - { id: b, label: Eine jährliche Gewinnbeteiligung an Aktionäre }
+      - { id: c, label: Die Verkaufsprovision an die Bank }
+    correct: b
+    explanation: Dividende = Anteil am Unternehmensgewinn, ausgeschüttet an die Aktionäre.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Hohe Dividenden klingen verlockend - sind aber kein Garant für eine gute Aktie.
+      - Manchmal zahlen schwache Firmen hohe Dividenden um Anleger zu locken.

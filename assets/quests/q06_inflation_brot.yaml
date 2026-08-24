@@ -1,0 +1,38 @@
+id: q06_inflation_brot
+title: Der teurer werdende Döner
+location: monetaria.heimathafen
+prerequisites:
+  - q04_konto_basics
+reward:
+  cash_cents: 140
+  xp: 40
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Denk mal an deinen Lieblings-Döner. Was hat der vor ein paar Jahren gekostet - und was kostet er heute?
+      - Genau - er ist teurer geworden. Nicht weil er besser ist, sondern weil fast alles mit der Zeit teurer wird.
+      - Diese schleichende Teuerung nennt man Inflation.
+  - id: kaufkraft
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Das Tückische - dein Geld wird dabei nicht weniger, aber es kann immer weniger kaufen.
+      - 10 Euro bleiben 10 Euro. Aber wenn der Döner teurer wird, bekommst du dafür irgendwann nur noch einen statt zwei.
+      - Dein Geld verliert also an Kaufkraft, ohne dass die Zahl auf dem Konto schrumpft.
+  - id: quiz
+    type: quiz
+    question: Du hast 1000 Euro unter der Matratze - 10 Jahre lang. Die Preise steigen jedes Jahr ein bisschen. Was passiert?
+    options:
+      - { id: a, label: Die 1000 Euro sind noch genauso viel wert }
+      - { id: b, label: Du kannst dir damit immer weniger kaufen }
+      - { id: c, label: Aus den 1000 Euro werden von allein mehr }
+    correct: b
+    explanation: Die Zahl bleibt gleich, aber die Preise steigen - also kannst du dir für dieselben 1000 Euro immer weniger leisten. Das ist der stille Verlust durch Inflation.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Deshalb reicht reines Sparen oft nicht - Geld, das nur herumliegt, verliert langsam an Wert.
+      - Du brauchst etwas, das mindestens so schnell wächst wie die Preise steigen. Dazu kommen wir noch.

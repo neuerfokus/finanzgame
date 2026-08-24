@@ -1,0 +1,30 @@
+id: q41_held_through_crash
+title: Durchgehalten
+location: monetaria.vulkan
+prerequisites: []
+reward:
+  cash_cents: 0
+  xp: 120
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der Crash ist vorbei. Du hast nicht verkauft.
+      - Das ist seltener als du denkst - die meisten kippen unter Druck um.
+      - Dein Depot ist wieder über dem Vor-Crash-Niveau.
+  - id: quiz
+    type: quiz
+    question: Warum ist Durchhalten so schwer?
+    options:
+      - { id: a, label: Weil Schmerzen lauter schreien als Geduld }
+      - { id: b, label: Weil Crashes selten vorkommen }
+      - { id: c, label: Weil man jeden Tag rechnen muss }
+    correct: a
+    explanation: Verlust-Aversion ist menschlich. Wer das weiß, kann gegensteuern.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Time in the market schlägt timing the market.
+      - Heute hast du das bewiesen.

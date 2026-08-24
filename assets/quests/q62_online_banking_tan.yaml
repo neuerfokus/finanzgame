@@ -1,0 +1,63 @@
+id: q62_online_banking_tan
+title: Die SMS von der Bank
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 220
+topic: betrug
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Ich hab jetzt mein erstes eigenes Konto + die Banking-App!"
+      - "Gerade kam eine SMS: 'Dein Konto wurde gesperrt. Hier klicken und mit TAN bestätigen.'"
+      - "Soll ich draufklicken und meine TAN eingeben?"
+
+  - id: tan_quiz
+    type: quiz
+    question: "Eine SMS will, dass du über einen Link klickst und deine TAN eingibst. Was tust du?"
+    options:
+      - id: eingeben
+        label: "TAN eingeben — sonst bleibt das Konto gesperrt."
+      - id: nicht
+        label: "Nicht klicken — echte Banken fragen NIE per SMS/Link nach der TAN."
+      - id: anrufen
+        label: "Die Nummer aus der SMS anrufen und alles durchgeben."
+    correct: nicht
+    explanation: >-
+      Eine TAN ist ein Einmal-Code, der eine Überweisung bestätigt. Gib sie
+      NIEMALS über einen Link, am Telefon oder per SMS weiter. Echte Banken
+      fragen so nie danach — das ist Phishing, um dein Konto leerzuräumen.
+
+  - id: sicher_dialog
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Puh, fast hätte ich mein Konto verschenkt."
+      - "Wie logge ich mich denn sicher ein, ohne reinzufallen?"
+
+  - id: sicher_quiz
+    type: quiz
+    question: "Wie gehst du sicher mit deinem Online-Banking um?"
+    options:
+      - id: link
+        label: "Immer über den Link in Mails/SMS einloggen — geht am schnellsten."
+      - id: app
+        label: "Nur die echte App / offizielle Adresse nutzen, PIN/TAN für mich behalten, App aus dem offiziellen Store."
+      - id: teilen
+        label: "PIN einem Freund geben, falls ich sie mal vergesse."
+    correct: app
+    explanation: >-
+      Sicher heißt: nur die echte App oder die offizielle Bank-Adresse
+      selbst öffnen (nie über fremde Links), PIN und TAN für dich behalten,
+      Apps nur aus dem offiziellen Store laden. Bei Zweifel: Bank über die
+      Nummer auf der echten Karte anrufen, nie über eine Nummer aus der SMS.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Merksatz: PIN und TAN gehören NUR mir."
+      - "Links aus Mails/SMS ignoriere ich, ich öffne die App selbst."
+      - "Erstes eigenes Konto — und ich pass drauf auf!"

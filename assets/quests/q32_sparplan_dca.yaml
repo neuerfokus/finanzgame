@@ -1,0 +1,30 @@
+id: q32_sparplan_dca
+title: Sparplan + DCA-Magie
+location: monetaria.etf_insel
+prerequisites: [q28_was_ist_etf]
+reward:
+  cash_cents: 400
+  xp: 90
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Sparplan heißt - jeden Monat denselben Betrag in einen ETF stecken.
+      - Mal kaufst du teuer, mal günstig. Im Schnitt zahlst du fairen Preis.
+      - Profis nennen das Dollar-Cost-Averaging - DCA.
+      - Vorteil - du musst nicht raten wann der beste Moment ist.
+  - id: quiz
+    type: quiz
+    question: Was ist der große Vorteil vom Sparplan?
+    options:
+      - { id: a, label: Garantierter Gewinn }
+      - { id: b, label: Du musst Markt-Timing nicht raten }
+      - { id: c, label: Schnelle Verdoppelung deines Geldes }
+    correct: b
+    explanation: DCA = Du kaufst regelmäßig, egal ob teuer oder billig.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Disziplin schlägt Bauchgefuehl. Sparplan einrichten, vergessen, profitieren.

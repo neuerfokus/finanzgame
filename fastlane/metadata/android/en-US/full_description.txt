@@ -1,0 +1,25 @@
+A game about money for teenagers, aged roughly 13 and up. Budget your allowance, save, invest, wait — and watch what grows. The interface is in German.
+
+Important: this is a learning simulation, not investment advice. Every price, company and return in the game is fictional. Real money behaves differently.
+
+WHAT YOU GET
+
+• A day cycle instead of real time — nothing happens while the phone is in your pocket. A day ends when you tap "sleep".
+• Eleven asset classes with distinct character: savings account, ETFs, single stocks, crypto, precious metals, real estate, pension products, collectibles, trees — each on its own island.
+• More than 60 story quests about everyday traps: subscriptions, phishing, fake shops, instalment plans, peer pressure, a first part-time job, tax allowances.
+• A daily question, a knowledge quiz, and a glossary that records what you have learned.
+• Time travel: fast-forward years and review your wealth over time.
+• A bridge to real life: log real savings goals, have a parent confirm them, get rewarded in game.
+
+PRINCIPLES
+
+• No real brands, no real securities — everything is fictional.
+• No loot boxes, no in-app purchases, no gambling mechanics.
+• No tracking, no analytics, no cloud. The app sends nothing.
+• Gender-neutral by design: the app never asks, and female and male characters cost the same and stand side by side.
+
+PRIVACY
+
+Everything stays on the device. No account, no sign-up, no personal data. The app does not even request the INTERNET permission, so Android prevents it from opening any connection.
+
+Free software under the GPL-3.0.

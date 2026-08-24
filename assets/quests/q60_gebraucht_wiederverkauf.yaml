@@ -1,0 +1,63 @@
+id: q60_gebraucht_wiederverkauf
+title: Neu oder gebraucht?
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 220
+topic: konsum
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Ich will die neuen SnipeShot-Sneaker — 180 € im Laden."
+      - "Aber online gibt es fast neue, getragen-1×, für 70 €."
+      - "Neu fühlt sich besser an... oder ist gebraucht schlauer?"
+
+  - id: wertverlust_quiz
+    type: quiz
+    question: "Die 180-€-Sneaker sind nach einem Jahr getragen noch etwa wie viel wert?"
+    options:
+      - id: gleich
+        label: "Immer noch 180 € — gute Sachen behalten ihren Wert."
+      - id: wenig
+        label: "Oft nur noch 40-70 € — das meiste verliert schnell an Wert."
+      - id: mehr
+        label: "Mehr als 180 € — getragen ist begehrter."
+    correct: wenig
+    explanation: >-
+      Die meisten Dinge verlieren ihren Wert sehr schnell — schon beim
+      Auspacken. Das nennt man Wiederverkaufswert. Wer neu für 180 € kauft
+      und später verkauft, bekommt oft nur einen Bruchteil zurück.
+
+  - id: gebraucht_dialog
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Krass. Dann zahle ich neu 110 € mehr für fast dasselbe."
+      - "Und beim Weiterverkauf verliere ich nochmal."
+      - "Aber kann man gebraucht denn bedenkenlos kaufen?"
+
+  - id: gebraucht_quiz
+    type: quiz
+    question: "Worauf achtest du beim Gebraucht-Kauf, damit es kein Reinfall wird?"
+    options:
+      - id: blind
+        label: "Einfach das billigste nehmen, Hauptsache günstig."
+      - id: pruefen
+        label: "Zustand + Fotos prüfen, Bewertungen lesen, lieber persönlich abholen."
+      - id: vorkasse
+        label: "Sofort per Vorkasse an Unbekannte zahlen."
+    correct: pruefen
+    explanation: >-
+      Gebraucht kaufen spart viel Geld — wenn du aufpasst: echte Fotos,
+      Zustand checken, Bewertungen des Verkäufers ansehen und wenn möglich
+      persönlich abholen statt blind Vorkasse an Fremde zu zahlen.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Plan: gebrauchte für 70 € holen, 110 € gespart."
+      - "Und was ich selbst nicht mehr nutze, verkauf ich weiter."
+      - "Neu ist nicht automatisch besser — nur teurer. Gelernt!"

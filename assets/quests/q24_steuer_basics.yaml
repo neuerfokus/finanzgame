@@ -1,0 +1,29 @@
+id: q24_steuer_basics
+title: Steuer-Basics
+location: monetaria.heimathafen
+prerequisites: [q21_diversifikation]
+reward:
+  cash_cents: 600
+  xp: 100
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wenn deine ETF-Gewinne wachsen, will der Staat etwas davon ab.
+      - In Deutschland zahlst du auf Kapitalerträge ca. 25 Prozent Steuern.
+      - Aber jedes Jahr sind 1000 Euro Sparerpauschbetrag frei.
+  - id: quiz
+    type: quiz
+    question: Was passiert mit deinem ETF-Gewinn, wenn du verkaufst?
+    options:
+      - { id: a, label: Alles gehört mir }
+      - { id: b, label: Über 1000 Euro pro Jahr zahlst du ca. 25 Prozent Steuer }
+      - { id: c, label: Der Staat nimmt die Hälfte }
+    correct: b
+    explanation: Erste 1000 Euro Kapitalerträge pro Jahr sind steuerfrei. Darüber ca. 25 Prozent.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Steuer kennen heißt nicht weniger investieren - aber besser planen.

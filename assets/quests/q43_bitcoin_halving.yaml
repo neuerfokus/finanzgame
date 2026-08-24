@@ -1,0 +1,32 @@
+id: q43_bitcoin_halving
+title: Bitcoin-Halving - was bedeutet das?
+location: monetaria.vulkan
+prerequisites: [q41_krypto_casino]
+reward:
+  cash_cents: 600
+  xp: 90
+topic: bitcoin
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Bitcoin hat eine besondere Regel - das Halving.
+      - Alle vier Jahre wird die Belohnung für Miner halbiert.
+      - Dadurch entstehen weniger neue Bitcoins. Das macht jeden einzelnen knapper.
+      - Bei Gold ist die Förderung auch begrenzt - ähnliches Prinzip.
+  - id: quiz
+    type: quiz
+    question: Was passiert beim Bitcoin-Halving?
+    options:
+      - { id: a, label: Der Preis halbiert sich automatisch }
+      - { id: b, label: Die Miner-Belohnung wird halbiert - weniger neue Bitcoins }
+      - { id: c, label: Jeder Halter verliert die Hälfte seiner Coins }
+    correct: b
+    explanation: Halving = halbierte Miner-Belohnung. Dadurch wächst der Bitcoin-Bestand langsamer.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Knappheit allein heißt nicht automatisch höherer Preis. Auch Nachfrage muss da sein.
+      - Historisch sind viele Bitcoin-Bullenmärkte nach einem Halving entstanden - keine Garantie für die Zukunft.

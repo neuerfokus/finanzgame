@@ -1,0 +1,29 @@
+id: q31_kostenfalle
+title: Die unsichtbare Kostenfalle
+location: monetaria.etf_insel
+prerequisites: [q28_was_ist_etf]
+reward:
+  cash_cents: 400
+  xp: 90
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Auch ETFs kosten Gebühren. Die nennt man TER - Total Expense Ratio.
+      - Günstige ETFs liegen unter 0.20 Prozent pro Jahr.
+      - Teure aktive Fonds verlangen 1.5 Prozent und mehr. Über 30 Jahre frisst das ein Drittel deines Vermögens.
+  - id: quiz
+    type: quiz
+    question: Was ist eine niedrige TER bei einem ETF?
+    options:
+      - { id: a, label: 0.20 Prozent pro Jahr }
+      - { id: b, label: 2.5 Prozent pro Jahr }
+      - { id: c, label: 5 Prozent einmalig }
+    correct: a
+    explanation: Niedrige TER (unter 0.30 %) ist Pflicht für langfristige ETFs.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Achte auf Kosten - sie sind dein größter Gewinn-Killer.

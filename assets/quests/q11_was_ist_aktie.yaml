@@ -1,0 +1,47 @@
+id: q11_was_ist_aktie
+title: Was ist eine Aktie?
+location: monetaria.aktien_archipel
+prerequisites: [q05_zinseszins]
+reward:
+  cash_cents: 300
+  xp: 70
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Stell dir vor, dein Vater will eine eigene Werkstatt aufmachen.
+      - Dafür braucht er Startkapital - sagen wir 100.000 Euro. Allein hat er die nicht.
+      - Also fragt er 100 Leute - gebt mir je 1000 Euro, dafür gehört euch ein Stück der Werkstatt und ihr werdet am Gewinn beteiligt.
+      - Genau das ist eine Aktie - ein Anteil an einer Firma, den du kaufst.
+  - id: eigentum
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wer 1000 Euro gibt, besitzt 1 von 100 Anteilen - also 1 Prozent der Werkstatt.
+      - Läuft die Werkstatt gut, ist dein Anteil mehr wert und du bekommst Gewinn.
+      - Läuft sie schlecht, ist dein Anteil weniger wert. Du trägst das Risiko mit.
+      - Du bist echter Mit-Eigentümer - kein Zuschauer.
+  - id: stimmrecht
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Als Mit-Eigentümer darfst du sogar mitbestimmen - pro Anteil eine Stimme.
+      - Bei der kleinen Werkstatt mit 100 Anteilen zählt deine Stimme spürbar.
+      - Aber bei einem Riesen-Konzern? Da hast du Millionen Mit-Eigentümer - dazu gleich mehr.
+  - id: quiz
+    type: quiz
+    question: Wem gehört ein Stück der Firma, wenn du eine Aktie kaufst?
+    options:
+      - { id: a, label: Dem Staat }
+      - { id: b, label: Dir }
+      - { id: c, label: Der Bank }
+    correct: b
+    explanation: Aktionäre sind echte Mit-Eigentümer der Firma - so wie die 100 Leute, denen je ein Stück der Werkstatt gehört.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Mit einer Aktie wirst du Mit-Eigentümer einer echten Firma - mit Chance auf Gewinn und dem Risiko des Verlusts.
+      - Bei der kleinen Werkstatt ist dein Stück groß. Bei einem Welt-Konzern winzig.
+      - Wie winzig genau - das schauen wir uns als Nächstes an.

@@ -1,0 +1,74 @@
+id: q57_spenden_stiftung
+title: Geld, das Gutes tut
+location: monetaria.heimathafen
+reward:
+  cash_cents: 2000
+  xp: 300
+topic: psychologie
+prerequisites:
+  - q56_genug_haben
+steps:
+  - id: intro
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Sagen wir, du hast genug — und es kommt sogar mehr rein."
+      - "Was passiert mit dem Überschuss?"
+      - "Es gibt da noch eine Sache, die Geld kann:"
+      - "Es kann anderen helfen — und dir ein gutes Gefühl geben."
+
+  - id: was_tun
+    type: choice
+    prompt: "Du hast mehr als du brauchst. Was tust du?"
+    options:
+      - id: teilen
+        label: "Einen Teil spenden — für etwas, das mir wichtig ist."
+      - id: anlegen
+        label: "Komplett weiter anlegen, später entscheiden."
+      - id: behalten
+        label: "Alles behalten, man weiß ja nie."
+
+  - id: was_ist_stiftung
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Manche Reiche gründen eine 'Stiftung'."
+      - "Das ist ein Topf Geld, der für immer einem guten Zweck dient."
+      - "Nur die Erträge werden gespendet — der Topf bleibt erhalten."
+      - "So hilft das Geld jedes Jahr aufs Neue, ohne aufgebraucht zu werden."
+
+  - id: stiftung_quiz
+    type: quiz
+    question: "Wie funktioniert eine Stiftung typischerweise?"
+    options:
+      - id: ertraege
+        label: "Das Vermögen bleibt, nur die Erträge gehen an den guten Zweck."
+      - id: einmal
+        label: "Das ganze Geld wird einmal verschenkt, dann ist Schluss."
+      - id: gewinn
+        label: "Sie macht möglichst viel Gewinn für den Gründer."
+    correct: ertraege
+    explanation: >-
+      Eine Stiftung legt ihr Vermögen an und spendet nur die Erträge.
+      So wirkt dasselbe Geld jedes Jahr wieder — der Zinseszins arbeitet
+      hier für eine gute Sache statt nur für dich.
+
+  - id: wieviel
+    type: choice
+    prompt: "Wie viel würdest du abgeben?"
+    options:
+      - id: klein
+        label: "Einen kleinen, festen Teil — regelmäßig."
+      - id: gross
+        label: "Einen großen Batzen auf einmal."
+      - id: spaeter
+        label: "Erstmal nichts, aber ich behalte es im Kopf."
+
+  - id: schluss
+    type: dialog
+    speaker: "Finanz-Coach"
+    lines:
+      - "Es gibt kein Richtig oder Falsch — das ist deine Entscheidung."
+      - "Aber wer genug hat und teilt, merkt oft:"
+      - "Geld macht zufriedener, wenn man es für andere einsetzt,"
+      - "als wenn man nur die Zahl auf dem Konto größer macht."

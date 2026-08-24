@@ -1,0 +1,29 @@
+id: q34_panik_vermeiden
+title: Nicht in Panik verkaufen
+location: monetaria.vulkan
+prerequisites: [q29_crash_was_tun]
+reward:
+  cash_cents: 500
+  xp: 110
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wenn der Markt crasht, verlieren alle Geld auf dem Papier.
+      - Wer in Panik verkauft, lockt den Verlust ein. Wer hält, sieht meistens nach Monaten oder Jahren wieder Gewinne.
+      - Historie zeigt - jeder Crash ging vorbei.
+  - id: quiz
+    type: quiz
+    question: Was ist die beste Reaktion bei einem Crash?
+    options:
+      - { id: a, label: Sofort alles verkaufen }
+      - { id: b, label: Halten und nichts tun }
+      - { id: c, label: Den ganzen Notgroschen in Krypto }
+    correct: b
+    explanation: Halten + nichts tun ist langfristig die beste Strategie.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Disziplin schlägt Bauchgefuehl. Immer.

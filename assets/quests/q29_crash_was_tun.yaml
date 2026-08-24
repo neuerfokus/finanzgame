@@ -1,0 +1,31 @@
+id: q29_crash_was_tun
+title: Wenn der Vulkan ausbricht
+location: monetaria.heimathafen
+prerequisites:
+  - q28_was_ist_etf
+reward:
+  cash_cents: 150
+  xp: 40
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Manchmal crasht die Börse - alle Kurse fallen um 20, 30, sogar 50 Prozent.
+      - Das fühlt sich schlimm an. Aber es ist normal und passiert immer wieder.
+      - Die wichtigste Frage - wie reagierst du?
+  - id: question
+    type: quiz
+    question: Die Börse crasht. Alle Aktien sind 30% weniger wert. Was machen kluge Langzeit-Anleger meistens?
+    options:
+      - { id: a, label: Sofort alles verkaufen, bevor noch mehr Verlust kommt }
+      - { id: b, label: Ruhig bleiben und durchhalten }
+      - { id: c, label: Alles in Bargeld umtauschen und verstecken }
+    correct: b
+    explanation: Wer ruhig bleibt, sieht den Rebound. Wer panisch verkauft, hat den Verlust fest eingebucht.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Geschichte zeigt - nach jedem Crash kam bisher eine Erholung.
+      - Manchmal nach Monaten, manchmal nach Jahren. Aber sie kam.

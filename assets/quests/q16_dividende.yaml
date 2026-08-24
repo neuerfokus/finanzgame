@@ -1,0 +1,44 @@
+id: q16_dividende
+title: Dividenden - Geld fürs Halten
+location: monetaria.aktien_archipel
+prerequisites: [q11_was_ist_aktie]
+reward:
+  cash_cents: 400
+  xp: 90
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Erinnerst du dich an die Werkstatt deines Vaters? Am Jahresende macht sie Gewinn.
+      - Einen Teil davon zahlt er an die 100 Mit-Eigentümer aus - jeder bekommt etwas, einfach weil ihm ein Stück gehört.
+      - Genau das ist eine Dividende - dein Anteil am Gewinn der Firma.
+  - id: zinsvergleich
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Das fühlt sich ähnlich an wie Zinsen bei der Bank.
+      - Bei der Bank gibst du Geld und bekommst jedes Jahr Zinsen. Bei der Aktie gibst du Geld und bekommst Dividende.
+      - Beides ist Geld, das kommt, während du einfach nur hältst - manche nennen das passives Einkommen.
+  - id: unterschied
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Aber ein großer Unterschied - der Bankzins ist fest zugesagt. Die Dividende nicht.
+      - Macht die Werkstatt mal kein Gewinn, gibt es auch keine Dividende. Niemand hat darauf Anspruch.
+      - Eine Dividende ist eine Belohnung - kein Versprechen.
+  - id: quiz
+    type: quiz
+    question: Was ist der wichtigste Unterschied zwischen Bankzins und Dividende?
+    options:
+      - { id: a, label: Zins ist fest zugesagt, Dividende nur wenn die Firma Gewinn macht }
+      - { id: b, label: Es gibt keinen Unterschied }
+      - { id: c, label: Dividende ist immer höher als Zins }
+    correct: a
+    explanation: Zins steht im Vertrag und kommt sicher. Dividende hängt vom Gewinn ab - läuft die Firma schlecht, fällt sie aus.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Nicht jede Firma zahlt Dividende - manche stecken den Gewinn lieber zurück ins Wachstum.
+      - Und Vorsicht - eine hohe Dividende klingt verlockend, ist aber kein Beweis für eine gute Firma. Dazu später mehr.

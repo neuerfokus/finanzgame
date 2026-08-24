@@ -1,0 +1,73 @@
+# Vorlage für den F-Droid-Eintrag.
+#
+# Diese Datei gehört NICHT in dieses Repo, sondern als
+# `metadata/com.finanzgame.finanzgame.yml` in einen Fork von
+# https://gitlab.com/fdroid/fdroiddata — von dort kommt der Merge Request.
+# Sie liegt hier, damit die Werte versioniert sind und nicht bei jedem
+# Update neu zusammengesucht werden müssen.
+#
+# Voraussetzung für den MR: das öffentliche Repo existiert, hat einen
+# signierten Tag und einen Build, der ohne Geheimnisse durchläuft.
+
+Categories:
+  - Money
+  - Games
+License: GPL-3.0-or-later
+AuthorName: neuerfokus
+SourceCode: https://github.com/neuerfokus/finanzgame
+IssueTracker: https://github.com/neuerfokus/finanzgame/issues
+Changelog: https://github.com/neuerfokus/finanzgame/releases
+
+AutoName: Finanzgame
+
+RepoType: git
+Repo: https://github.com/neuerfokus/finanzgame.git
+
+Builds:
+  - versionName: 1.10.0
+    versionCode: 185
+    commit: v1.10.0+185
+    subdir: android/app
+    sudo:
+      - apt-get update
+      - apt-get install -y curl unzip xz-utils
+    output: build/app/outputs/flutter-apk/app-release-unsigned.apk
+    srclibs:
+      - flutter@3.41.0
+    prebuild:
+      - $$flutter$$/bin/flutter config --no-analytics
+      - $$flutter$$/bin/flutter pub get
+    scandelete:
+      - build
+    build:
+      - $$flutter$$/bin/flutter build apk --release
+    ndk: false
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.10.0
+CurrentVersionCode: 185
+
+# Hinweise zum MR
+#
+# 1. Vor dem Einreichen lokal prüfen:
+#      fdroid build -v -l com.finanzgame.finanzgame
+#    (braucht die fdroidserver-Werkzeuge, siehe
+#     https://f-droid.org/docs/Building_Applications/)
+#
+# 2. Die Flutter-Version im `srclibs`-Eintrag muss es in fdroiddata geben.
+#    Fehlt sie, gehört ein Update von `srclibs/flutter.yml` in denselben MR.
+#
+# 3. `key.properties` existiert im öffentlichen Repo nicht, deshalb greift in
+#    `android/app/build.gradle.kts` der Debug-Keystore-Fallback. F-Droid
+#    entfernt vorhandene Signaturen und signiert mit dem eigenen Schlüssel —
+#    die Folge ist die übliche: **eine F-Droid-Installation lässt sich nicht
+#    über eine bestehende Sideload-Installation drüberinstallieren.** Wer
+#    wechselt, exportiert vorher seinen Spielstand und importiert ihn danach.
+#
+# 4. Anti-Features: keine. Die App hat weder Werbung noch Tracking noch
+#    proprietäre Abhängigkeiten. Der Spenden-Link öffnet den externen Browser
+#    und zählt deshalb nicht als NonFreeNet.
+#
+# 5. Beschreibungen und Änderungsprotokolle werden NICHT hier gepflegt —
+#    F-Droid liest sie direkt aus `fastlane/metadata/android/` im App-Repo.

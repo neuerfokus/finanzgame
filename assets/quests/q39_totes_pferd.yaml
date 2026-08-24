@@ -1,0 +1,46 @@
+id: q39_totes_pferd
+title: Man reitet kein totes Pferd
+location: monetaria.aktien_archipel
+prerequisites: [q34_panik_vermeiden]
+reward:
+  cash_cents: 500
+  xp: 110
+topic: psychologie
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Es gibt einen klugen Spruch - steig ab, wenn das Pferd tot ist.
+      - Klingt selbstverständlich. Aber beim Geld machen es die wenigsten.
+      - Sie haben viel in eine Firma gesteckt - und reiten weiter, obwohl das Pferd längst liegt.
+  - id: falle
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Falle klingt so - "Ich habe schon so viel Geld reingesteckt, jetzt kann ich nicht aufhören."
+      - Aber das Geld von früher ist weg - egal was du jetzt tust. Es zählt nur, was vor dir liegt.
+      - Frag dich nie "wieviel habe ich schon verloren?" - sondern "würde ich heute neu einsteigen?"
+  - id: aufloesung
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Moment - vorhin hieß es doch, bei einem Crash einfach durchhalten? Beides stimmt - es kommt darauf an, WAS du hältst.
+      - Der breite Markt ist eine ganze Herde Pferde. Stürzt sie im Crash, steht sie wieder auf - immer wieder. Da gilt - halten.
+      - Eine einzelne Firma ist EIN Pferd. Das kann wirklich sterben und nie wieder aufstehen. Da musst du ehrlich hinschauen.
+  - id: quiz
+    type: quiz
+    question: Du hast viel Geld in eine einzelne Firma gesteckt, die seit Jahren nur fällt. Woran solltest du deine Entscheidung NICHT festmachen?
+    options:
+      - { id: a, label: Ob die Firma noch eine Zukunft hat }
+      - { id: b, label: Daran, wieviel Geld du schon verloren hast }
+      - { id: c, label: Ob du heute noch einmal einsteigen würdest }
+    correct: b
+    explanation: Das bereits verlorene Geld ist weg - es darf die Entscheidung nicht steuern. Das nennt man die Falle der versunkenen Kosten.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Diese Falle gibt es überall - das schlechte Spiel weiterzocken, weil man schon 80 Stunden drin hat.
+      - Ein toter Verlust wird nicht besser, weil du länger wartest. Manchmal ist absteigen die mutigste Entscheidung.
+      - Und genau deshalb streust du breit - dann hängt nie alles an einem einzigen Pferd.

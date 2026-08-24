@@ -1,0 +1,45 @@
+id: q30_wie_kaufen
+title: Wie kaufe ich einen ETF?
+location: monetaria.etf_insel
+prerequisites: [q28_was_ist_etf]
+reward:
+  cash_cents: 350
+  xp: 80
+topic: praxis
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Du weißt jetzt, WAS ein ETF ist. Aber wie kommt er überhaupt zu dir?
+      - Dafür brauchst du zuerst ein Depot. Das ist wie ein Konto - nur dass darin nicht Geld liegt, sondern deine Aktien und ETFs.
+      - Bei der Bank oder einem Online-Anbieter eröffnest du so ein Depot. Achte auf eines, das günstig oder kostenlos ist.
+  - id: ablauf
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der Ablauf ist einfacher als du denkst - drei Schritte.
+      - Erstens - ein günstiges Depot suchen und eröffnen. Zweitens - Geld von deinem Konto draufzahlen.
+      - Drittens - den ETF aussuchen und kaufen. Oder einen Sparplan einrichten, der jeden Monat automatisch kauft.
+  - id: hilfe
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Und das Wichtigste - du musst das nicht allein können.
+      - Frag jemanden, der sich auskennt - Eltern, einen erfahrenen Freund, oder bei der Bank nach.
+      - Niemand wird als Profi geboren. Fragen ist klug, nicht peinlich.
+  - id: quiz
+    type: quiz
+    question: Was ist ein Depot?
+    options:
+      - { id: a, label: Ein Konto, in dem statt Geld deine Aktien und ETFs liegen }
+      - { id: b, label: Ein Sparschwein aus Porzellan }
+      - { id: c, label: Eine besondere Kreditkarte }
+    correct: a
+    explanation: Ein Depot ist wie ein Konto - aber darin liegen deine Wertpapiere wie Aktien und ETFs, nicht Bargeld.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Depot eröffnen, Geld drauf, ETF oder Sparplan auswählen - fertig.
+      - Der schwerste Schritt ist meist nur, überhaupt anzufangen.

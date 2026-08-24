@@ -1,0 +1,13 @@
+# Copy this file to android/key.properties and fill in real values.
+# DO NOT commit the filled key.properties or the .jks keystore — both
+# are gitignored.
+#
+# Generate the keystore once:
+#   keytool -genkey -v -keystore <abs-path>.jks \
+#     -keyalg RSA -keysize 2048 -validity 36500 \
+#     -alias finanzgame -storepass <pw> -keypass <pw>
+
+storePassword=CHANGEME
+keyPassword=CHANGEME
+keyAlias=finanzgame
+storeFile=C:/Pfad/zu/deinem/finanzgame-keystore.jks

@@ -1,0 +1,44 @@
+id: q03_notgroschen
+title: Der Notgroschen
+location: monetaria.heimathafen
+prerequisites: [q01_sparschwein]
+reward:
+  cash_cents: 300
+  xp: 60
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Dein Handy fällt runter und das Display ist hin. Oder dein Moped springt nicht mehr an.
+      - Solche Sachen kommen immer plötzlich - und kosten Geld, das du gerade nicht eingeplant hast.
+      - Dafür hast du einen kleinen Vorrat zur Seite gelegt - den Notgroschen.
+  - id: was_zaehlt
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der Notgroschen ist nur für echte Notfälle - das Kaputte, das Plötzliche, das Unaufschiebbare.
+      - Display-Reparatur, Moped in die Werkstatt, ein überraschender Schulausflug - dafür ist er da.
+      - Nicht für neue Sneaker oder ein Spiel - das sind Wünsche, kein Notfall. Den Unterschied kennst du schon.
+  - id: wieviel
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wie viel? Genug, um die typischen Überraschungen abzufangen - für dich vielleicht ein paar hundert Euro.
+      - Das Wichtigste - lieber zuerst diesen Puffer aufbauen, bevor du dein Geld investierst.
+      - Erst das Sicherheitsnetz, dann aufs Hochseil.
+  - id: quiz
+    type: quiz
+    question: Wofür ist der Notgroschen da?
+    options:
+      - { id: a, label: Für ein neues Spiel }
+      - { id: b, label: Für unerwartete Ausgaben wie eine kaputte Handy-Reparatur }
+      - { id: c, label: Um angeben zu können }
+    correct: b
+    explanation: Der Notgroschen ist nur für echte Notfälle da - das Kaputte, das Plötzliche. Nicht für Wünsche.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Erst der Notgroschen, dann das Investieren. Das ist die Reihenfolge.
+      - Übrigens - der Notgroschen wächst mit dir. Ziehst du mal aus, kommen Miete und eigene Kosten dazu, dann wird er größer. Aber das hat noch Zeit.

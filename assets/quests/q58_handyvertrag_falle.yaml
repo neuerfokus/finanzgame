@@ -1,0 +1,76 @@
+id: q58_handyvertrag_falle
+title: Der Handyvertrag
+location: monetaria.heimathafen
+reward:
+  cash_cents: 1200
+  xp: 220
+topic: konsum
+steps:
+  - id: einstieg
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Im Laden sagt der Verkäufer: 'Das neue Handy für nur 0 € — bei einem Vertrag!'"
+      - "Null Euro! Das ist doch geschenkt, oder?"
+
+  - id: null_euro_quiz
+    type: quiz
+    question: "Das Handy kostet '0 €' beim Abschluss eines 24-Monats-Vertrags für 40 €/Monat. Was stimmt?"
+    options:
+      - id: geschenkt
+        label: "Das Handy ist geschenkt — 0 € heißt 0 €."
+      - id: versteckt
+        label: "Das Handy steckt im Monatspreis — 24 × 40 € = 960 € insgesamt."
+      - id: egal
+        label: "Egal, Hauptsache ich hab's sofort."
+    correct: versteckt
+    explanation: >-
+      '0 €' ist ein Lockmittel. Du zahlst das Handy über den Monatspreis ab.
+      24 Monate × 40 € = 960 €. Rechne immer die GESAMTKOSTEN über die ganze
+      Laufzeit — nicht nur den Startpreis.
+
+  - id: bindung_dialog
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Krass, 960 €. Und ich häng dann 2 Jahre fest?"
+      - "Was ist, wenn ich nach einem halben Jahr einen besseren Tarif finde?"
+
+  - id: bindung_quiz
+    type: quiz
+    question: "Du bist 24 Monate an den Vertrag gebunden. Was bedeutet diese Vertragsbindung?"
+    options:
+      - id: jederzeit
+        label: "Ich kann jederzeit ohne Kosten wechseln."
+      - id: gebunden
+        label: "Ich muss 2 Jahre zahlen, auch wenn ich es kaum nutze oder was Besseres finde."
+      - id: handy_weg
+        label: "Ich darf das Handy nicht benutzen."
+    correct: gebunden
+    explanation: >-
+      Vertragsbindung heißt: du zahlst die volle Laufzeit, egal was kommt.
+      Kein Wechsel zu billigeren Tarifen, auch wenn dein Geldbeutel knapp
+      wird. Lange Bindung = wenig Freiheit.
+
+  - id: prepaid_quiz
+    type: quiz
+    question: "Welche Alternative gibt dir mehr Kontrolle über deine Handy-Kosten?"
+    options:
+      - id: teurer_vertrag
+        label: "Der teuerste Vertrag mit den meisten Extras."
+      - id: prepaid
+        label: "Prepaid: du lädst nur auf, was du brauchst — keine Bindung, keine Überraschung."
+      - id: zwei_vertraege
+        label: "Zwei Verträge gleichzeitig."
+    correct: prepaid
+    explanation: >-
+      Mit Prepaid zahlst du nur, was du wirklich auflädst — keine 24-Monats-
+      Falle, keine versteckten Kosten. Ein gebrauchtes oder günstigeres Handy
+      separat kaufen ist oft viel billiger als ein '0-€'-Vertrag.
+
+  - id: abschluss
+    type: dialog
+    speaker: "Maxi"
+    lines:
+      - "Also: '0 €' ist nie 0 €, ich häng 2 Jahre fest, und Prepaid ist flexibler."
+      - "Ich rechne erst die Gesamtkosten aus, bevor ich was unterschreibe. Danke!"

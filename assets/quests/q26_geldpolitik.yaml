@@ -1,0 +1,29 @@
+id: q26_geldpolitik
+title: Was macht die EZB?
+location: monetaria.heimathafen
+prerequisites: [q24_steuer_basics]
+reward:
+  cash_cents: 400
+  xp: 90
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Europäische Zentralbank legt den Leitzins für den Euro fest.
+      - Niedriger Zins = Kredite billig, Sparen lohnt sich wenig, Aktien teuer.
+      - Hoher Zins = Sparen lohnt wieder, Kredite teurer, Aktien können fallen.
+  - id: quiz
+    type: quiz
+    question: Was bedeutet ein steigender Leitzins für Tagesgeld?
+    options:
+      - { id: a, label: Niedrigere Zinsen aufs Sparkonto }
+      - { id: b, label: Höhere Zinsen aufs Sparkonto }
+      - { id: c, label: Keinen Einfluss }
+    correct: b
+    explanation: Tagesgeld-Zinsen folgen dem Leitzins meist mit Verzögerung.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Wer Geldpolitik versteht, kann besser timen wo das Geld liegen sollte.

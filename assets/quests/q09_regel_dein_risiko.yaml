@@ -1,0 +1,56 @@
+id: q09_regel_dein_risiko
+title: Regel dein Risiko
+location: monetaria.heimathafen
+prerequisites:
+  - q05_zinseszins
+reward:
+  cash_cents: 200
+  xp: 60
+topic: grundlagen
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Jede Geldanlage hat drei Regler - Sicherheit, Gewinn und wie schnell du wieder ans Geld kommst.
+      - Kurz zum Wort Gewinn - Profis sagen dazu "Rendite". Das ist nur ein schickes Wort für - was am Ende mehr rauskommt.
+      - Stell dir ein Mischpult vor. Der Haken - du kannst nie alle drei Regler gleichzeitig nach oben schieben.
+      - Schiebst du einen hoch, gehen die anderen beiden von selbst zurück.
+  - id: regler
+    type: interactive
+    widget: magisches_dreieck
+    speaker: Magister Aureus
+    lines:
+      - Probier es aus - zieh an einem Regler und schau, wie die anderen automatisch zurückweichen.
+      - Sicher UND schnell verfügbar? Dann bleibt kaum Gewinn - das ist das Sparkonto.
+      - Viel Gewinn UND sicher? Dann musst du Zeit mitbringen - das ist der Welt-ETF über viele Jahre.
+  - id: zeit
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Die Zeit ist dabei dein stärkster Hebel. Eine Aktie über ein Jahr ist ein Glücksspiel.
+      - Dieselbe Anlage über 15 Jahre war historisch fast immer im Plus - die Zeit zähmt das Schwanken.
+      - Deshalb sagt man - Aktien betrachtet man langfristig, nicht nach einem Jahr.
+  - id: ehrlich
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Der schwerste Regler ist das Risiko - weil du dich leicht überschätzt.
+      - Im Ruhigen halten sich fast alle für mutig. Die Wahrheit zeigt sich erst, wenn dein Geld plötzlich weniger wird.
+      - Frag dich ehrlich - bleibe ich ruhig, wenn aus 1000 Euro für eine Weile 600 werden? Danach stell deinen Regler ein.
+  - id: quiz
+    type: quiz
+    question: Du willst viel Gewinn UND volle Sicherheit. Was musst du dafür opfern?
+    options:
+      - { id: a, label: Nichts - das geht alles gleichzeitig }
+      - { id: b, label: Schnelle Verfügbarkeit — Geld muss lange liegen bleiben }
+      - { id: c, label: Du musst einfach mehr einzahlen }
+    correct: b
+    explanation: Sicherheit und Gewinn (Rendite) bekommst du zusammen nur mit Zeit - du musst das Geld lange liegen lassen können. Alle drei gleichzeitig gibt es nicht.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Es gibt keine perfekte Anlage - nur die, die zu deiner Lage passt.
+      - Brauchst du das Geld bald? Dann Sicherheit vor Gewinn. Kannst du es lange liegen lassen? Dann arbeitet die Zeit für dich.
+      - Such dir bewusst aus, welche zwei Ecken dir gerade wichtig sind.

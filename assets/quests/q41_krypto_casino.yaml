@@ -1,0 +1,29 @@
+id: q41_krypto_casino
+title: Krypto-Casino oder Investition?
+location: monetaria.vulkan
+prerequisites: [q37_volatilitaet]
+reward:
+  cash_cents: 500
+  xp: 70
+steps:
+  - id: intro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - Krypto kann fett ansteigen oder komplett crashen.
+      - "Es gibt zwei Sorten: Bitcoin als bekanntester Coin, und die wilde Masse Krypto-Casino-Coins."
+      - Letztere sind eher wie Lotterielose - Spass haben, aber nie Geld reinstecken, das du brauchst.
+  - id: quiz
+    type: quiz
+    question: Wieviel Prozent deines Vermögens sollten in Krypto-Casino-Coins sein?
+    options:
+      - { id: a, label: Mindestens 50 Prozent }
+      - { id: b, label: Maximal so viel wie du komplett verlieren kannst }
+      - { id: c, label: Alles rein, dann zurückkaufen }
+    correct: b
+    explanation: Investiere nie mehr in Hochrisiko-Krypto als du komplett verlieren kannst.
+  - id: outro
+    type: dialog
+    speaker: Magister Aureus
+    lines:
+      - "Bitcoin ist anders als Casino-Coins - größer, etablierter. Aber auch hier gilt: nicht alles auf eine Karte."

@@ -1,0 +1,4 @@
+The shadow under each island was drawn on top of it, dimming its lower
+half. It now sits behind the island.
+
+New "About & licences" page in settings with all attributions.

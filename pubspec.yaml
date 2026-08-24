@@ -1,7 +1,7 @@
 name: finanzgame
 description: "Lernspiel über Geld für Jugendliche ab etwa 13. Pixel-Art-Insel-Simulation, offline, ohne Tracking."
 publish_to: 'none'
-version: 1.10.0+185
+version: 1.10.0+186
 
 environment:
   sdk: ^3.11.5

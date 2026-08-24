@@ -102,11 +102,20 @@ class IslandMarker extends PositionComponent with TapCallbacks {
     final fill = unlocked ? _identity.color : _lockedGrey;
 
     // Spec-38 P3-4: ellipse-shadow under each island for iso depth.
+    //
+    // priority MUSS unter der Insel-Grafik liegen (die steht auf -1). Flame
+    // zeichnet nach priority aufsteigend, Hoeheres kommt obendrauf — die
+    // Reihenfolge der add()-Aufrufe entscheidet also nichts, sobald ein
+    // Bauteil eine eigene priority setzt. Ohne die -2 lag die unscharfe
+    // schwarze Scheibe UEBER der Insel: sie reicht von 0,50 bis 1,40
+    // Durchmesser, verdunkelte damit die untere Haelfte jeder Insel und sah
+    // aus wie ein Schatten, der auf die Insel faellt statt unter sie.
     add(
       CircleComponent(
         radius: _diameter * 0.45,
         position: Vector2(_diameter / 2, _diameter * 0.95),
         anchor: Anchor.center,
+        priority: -2,
         paint: Paint()
           ..color = const Color(0xFF000000).withValues(alpha: 0.35)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6),

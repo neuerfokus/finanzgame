@@ -10,6 +10,15 @@ Jugendlichen gewachsen.
 > **Das ist eine Simulation, keine Anlageberatung.** Alle Kurse, Firmen,
 > Renditen und Preise im Spiel sind erfunden. Echtes Geld verhält sich anders.
 
+<p align="center">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/1.png" width="19%" alt="Startseite mit Tag, Geld, Job und App-Icons">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/2.png" width="19%" alt="Monetaria — die neun Inseln">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/4.png" width="19%" alt="Börse — ETF mit Zusammensetzung">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/6.png" width="19%" alt="Zeitreise — Vermögensverlauf">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/8.png" width="19%" alt="Wissen — Quiz und Glossar">
+</p>
+
+
 ## Was es kann
 
 - **Tageszyklus statt Echtzeit.** Es passiert nichts, während das Handy in der
@@ -26,6 +35,15 @@ Jugendlichen gewachsen.
   Anlageklassen ansehen.
 - **Brücke ins echte Leben**: echte Sparziele eintragen, von einem Elternteil
   bestätigen lassen, dafür im Spiel belohnt werden.
+
+<p align="center">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/3.png" width="24%" alt="Spar-Insel mit Beeten">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/5.png" width="24%" alt="Portfolio mit Brutto/Netto-Aufschlüsselung">
+  <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/7.png" width="24%" alt="Mischwald mit Bäumen und Renditen">
+</p>
+
+<p align="center"><sub>Spar-Insel · Portfolio · Mischwald — alle Bilder aus dem laufenden Spiel,
+Pixel-Font und Farben wie sie sind.</sub></p>
 
 ## Haltung
 

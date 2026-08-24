@@ -54,7 +54,7 @@ braucht ohnehin nur Tags ab heute.
 - [x] `fastlane/metadata/android/de-DE/` + `en-US/` (title, short/full
       description, changelogs/`<versionCode>.txt`, Screenshots) — F-Droid
       liest das direkt aus dem Repo
-- [ ] Tag `v1.10.0+185` als Build-Anker
+- [x] Tag `v1.10.0+185` als Build-Anker
 - [ ] Build ohne `key.properties` prüfen (Fallback existiert; F-Droid
       signiert selbst → **andere Signatur als die Sideload-APKs**, kein
       Update-Pfad für bestehende Installationen, nur Neuinstallation +
@@ -82,6 +82,15 @@ Was noch fehlt, bevor gepusht werden kann:
 - `kContactEmail` in `settings_page.dart` ist weiterhin leer → die
   Erstattungszusage im Unterstützen-Bereich erscheint nicht.
 - GitHub-Benutzername + noreply-Adresse für `-AuthorEmail`.
-- Mindestens zwei Screenshots unter
-  `fastlane/metadata/android/de-DE/images/phoneScreenshots/`.
-- Platzhalter `DEINNAME` in `docs/fdroid-metadata.yml` ersetzen.
+- Nichts mehr. Kontaktadresse, GitHub-Konto und Screenshots sind drin.
+
+## Stand 2026-08-24
+
+Repo liegt privat unter github.com/neuerfokus/finanzgame, Tag
+`v1.10.0+185` gesetzt. Fünf Screenshots aufgenommen (Startseite, Inseln,
+Portfolio, Zeitreise, Wissen) — vom Samsung, weil der Emulator auf dieser
+Maschine nicht durchlief. Keiner zeigt einen Spielernamen; die
+Android-Systemleisten sind abgeschnitten.
+
+Offen: Repo auf öffentlich stellen (Entscheidung des Users) und danach der
+Merge Request an fdroiddata.

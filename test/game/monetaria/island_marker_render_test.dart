@@ -10,15 +10,12 @@ import 'package:finanzgame/game/monetaria/state/monetaria_state.dart';
 class _HostGame extends FlameGame {}
 
 void main() {
-  const allIds = [
-    IslandId.heimathafen,
-    IslandId.sparInsel,
-    IslandId.mischwald,
-    IslandId.etfInsel,
-    IslandId.inflationAtoll,
-    IslandId.aktienArchipel,
-    IslandId.vulkan,
-  ];
+  // Aus kIslandSpecs abgeleitet statt handgepflegt: die alte Liste nannte
+  // sieben IDs, die Karte hat aber neun — `goldmine` und `wohnviertel`
+  // fehlten, und der Schatten-Waechter prüfte sie damit nicht. So bleibt
+  // jede künftige Insel automatisch abgedeckt. Dasselbe Muster nutzt bereits
+  // `island_overview_test`.
+  final allIds = kIslandSpecs.map((s) => s.id).toList();
 
   group('IslandMarker render smoke (spec-16)', () {
     for (final id in allIds) {

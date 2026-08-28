@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptives Launcher-Icon (Android 8+). Der Launcher legt seine eigene
+  Maske darueber — Kreis, Squircle, Tropfen — und animiert die beiden
+  Ebenen gegeneinander. Deshalb darf der Vordergrund KEINEN eigenen
+  Rahmen mitbringen: das ergaebe ein Icon im Icon. Er enthaelt nur den
+  Baum, freigestellt aus assets/branding/icon_master.png.
+
+  monochrome speist die eingefaerbten Icons ab Android 13. Aeltere
+  Systeme ignorieren das Element.
+-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+    <monochrome android:drawable="@mipmap/ic_launcher_monochrome" />
+</adaptive-icon>

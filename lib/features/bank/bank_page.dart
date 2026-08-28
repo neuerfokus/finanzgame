@@ -233,7 +233,8 @@ class _SavingsRateSectionState extends ConsumerState<_SavingsRateSection> {
             const SizedBox(height: FgSpacing.xs),
             Text(
               '🌟 Skill „Sparroutine" hebt das Limit auf 100 %.',
-              style: FgTypography.bodyS.copyWith(color: FgColors.neutral),
+              style:
+                  FgTypography.bodyS.copyWith(color: FgColors.onSurfaceMuted),
             ),
           ],
         ],

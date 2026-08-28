@@ -169,9 +169,12 @@ class _GlossarPageState extends ConsumerState<GlossarPage> {
                     Text(isLearned ? '✅' : '○',
                         style: TextStyle(
                           fontSize: 18,
+                          // outline ist Schwarz und kommt auf dem Panel auf
+                          // 1,39:1 — das "noch nicht gelernt"-Zeichen war
+                          // praktisch unsichtbar.
                           color: isLearned
                               ? FgColors.success
-                              : FgColors.outline,
+                              : FgColors.onSurfaceMuted,
                         )),
                     const SizedBox(width: FgSpacing.s),
                     Expanded(

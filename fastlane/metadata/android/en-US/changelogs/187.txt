@@ -1,0 +1,10 @@
+A large clean-up round after a review with six analysis agents.
+
+• Time travel: short jumps were destroying wealth — the crisis was a flat
+  fee per tap instead of a risk per day. Fixed.
+• Parent PIN: importing through the file manager bypassed it, and setting
+  it up granted the reward in the same step. Both closed.
+• Resetting and the emergency quarantine can no longer damage your save.
+• Error messages and quiz answers are legible at last, and the result is
+  now spelled out instead of being colour only.
+• Lower memory use, quieter time travel, adaptive app icon.

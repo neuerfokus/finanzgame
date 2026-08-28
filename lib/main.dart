@@ -15,6 +15,8 @@ import 'features/onboarding/onboarding_page.dart';
 import 'features/phone_ui/springboard_page.dart';
 import 'features/settings/birth_year_prompt.dart';
 import 'features/settings/import_intent_channel.dart';
+import 'features/settings/import_failure_dialog.dart';
+import 'features/settings/parent_gate.dart';
 import 'features/settings/save_export_service.dart';
 import 'features/settings/settings_repository.dart';
 
@@ -338,26 +340,23 @@ class _RootSwitcherState extends ConsumerState<_RootSwitcher> {
       ),
     );
     if (yes != true || !mounted) return;
+    // Der Import über den Dateimanager führte an der PIN-gesperrten
+    // Einstellungsseite vorbei: ein mitgebrachter Spielstand bringt seine
+    // eigene (womöglich leere) parentPin mit, sein eigenes Geburtsjahr und
+    // beliebiges Vermögen. Ohne eingerichteten PIN bleibt der Weg offen —
+    // er ist zugleich der Rettungsweg nach einem beschädigten Spielstand.
+    if (!await ParentGate.verifyIfConfigured(context, ref)) return;
+    if (!mounted) return;
     final res = await SaveExportService.instance.importFromPath(
       path,
       live: ref.read(appDatabaseProvider),
     );
     if (!mounted) return;
     if (!res.success) {
-      await showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Laden fehlgeschlagen'),
-          content: Text(
-            res.error ?? 'Die Datei konnte nicht gelesen werden.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Ok'),
-            ),
-          ],
-        ),
+      await showImportFailure(
+        context,
+        error: res.error,
+        dbClosed: res.dbClosed,
       );
       return;
     }
@@ -453,22 +452,13 @@ class _RootSwitcherState extends ConsumerState<_RootSwitcher> {
     final ok = res.success;
     if (!mounted) return;
     if (!ok) {
-      await showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Wiederherstellung fehlgeschlagen'),
-          content: const Text(
-            'Die Sicherung konnte nicht geladen werden. '
-            'Du kannst sie später in Einstellungen → Importieren '
-            'manuell auswählen.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Ok'),
-            ),
-          ],
-        ),
+      await showImportFailure(
+        context,
+        titel: 'Wiederherstellung fehlgeschlagen',
+        error: res.error ??
+            'Die Sicherung konnte nicht geladen werden. Du kannst sie '
+            'später in Einstellungen → Importieren manuell auswählen.',
+        dbClosed: res.dbClosed,
       );
       return;
     }
@@ -541,21 +531,11 @@ class _RootSwitcherState extends ConsumerState<_RootSwitcher> {
     );
     if (!mounted) return;
     if (!res.success) {
-      await showDialog<void>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Wiederherstellung fehlgeschlagen'),
-          content: Text(
-            res.error ??
-                'Im gewählten Ordner wurde keine Sicherung gefunden.',
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Ok'),
-            ),
-          ],
-        ),
+      await showImportFailure(
+        context,
+        titel: 'Wiederherstellung fehlgeschlagen',
+        error: res.error ?? 'Im gewählten Ordner wurde keine Sicherung gefunden.',
+        dbClosed: res.dbClosed,
       );
       return;
     }

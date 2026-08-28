@@ -77,6 +77,11 @@ oder die private Mailadresse.
 Pakete A, B und C sind fertig, D bis auf Screenshots und den Merge Request.
 695 Tests grün (+3), `flutter analyze --fatal-infos` 0. Der Probelauf von
 `prepare_public_repo.ps1` erzeugt 638 Dateien und meldet keinen Fund.
+**Diese Zeile war falsch** (bemerkt 2026-08-25): das Muster für den
+Klarnamen stand ohne Wortgrenzen im Skript, `docs/finanzgame-master.md`
+nennt aber das US-Produkt „GoHenry" — das Skript brach also bei JEDEM
+Lauf mit `exit 1` ab, bevor `git init` lief. Der Probelauf kann so nicht
+stattgefunden haben. Gefixt in `9f8fb53`, nachgeholt am 25.08.
 
 Was noch fehlt, bevor gepusht werden kann:
 - `kContactEmail` in `settings_page.dart` ist weiterhin leer → die
@@ -94,3 +99,42 @@ Android-Systemleisten sind abgeschnitten.
 
 Offen: Repo auf öffentlich stellen (Entscheidung des Users) und danach der
 Merge Request an fdroiddata.
+
+## Stand 2026-08-25
+
+Alle Befunde der Sechs-Agenten-Prüfrunde sind abgearbeitet, APK **1.10.0+187**
+am Gerät verifiziert. Für dieses Spec relevant:
+
+- **Der Export-Wächter läuft jetzt wirklich durch.** Probelauf nachgeholt:
+  659 Dateien, `CLAUDE.md`/`STATE.md`/`Recherche/` und das Skript selbst
+  korrekt ausgeschlossen, keine Seriennummer, keine private Mailadresse,
+  keine Benutzerpfade im Ergebnis.
+- **Das F-Droid-Rezept war nicht buildfähig.** Drei Blocker in
+  `docs/fdroid-metadata.yml`: `output:` nannte `app-release-unsigned.apk`
+  (gebaut wird `app-release.apk`, weil ohne `key.properties` der
+  Debug-Keystore-Fallback greift und Gradle das Suffix weglässt);
+  `srclibs: flutter@3.41.0` kann `sdk: ^3.11.5` nicht erfüllen, dort
+  scheitert schon `flutter pub get`; `AutoUpdateMode: Version` hätte den Tag
+  `v1.10.0+187` nie gefunden, weil der versionName nur `1.10.0` ist.
+- **Öffentliche Texte stimmten nicht:** „Elf Anlageklassen" an vier Stellen
+  (es sind neun — elf war die Zahl der Zeitreise-Reihen inklusive Bargeld und
+  Inflationsindex), „über 60 Story-Quests" (es sind 58), und
+  `en-US/changelogs/185.txt` enthielt wörtlich den deutschen Text.
+- **`PRIVACY.md` verschwieg `MANAGE_EXTERNAL_STORAGE`.** Die Berechtigung
+  zeigt der F-Droid-Client prominent an und ist bei einer App für Jugendliche
+  der auffälligste Eintrag der Seite. Jetzt steht dort, was sie ist
+  (Rückfallweg für alte Installationen), dass man sie verweigern kann, ohne
+  dass die Sicherung aufhört zu funktionieren, und dass sie verschwinden
+  soll. Dazu neu der Satz, dass die Sicherungsdatei unverschlüsselt im
+  Download-Ordner liegt und Spielername, Geburtsjahr und Wunschlisten-Fotos
+  enthält — in beiden Sprachen.
+- `icon.png` (512×512) für beide Sprachen ergänzt; `README.txt` aus
+  `phoneScreenshots/` nach `images/SCREENSHOTS.txt` verschoben, weil
+  `fdroidserver` den Screenshot-Ordner iteriert und Nicht-Bilddateien meldet.
+
+**Nachgeprüft und in Ordnung:** `tools/license_check.py` meldet 18 exakt,
+107 bulk, 0 unbekannt, 0 verwaist. Das Release-Paket fordert weiterhin
+**keine INTERNET-Berechtigung** an — die Zusage im README hält.
+
+Unverändert offen: Repo auf öffentlich stellen (Entscheidung des Users),
+danach der Merge Request an fdroiddata.

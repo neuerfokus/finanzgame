@@ -178,6 +178,7 @@ class _RealMilestonesSectionState extends ConsumerState<RealMilestonesSection> {
                       ),
                     ),
                     IconButton(
+                      tooltip: 'Eintrag löschen',
                       icon: const Icon(Icons.delete_outline,
                           color: FgColors.alert),
                       onPressed: () => ref

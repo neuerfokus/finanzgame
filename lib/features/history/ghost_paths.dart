@@ -29,11 +29,25 @@ abstract final class GhostPaths {
   /// sind. 25 € = Onboarding-Startkapital.
   static const int fallbackStartCents = 2500;
 
+  /// Obergrenze für die Punktzahl einer Geisterlinie.
+  ///
+  /// Vorher lieferten diese Pfade **einen Punkt pro Spieltag**. Bei Tag 6575
+  /// waren das ~26.000 Records über vier Linien, neu gerechnet und neu
+  /// gezeichnet bei JEDEM Rebuild der Zeitreise-Seite — also bei jedem Tipp
+  /// auf einen Anlage-Chip. Und es wuchs linear mit dem Spielalter.
+  ///
+  /// Das Chart ist ein paar hundert Pixel breit; mehr Punkte als Pixel sind
+  /// unsichtbar. 400 liegt über jeder realistischen Chart-Breite.
+  static const int maxPoints = 400;
+
   /// [startCents] = Vermögen am ersten Tag des Charts.
   /// [days] = Anzahl Tage, für die der Pfad berechnet werden soll
   /// (inklusive Tag 0).
   /// Liefert `[(dayIndex, valueCents), …]` mit `dayIndex` ab
-  /// [startDayIndex].
+  /// [startDayIndex]. Über [maxPoints] Tagen wird gleichmäßig ausgedünnt;
+  /// der erste und der letzte Tag sind IMMER enthalten, und jeder Wert wird
+  /// direkt aus seinem Tagesindex gerechnet — Ausdünnen verändert also
+  /// keinen einzigen Wert, nur ihre Anzahl.
   static List<(int, int)> compoundDailyFromYearly({
     required int startCents,
     required int days,
@@ -42,12 +56,22 @@ abstract final class GhostPaths {
   }) {
     if (days <= 0) return const [];
     final dailyFactor = math.pow(1.0 + yearlyPct, 1.0 / 365.0).toDouble();
-    final out = <(int, int)>[];
-    var value = startCents.toDouble();
-    for (var i = 0; i < days; i++) {
-      out.add((startDayIndex + i, value.round()));
-      value *= dailyFactor;
+    final start = startCents.toDouble();
+    int valueAt(int i) => (start * math.pow(dailyFactor, i)).round();
+
+    if (days <= maxPoints) {
+      return [
+        for (var i = 0; i < days; i++) (startDayIndex + i, valueAt(i)),
+      ];
     }
+    final step = (days - 1) / (maxPoints - 1);
+    final out = <(int, int)>[
+      for (var k = 0; k < maxPoints - 1; k++)
+        if ((k * step).round() case final i)
+          (startDayIndex + i, valueAt(i)),
+    ];
+    // Letzter Tag exakt, damit das Ende der Linie stimmt.
+    out.add((startDayIndex + days - 1, valueAt(days - 1)));
     return out;
   }
 

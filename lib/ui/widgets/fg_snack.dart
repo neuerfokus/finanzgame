@@ -36,7 +36,13 @@ void showFgSnack(
         content: Text(
           message,
           style: FgTypography.bodyL.copyWith(
-            color: FgColors.onSurface,
+            // Auf dem hellen Warn-Rosa (`alert` #FF6B9D) kam `onSurface`
+            // #E8E8E8 auf 2,19:1 — der Text war praktisch unlesbar, und zwar
+            // an 42 Aufrufstellen: „Falscher Eltern-PIN", „Nicht genug Geld",
+            // also ausgerechnet die Meldungen, die etwas Wichtiges sagen.
+            // Schwarz darauf ergibt 7,84:1. Auf dem dunklen Normal-Grund
+            // bleibt es bei `onSurface` (12,3:1).
+            color: isError ? Colors.black : FgColors.onSurface,
             fontWeight: FontWeight.bold,
           ),
         ),

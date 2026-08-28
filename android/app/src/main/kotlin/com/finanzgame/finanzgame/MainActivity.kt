@@ -202,10 +202,12 @@ class MainActivity : FlutterActivity() {
     private fun writeBackup(treeUri: String, fileName: String, bytes: ByteArray): Boolean {
         return try {
             val dir = treeDir(treeUri) ?: return false
-            // Atomar wie der Legacy-Pfad (.tmp + rename): erst die neue Datei
-            // VOLLSTÄNDIG schreiben, dann tauschen. Prozess-Kill mid-write
-            // (Kind swiped App nach Zeitsprung weg) lässt so die vorige
-            // gültige autosave.fgsave unberührt — statt sie zu truncaten.
+            // Reihenfolge: neue Datei VOLLSTAENDIG als .tmp schreiben, die
+            // alte als .old zur Seite schieben, dann tauschen, dann die .old
+            // wegraeumen. Zu jedem Zeitpunkt existiert mindestens eine
+            // vollstaendige Sicherung -- Prozess-Kill mid-write (Kind swiped
+            // die App nach dem Zeitsprung weg) kann keine truncaten und keine
+            // loeschen. `readBackup` findet die Reste ueber `findBackupFile`.
             val tmpName = "$fileName.tmp"
             dir.findFile(tmpName)?.delete()
             val tmp = dir.createFile("application/octet-stream", tmpName)
@@ -219,28 +221,69 @@ class MainActivity : FlutterActivity() {
                 tmp.delete()
                 return false
             }
-            dir.findFile(fileName)?.delete()
-            if (tmp.renameTo(fileName)) return true
+            // Die alte Sicherung wird zur Seite GESCHOBEN, nicht geloescht.
+            // Vorher stand hier `dir.findFile(fileName)?.delete()` direkt vor
+            // dem rename: schlug danach irgendetwas fehl, war die einzige
+            // Deinstall-ueberlebende Sicherung weg -- und weil `tmp.delete()`
+            // auch im Fehlerfall lief, blieb nicht einmal die Zwischendatei.
+            // Der Kommentar oben behauptete "atomar wie der Legacy-Pfad";
+            // der Legacy-Pfad loescht sein Ziel gerade NICHT.
+            val altName = "$fileName.old"
+            dir.findFile(altName)?.delete()
+            val alt = dir.findFile(fileName)
+            val altGesichert = alt == null || alt.renameTo(altName)
+            if (!altGesichert) {
+                // Laesst sich die alte nicht wegbenennen, wird sie auch nicht
+                // angefasst: lieber diese eine Sicherung auslassen als die
+                // vorhandene gute gegen eine ungewisse neue tauschen.
+                tmp.delete()
+                return false
+            }
+            if (tmp.renameTo(fileName)) {
+                dir.findFile(altName)?.delete()
+                return true
+            }
             // Provider ohne rename-Support: Ziel neu anlegen + Bytes kopieren.
             val target = dir.createFile("application/octet-stream", fileName)
-                ?: return false
-            val copied = contentResolver.openOutputStream(target.uri, "wt")?.use { out ->
-                out.write(bytes)
-                out.flush()
-                true
-            } ?: false
+            val copied = target != null &&
+                (contentResolver.openOutputStream(target.uri, "wt")?.use { out ->
+                    out.write(bytes)
+                    out.flush()
+                    true
+                } ?: false)
+            if (copied) {
+                dir.findFile(altName)?.delete()
+                tmp.delete()
+                return true
+            }
+            // Fehlgeschlagen: erst den halben Versuch wegraeumen, dann die
+            // alte Sicherung zurueckholen. Sie ist ab hier wieder die gueltige.
+            target?.delete()
+            dir.findFile(altName)?.renameTo(fileName)
             tmp.delete()
-            copied
+            false
         } catch (e: Exception) {
             false
         }
     }
 
+    /// Sucht die Sicherung unter dem kanonischen Namen -- und faellt auf die
+    /// Reste eines abgebrochenen Schreibvorgangs zurueck (`.old` = die vorige
+    /// gueltige Sicherung, `.tmp` = die fertig geschriebene neue). Wird der
+    /// Prozess mitten im Tausch beendet, liegt genau eine davon da; ohne
+    /// diesen Rueckfall waere sie unauffindbar, obwohl sie vollstaendig ist.
+    private fun findBackupFile(dir: DocumentFile, fileName: String): DocumentFile? {
+        for (name in listOf(fileName, "$fileName.tmp", "$fileName.old")) {
+            val f = dir.findFile(name)
+            if (f != null && f.exists() && f.length() > 0) return f
+        }
+        return null
+    }
+
     private fun readBackup(treeUri: String, fileName: String): ByteArray? {
         return try {
             val dir = treeDir(treeUri) ?: return null
-            val file = dir.findFile(fileName) ?: return null
-            if (!file.exists()) return null
+            val file = findBackupFile(dir, fileName) ?: return null
             contentResolver.openInputStream(file.uri)?.use { it.readBytes() }
         } catch (e: Exception) {
             null
@@ -250,8 +293,7 @@ class MainActivity : FlutterActivity() {
     private fun backupInfo(treeUri: String, fileName: String): Map<String, Any>? {
         return try {
             val dir = treeDir(treeUri) ?: return null
-            val file = dir.findFile(fileName) ?: return null
-            if (!file.exists()) return null
+            val file = findBackupFile(dir, fileName) ?: return null
             mapOf("modified" to file.lastModified(), "size" to file.length())
         } catch (e: Exception) {
             null

@@ -25,10 +25,10 @@ Jugendlichen gewachsen.
   Tasche liegt. Ein Tag endet, wenn man auf „Schlafen" tippt — dann werden
   Erträge, Kosten und Ereignisse gesammelt und in einer Tageszusammenfassung
   gezeigt.
-- **Elf Anlageklassen** mit unterschiedlichem Charakter: Sparkonto, ETFs,
+- **Neun Anlageklassen** mit unterschiedlichem Charakter: Sparkonto, ETFs,
   Einzelaktien, Krypto, Edelmetalle, Immobilien, Vorsorge, Sammlerobjekte,
   Bäume — jede auf einer eigenen Insel.
-- **Lerninhalte im Spiel**, nicht daneben: über 60 Story-Quests (Abo-Falle,
+- **Lerninhalte im Spiel**, nicht daneben: 58 Story-Quests (Abo-Falle,
   Phishing, Gruppenzwang, Ratenkauf, Freistellungsauftrag …), Tagesfrage,
   Wissens-Quiz, Glossar als Lern-Tagebuch.
 - **Zeitreise**: Jahre vorspulen und den eigenen Vermögensverlauf über alle

@@ -133,6 +133,14 @@ class PlantRepository extends _$PlantRepository implements PlantGrowthSource {
     );
     if (withered.id.isNotEmpty) {
       state = state.where((p) => p.id != withered.id).toList();
+      // Auch aus der DB entfernen. Vorher verschwand die verdorrte Pflanze
+      // nur aus dem Speicher und stand beim naechsten Start wieder da; weil
+      // `_idCounter` in `build()` auf max+1 gesetzt wird, kollidierten die
+      // IDs zwar nie, aber jedes Bepflanzen liess dauerhaft eine Zeile mehr
+      // zurueck. `plants_table` war damit die einzige unbegrenzt wachsende
+      // Tabelle im Kaltstart-Pfad, und `loadDbSnapshot` laedt sie
+      // vollstaendig vor `runApp`.
+      _deleteRow(withered.id);
     }
     final spec = PlantKinds.spec(kind);
     // Spec-43 v3: Saison-Check. Pflanze nur in passender Jahreszeit.
@@ -211,6 +219,10 @@ class PlantRepository extends _$PlantRepository implements PlantGrowthSource {
     ref.read(xpRepositoryProvider.notifier).add(XpRewards.plantHarvested);
     final harvested = plant.copyWith(status: PlantStatus.harvested);
     update(harvested);
+    // Der Status bleibt im Speicher (alles filtert ihn heraus), die Zeile
+    // fliegt aber aus der DB — sonst waechst sie mit jeder Ernte weiter und
+    // verlaengert den Kaltstart. Siehe _deleteRow.
+    _deleteRow(harvested.id);
     // Welle-8: Achievements real-time (first_harvest etc).
     ref.read(gameClockProvider.notifier).evaluateAchievementsNow();
     return HarvestResult(plant: harvested, yield_: adjustedYield);
@@ -219,6 +231,19 @@ class PlantRepository extends _$PlantRepository implements PlantGrowthSource {
   void _persist(Plant plant) {
     final db = ref.read(appDatabaseProvider);
     unawaited(db.plantsDao.upsert(_plantToRow(plant)).catchError((Object _) {}));
+  }
+
+  /// Entfernt eine Pflanze dauerhaft aus der DB.
+  ///
+  /// Ohne das wuchs `plants_table` unbegrenzt: geerntete Pflanzen behielten
+  /// nur den Status `harvested`, und beim Bepflanzen eines verdorrten Beets
+  /// verschwand die alte Zeile nur aus dem Speicher. Gelesen wird beides
+  /// nirgends — jeder Konsument filtert `harvested` heraus, und
+  /// `plantInPlot` uebergeht verdorrte Pflanzen ohnehin. Die Zeilen landeten
+  /// aber alle in `loadDbSnapshot`, das vor `runApp` laeuft.
+  void _deleteRow(String id) {
+    final db = ref.read(appDatabaseProvider);
+    unawaited(db.plantsDao.deleteById(id).catchError((Object _) {}));
   }
 
   static Plant _rowToPlant(PlantRow row) {

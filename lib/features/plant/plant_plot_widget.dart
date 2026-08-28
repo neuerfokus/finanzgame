@@ -24,8 +24,45 @@ class PlantPlotWidget extends StatelessWidget {
   /// Null = kein Tooltip (Tests/Pre-Setup).
   final int? currentDayIndex;
 
+  /// Was TalkBack vorliest. Ohne das war die gesamte Pflanz-Mechanik — der
+  /// Kern-Loop der Spar-Insel — fuer eine blinde Spielerin unbedienbar: der
+  /// Zustand steckt ausschliesslich in Emoji, Rahmenfarbe und der Fuellung
+  /// des Wachstumsbalkens, und der GestureDetector meldete nur "Doppeltippen
+  /// zum Aktivieren", ohne zu sagen, was passieren wuerde.
+  String _semantik() {
+    final p = plant;
+    final nr = plotIndex + 1;
+    if (p == null) return 'Feld $nr, leer. Antippen zum Bepflanzen.';
+    final name = p.kind.displayName;
+    switch (p.status) {
+      case PlantStatus.withered:
+        return 'Feld $nr, $name verdorrt. Antippen zum Neubepflanzen.';
+      case PlantStatus.ready:
+        return 'Feld $nr, $name erntereif. Antippen zum Ernten.';
+      case PlantStatus.growing:
+        final tag = currentDayIndex;
+        if (tag == null) return 'Feld $nr, $name wächst.';
+        final rest = p.plantedOnDayIndex +
+            PlantKinds.spec(p.kind).growDays -
+            tag;
+        if (rest <= 0) return 'Feld $nr, $name fast reif.';
+        return 'Feld $nr, $name wächst, '
+            'noch $rest ${rest == 1 ? 'Tag' : 'Tage'}.';
+      case PlantStatus.harvested:
+        return 'Feld $nr, $name abgeerntet.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: _semantik(),
+      child: ExcludeSemantics(child: _buildTappable(context)),
+    );
+  }
+
+  Widget _buildTappable(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {

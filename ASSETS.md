@@ -6,7 +6,6 @@ Pro Asset: Pfad + Quelle + Lizenz + Datum. Pflicht beim Add.
 
 | Pfad | Quelle | Lizenz | Datum |
 |---|---|---|---|
-| assets/images/iso/*.png | Kenney Isometric Landscape | CC0 | 2026-05-19 |
 | assets/images/islands_composite/spar_insel.png | Composite: Kenney Iso-Landscape tile_067 + Nature-Kit tree_oak/flower_red*/stump_squareDetailedWide | CC0 | 2026-05-20 |
 | assets/images/islands_composite/etf_insel.png | Composite: Kenney Iso-Landscape tile_105 + Nature-Kit tree_pineTall* | CC0 | 2026-05-20 |
 | assets/images/islands_composite/vulkan.png | Composite: Kenney Iso-Landscape tile_086 + Nature-Kit rock_tallA/rock_largeC/tree_default_dark | CC0 | 2026-05-20 |

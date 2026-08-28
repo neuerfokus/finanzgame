@@ -18,5 +18,8 @@ fastlane/metadata/android/<locale>/
 Der Dateiname eines Änderungsprotokolls ist der **versionCode**, nicht der
 Versionsname: `pubspec.yaml` `1.10.0+185` → `changelogs/185.txt`.
 
-Noch offen: Screenshots und `icon.png` ablegen. Ohne mindestens zwei
-Screenshots wirkt der F-Droid-Eintrag leer, und Play verlangt sie ohnehin.
+Screenshots (je 8, beide Sprachen) und `icon.png` (512x512) liegen seit
+2026-08-24 vor. Der Ordner `phoneScreenshots/` darf NUR Bilder enthalten —
+`fdroidserver` iteriert ihn und meldet alles andere als "Only PNG and JPEG
+are supported". Die Bildunterschriften stehen deshalb eine Ebene hoeher in
+`images/SCREENSHOTS.txt`.

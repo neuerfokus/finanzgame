@@ -157,18 +157,32 @@ class _IslandPageState extends ConsumerState<IslandPage> {
                   ),
                   const SizedBox(width: FgSpacing.xs),
                   // Welle-8: Plot-Reset kompakt als Icon-Button neben Ernte.
-                  GestureDetector(
-                    onTap: _confirmClearWithered,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: FgColors.alert,
-                        border: Border.all(
-                            color: FgColors.outline, width: 2),
+                  // Emoji-only: ohne Label liest TalkBack den Namen des
+                  // Zeichens vor. Trefferflaeche auf die geforderten 48 dp
+                  // gebracht (war ~42 dp).
+                  Semantics(
+                    button: true,
+                    label: 'Verdorrte Felder aufräumen',
+                    child: ExcludeSemantics(
+                      child: GestureDetector(
+                        onTap: _confirmClearWithered,
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minWidth: 48,
+                            minHeight: 48,
+                          ),
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            color: FgColors.alert,
+                            border: Border.all(
+                                color: FgColors.outline, width: 2),
+                          ),
+                          child: const Text('🧹',
+                              style: TextStyle(fontSize: 18)),
+                        ),
                       ),
-                      child: const Text('🧹',
-                          style: TextStyle(fontSize: 18)),
                     ),
                   ),
                 ],

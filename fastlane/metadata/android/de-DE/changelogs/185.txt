@@ -1,6 +1,6 @@
 Erste öffentliche Veröffentlichung als freie Software.
 
-• Zeitreise erfasst jetzt alle elf Anlageklassen
+• Zeitreise erfasst jetzt alle Anlageklassen
 • Immobilien: selbst bewohnen oder vermieten
 • Bäume fällen zahlt den Verkehrswert statt Schrottwert
 • Markt-Balance überarbeitet — ETF, Gold und Bitcoin wachsen wieder wie vorgesehen

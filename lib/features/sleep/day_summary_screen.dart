@@ -552,11 +552,16 @@ class _AssetClassBreakdown extends ConsumerWidget {
             const SizedBox(height: FgSpacing.xs),
             Text(
               'vs. letztem Höchststand: −${Money.cents(etfLoss + stockLoss).formatEur()}',
-              style: FgTypography.bodyS.copyWith(color: FgChart.down),
+              // FgChart.down ist die Diagramm-Rotstufe und kommt auf dem
+              // Panel nur auf 3,57:1 — als Fliesstext zu wenig. Fuer Text
+              // die Signalfarbe nehmen (5,63:1), die Linien im Diagramm
+              // behalten ihr Rot.
+              style: FgTypography.bodyS.copyWith(color: FgColors.alert),
             ),
             Text(
               'noch nicht real — erst beim Verkaufen',
-              style: FgTypography.bodyS.copyWith(color: FgColors.neutral),
+              style:
+                  FgTypography.bodyS.copyWith(color: FgColors.onSurfaceMuted),
             ),
           ],
         ],

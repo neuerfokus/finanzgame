@@ -286,18 +286,25 @@ class EtfRepository extends _$EtfRepository
     unawaited(db.etfDao.deleteHolding(etfId).catchError((Object _) {}));
   }
 
-  void _persistQuote(EtfQuote q) {
-    final db = ref.read(appDatabaseProvider);
-    unawaited(
-      db.etfDao
-          .upsertQuote(EtfQuoteRow(
-            etfId: q.etfId,
-            pricePerShareCents: q.pricePerShare.cents,
-            onDayIndex: q.onDayIndex,
-          ))
-          .catchError((Object _) {}),
-    );
+  /// Sammelt die Kurs-Schreibvorgaenge zu EINEM Batch — Begruendung siehe
+  /// `_persistAllQuotes` weiter unten und den gleichlautenden Kommentar im
+  /// Krypto-Repository.
+  ///
+  /// Der Microtask laeuft am naechsten Await-Punkt. Im Zeitsprung ist das
+  /// alle zehn Tage (der Fortschritts-Yield), im normalen Spiel sofort nach
+  /// der Tages-Pipeline. `ref.mounted` schuetzt den Fall, dass der Container
+  /// zwischen Planung und Ausfuehrung verworfen wurde.
+  void _persistQuote(EtfQuote _) {
+    if (_flushGeplant) return;
+    _flushGeplant = true;
+    scheduleMicrotask(() {
+      _flushGeplant = false;
+      if (!ref.mounted) return;
+      _persistAllQuotes();
+    });
   }
+
+  bool _flushGeplant = false;
 
   void _persistAllQuotes() {
     final db = ref.read(appDatabaseProvider);

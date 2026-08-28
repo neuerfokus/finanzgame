@@ -42,8 +42,24 @@ Nichts davon verlässt das Gerät, außer du gibst es selbst weiter (siehe unten
 
 ## Berechtigungen
 
-- **Speicherzugriff**: nur, um deine Sicherungsdatei in den von dir gewählten
-  Ordner zu schreiben und wieder zu lesen.
+- **Speicherzugriff**: um deine Sicherungsdatei in den von dir gewählten Ordner
+  zu schreiben und wieder zu lesen.
+
+  Die App fordert dafür „**Zugriff auf alle Dateien**"
+  (`MANAGE_EXTERNAL_STORAGE`) an. Das ist eine weitreichende Berechtigung, und
+  du sollst wissen, warum sie dasteht: sie ist der **Rückfallweg** für ältere
+  Installationen. Der reguläre Weg ist seit Version 1.10.0+172 der
+  System-Ordnerwähler — du suchst einmal einen Ordner aus, und die App darf
+  genau dort schreiben, sonst nirgends. Wer diesen Weg nutzt, für den bleibt
+  die Berechtigung ungenutzt; du kannst sie in den Android-Einstellungen
+  verweigern, ohne dass die Sicherung aufhört zu funktionieren.
+
+  Sie soll verschwinden, sobald der Rückfallweg nicht mehr gebraucht wird.
+- **Deine Sicherungsdatei ist nicht verschlüsselt.** Nutzt du den alten Weg,
+  landet sie in `Download/Finanzgame/` — dort kann jede App mit
+  Datei-Zugriff sie lesen. Darin stehen dein Spielername, dein Geburtsjahr
+  (falls eingegeben) und die Bilder, die du für deine Wunschliste ausgesucht
+  hast. Wähle einen eigenen Ordner, wenn dir das wichtig ist.
 - **Fotos**: nur, wenn du ein Bild für deine Wunschliste aussuchst.
 - **Internet**: Die App fordert die Internet-Berechtigung **gar nicht erst
   an**. Android verhindert damit auf Systemebene, dass sie überhaupt eine
@@ -95,11 +111,24 @@ You can export a save file, a text report, or diagnostic files through your
 phone's share menu — that only happens when you actively trigger it, and you
 decide where it goes.
 
-Permissions: storage only to write and read your backup file in a folder you
-pick; photos only when you choose a wish-list image. **The app does not
-request the INTERNET permission at all**, so Android prevents it from opening
-any network connection; the only way out is a link you deliberately tap, which
-opens your browser.
+Permissions: storage to write and read your backup file in a folder you pick;
+photos only when you choose a wish-list image. **The app does not request the
+INTERNET permission at all**, so Android prevents it from opening any network
+connection; the only way out is a link you deliberately tap, which opens your
+browser.
+
+The app does declare "**All files access**" (`MANAGE_EXTERNAL_STORAGE`). That
+is a broad permission and you should know why it is there: it is the
+**fallback path** for older installations. Since version 1.10.0+172 the
+regular path is the system folder picker — you pick a folder once, and the app
+may write there and nowhere else. If you use that path the permission stays
+unused, and you can deny it in Android's settings without breaking backups. It
+is meant to go away once the fallback is no longer needed.
+
+**Your backup file is not encrypted.** On the old path it lands in
+`Download/Finanzgame/`, where any app with file access can read it. It
+contains your player name, your birth year (if you entered one) and the images
+you picked for your wish list. Pick your own folder if that matters to you.
 
 The app targets teenagers, which is exactly why it collects no personal data,
 carries no ads or in-app purchases, and has no social features. It never asks

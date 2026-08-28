@@ -5,8 +5,8 @@ Important: this is a learning simulation, not investment advice. Every price, co
 WHAT YOU GET
 
 • A day cycle instead of real time — nothing happens while the phone is in your pocket. A day ends when you tap "sleep".
-• Eleven asset classes with distinct character: savings account, ETFs, single stocks, crypto, precious metals, real estate, pension products, collectibles, trees — each on its own island.
-• More than 60 story quests about everyday traps: subscriptions, phishing, fake shops, instalment plans, peer pressure, a first part-time job, tax allowances.
+• Nine asset classes with distinct character: savings account, ETFs, single stocks, crypto, precious metals, real estate, pension products, collectibles, trees — each on its own island.
+• 58 story quests about everyday traps: subscriptions, phishing, fake shops, instalment plans, peer pressure, a first part-time job, tax allowances.
 • A daily question, a knowledge quiz, and a glossary that records what you have learned.
 • Time travel: fast-forward years and review your wealth over time.
 • A bridge to real life: log real savings goals, have a parent confirm them, get rewarded in game.

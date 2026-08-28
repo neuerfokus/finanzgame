@@ -1,4 +1,5 @@
 The shadow under each island was drawn on top of it, dimming its lower
 half. It now sits behind the island.
 
-New "About & licences" page in settings with all attributions.
+New "About & licences" page in settings with all attributions. The
+refund promise is now visible in the support section.

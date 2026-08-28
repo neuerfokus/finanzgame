@@ -51,9 +51,23 @@ class CashState extends _$CashState implements CashBalanceSource {
     _persist();
   }
 
+  /// Solange true, geben Geldeingänge weder Klang noch Vibration.
+  ///
+  /// Der Zeitsprung schaltet das für seine Dauer ein. Dort kommen
+  /// Holzertrag (täglich), Miete, Taschengeld, Gehalt und Lucky-Events
+  /// zusammen — ein 5-Jahres-Sprung löste 1.800 bis 3.700 Aufrufe aus. Der
+  /// Klang ist auf 80 ms gedrosselt, das waren immer noch ~180
+  /// Münzgeräusche am Stück; die **Vibration war gar nicht gedrosselt** und
+  /// flutete den Platform-Channel über die gesamte Dauer des Sprungs.
+  ///
+  /// Ein Schalter statt eines Parameters, weil `earn` aus vielen Listenern
+  /// und Repositories heraus gerufen wird — der Sprung soll alle Quellen
+  /// stummschalten, nicht nur die, die davon wissen.
+  bool quiet = false;
+
   void earn(Money amount) {
     state = state + amount;
-    if (amount.isPositive) {
+    if (amount.isPositive && !quiet) {
       SoundService.instance.playSfx(AudioKey.coin);
       // spec-35 phase M: subtle haptic on every coin-in event. Wrap in
       // try so unit tests without ServicesBinding don't blow up.

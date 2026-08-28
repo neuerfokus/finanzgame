@@ -9,10 +9,14 @@
 # Voraussetzung für den MR: das öffentliche Repo existiert, hat einen
 # signierten Tag und einen Build, der ohne Geheimnisse durchläuft.
 
+# ACHTUNG vor dem MR gegen `config/categories.yml` in `fdroiddata` pruefen:
+# die Taxonomie wurde erweitert, die alten Sammelnamen "Money" und "Games"
+# gibt es dort nicht mehr. Ein falscher Name laesst den Lint fehlschlagen,
+# bevor ueberhaupt gebaut wird.
 Categories:
-  - Money
-  - Games
-License: GPL-3.0-or-later
+  - Finance Manager
+  - Educational Game
+License: GPL-3.0-or-later AND CC-BY-SA-4.0 AND CC-BY-4.0 AND CC0-1.0
 AuthorName: neuerfokus
 SourceCode: https://github.com/neuerfokus/finanzgame
 IssueTracker: https://github.com/neuerfokus/finanzgame/issues
@@ -25,15 +29,20 @@ Repo: https://github.com/neuerfokus/finanzgame.git
 
 Builds:
   - versionName: 1.10.0
-    versionCode: 186
-    commit: v1.10.0+186
-    subdir: android/app
+    versionCode: 187
+    commit: v1.10.0+187
+    # KEIN `subdir`: fdroidserver fuehrt die Build-Schritte darin aus, und
+    # `pubspec.yaml` liegt im Wurzelverzeichnis. Mit `subdir: android/app`
+    # lief `flutter pub get` in einem Verzeichnis ohne pubspec.yaml und der
+    # Build brach im allerersten Schritt ab; zusaetzlich haette sich `output:`
+    # relativ dazu aufgeloest. Flutter-Rezepte setzen `subdir` nur, wenn das
+    # pubspec NICHT im Wurzelverzeichnis liegt.
     sudo:
       - apt-get update
       - apt-get install -y curl unzip xz-utils
-    output: build/app/outputs/flutter-apk/app-release-unsigned.apk
+    output: build/app/outputs/flutter-apk/app-release.apk
     srclibs:
-      - flutter@3.41.0
+      - flutter@3.41.9
     prebuild:
       - $$flutter$$/bin/flutter config --no-analytics
       - $$flutter$$/bin/flutter pub get
@@ -41,12 +50,11 @@ Builds:
       - build
     build:
       - $$flutter$$/bin/flutter build apk --release
-    ndk: false
 
-AutoUpdateMode: Version
+AutoUpdateMode: Version v%v+%c
 UpdateCheckMode: Tags
 CurrentVersion: 1.10.0
-CurrentVersionCode: 186
+CurrentVersionCode: 187
 
 # Hinweise zum MR
 #
@@ -57,6 +65,8 @@ CurrentVersionCode: 186
 #
 # 2. Die Flutter-Version im `srclibs`-Eintrag muss es in fdroiddata geben.
 #    Fehlt sie, gehört ein Update von `srclibs/flutter.yml` in denselben MR.
+#    Sie muss mindestens Dart 3.11.5 mitbringen — das verlangt `pubspec.yaml`,
+#    und mit einer älteren Fassung scheitert schon `flutter pub get`.
 #
 # 3. `key.properties` existiert im öffentlichen Repo nicht, deshalb greift in
 #    `android/app/build.gradle.kts` der Debug-Keystore-Fallback. F-Droid

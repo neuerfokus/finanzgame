@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,6 +8,7 @@ import '../domain/economy/money.dart';
 import '../domain/sim/day_event.dart';
 import '../domain/sim/day_event_listener.dart';
 import '../domain/sim/day_summary.dart';
+import '../domain/sim/fast_forward_crisis.dart';
 import '../domain/sim/game_day.dart';
 import '../domain/sim/listeners/allowance_listener.dart';
 import '../domain/sim/listeners/birthday_listener.dart';
@@ -885,25 +885,32 @@ class GameClock extends _$GameClock {
     final startAge = ref.read(settingsRepositoryProvider).startAgeYears;
     final maxDay = GameBalance.maxDayIndexFor(startAge);
     final remaining = maxDay - state.dayIndex;
+    // `effectiveDays` ist die Zahl der Tage, die WIRKLICH vergehen. Am
+    // Lebensende laeuft die Schleife noch einmal, damit sie das
+    // LifetimeEndEvent liefert — vergangen ist dabei aber kein Tag, und der
+    // Krisenwurf darf sich davon nicht speisen.
+    var effectiveDays = days;
     if (remaining <= 0) {
       days = 1;
+      effectiveDays = 0;
     } else if (days > remaining) {
       days = remaining;
+      effectiveDays = remaining;
     }
 
-    // B6 — Crisis-Roll vor dem Sprung. Welle-8 Round 22 v2: alles
-    // randomisiert in Skalierungs-Range damit Spieler es NICHT
-    // einkalkulieren kann. lenFactor 0..1 = Skalierungs-Faktor für
-    // max-Risiko + max-Stärke. Sockel 2 % auch bei kurzen Sprüngen.
-    final rand = math.Random();
-    final lenFactor = (days / 1825.0).clamp(0.0, 1.0);
-    final maxFail = 0.05 + 0.55 * lenFactor;
-    final failChance = 0.02 + rand.nextDouble() * (maxFail - 0.02);
-    final crisisHit = rand.nextDouble() < failChance;
-    final maxSev = 0.15 + 0.55 * lenFactor;
-    final severity = 0.05 + rand.nextDouble() * (maxSev - 0.05);
-    final crisisDropPct = crisisHit ? severity : 0.0;
-    if (crisisHit) {
+    // B6 — Krisenwurf vor dem Sprung, seit 2026-08-24 als Gefahr PRO TAG
+    // statt als Gebuehr pro Antippen. Begruendung und Messwerte stehen in
+    // `FastForwardCrisisModel`; kurz: der alte 2-%-Sockel machte den
+    // 7-Tage-Sprung zu einem Verlustgeschaeft von −13 % pro Spieljahr, und
+    // der Wurf lief auch dann, wenn wegen der Lebenszeit gar kein Tag mehr
+    // verging.
+    final crisis = FastForwardCrisisModel.roll(
+      days: effectiveDays,
+      dayIndex: state.dayIndex,
+    );
+    final severity = crisis.severity;
+    final crisisDropPct = crisis.dropPct;
+    if (crisis.hit) {
       final cashCur = ref.read(cashStateProvider).cents;
       if (cashCur > 0) {
         ref
@@ -944,45 +951,58 @@ class GameClock extends _$GameClock {
     var harvestTotal = 0;
     var crashCount = 0;
 
-    for (var i = 0; i < days; i++) {
-      // B5: progress-Tick + Frame-Yield, sonst blockt der synchrone Loop den
-      // UI-Thread (die awaits dazwischen sind Microtasks, kein Render).
-      // delayed(1ms) zwingt den EventLoop zu einem Frame-Pump. Intervall 10
-      // statt 30 Tage: 30 Tages-Pipelines in Folge waren 30-150 ms Blöcke →
-      // die Progress-Bar fror auf dem Mi A3 sichtbar in Stufen ein.
-      if (i % 10 == 0) {
-        if (onProgress != null) onProgress(i);
-        await Future<void>.delayed(const Duration(milliseconds: 1));
-      }
-      // spec-33: bypass sleep cost during multi-day jumps so years of
-      // allowance/harvest don't get nuked by accumulated snack expense.
-      final s = await advanceDay(skipSleepCost: true, lightweight: true);
-      summaries.add(s);
-      // v29: Stopp wenn 80-Jahre-Cap erreicht — LifetimeEnd-Event ist
-      // terminierend, weiter advancen würde immer wieder das selbe Event
-      // returnen ohne Spielstand-Fortschritt.
-      if (s.events.any((e) => e is LifetimeEndEvent)) {
-        if (onProgress != null) onProgress(days - 1);
-        break;
-      }
-      for (final e in s.events) {
-        switch (e) {
-          case AllowanceEvent(:final amount):
-            allowanceTotal += amount.cents;
-          case HarvestEvent(:final harvestYield):
-            harvestTotal += harvestYield.cents;
-          case CrashStartedEvent():
-            crashCount += 1;
-          case LuckyEvent(:final title, :final amount):
-            luckyEvents.add(LuckyEventEntry(
-              title: title,
-              amountCents: amount.cents,
-              dayIndex: s.day.dayIndex,
-            ));
-          default:
-            break;
+    // Münz-Klang und Vibration für die Dauer des Sprungs abschalten: sonst
+    // feuern Holzertrag, Miete, Taschengeld, Gehalt und Lucky-Events über
+    // 1825 Tage tausendfach. Der Klang ist auf 80 ms gedrosselt (immer noch
+    // ~180 Geräusche am Stück), die Vibration war es gar nicht — das Gerät
+    // brummte über den ganzen Sprung durch und flutete den Platform-Channel.
+    // `finally`, damit ein Abbruch mitten im Sprung die App nicht stumm
+    // zurücklässt.
+    final cashForQuiet = ref.read(cashStateProvider.notifier);
+    cashForQuiet.quiet = true;
+    try {
+      for (var i = 0; i < days; i++) {
+        // B5: progress-Tick + Frame-Yield, sonst blockt der synchrone Loop den
+        // UI-Thread (die awaits dazwischen sind Microtasks, kein Render).
+        // delayed(1ms) zwingt den EventLoop zu einem Frame-Pump. Intervall 10
+        // statt 30 Tage: 30 Tages-Pipelines in Folge waren 30-150 ms Blöcke →
+        // die Progress-Bar fror auf dem Mi A3 sichtbar in Stufen ein.
+        if (i % 10 == 0) {
+          if (onProgress != null) onProgress(i);
+          await Future<void>.delayed(const Duration(milliseconds: 1));
+        }
+        // spec-33: bypass sleep cost during multi-day jumps so years of
+        // allowance/harvest don't get nuked by accumulated snack expense.
+        final s = await advanceDay(skipSleepCost: true, lightweight: true);
+        summaries.add(s);
+        // v29: Stopp wenn 80-Jahre-Cap erreicht — LifetimeEnd-Event ist
+        // terminierend, weiter advancen würde immer wieder das selbe Event
+        // returnen ohne Spielstand-Fortschritt.
+        if (s.events.any((e) => e is LifetimeEndEvent)) {
+          if (onProgress != null) onProgress(days - 1);
+          break;
+        }
+        for (final e in s.events) {
+          switch (e) {
+            case AllowanceEvent(:final amount):
+              allowanceTotal += amount.cents;
+            case HarvestEvent(:final harvestYield):
+              harvestTotal += harvestYield.cents;
+            case CrashStartedEvent():
+              crashCount += 1;
+            case LuckyEvent(:final title, :final amount):
+              luckyEvents.add(LuckyEventEntry(
+                title: title,
+                amountCents: amount.cents,
+                dayIndex: s.day.dayIndex,
+              ));
+            default:
+              break;
+          }
         }
       }
+    } finally {
+      cashForQuiet.quiet = false;
     }
 
     // Yield damit UI letzten Progress-Tick rendern kann bevor Post-Loop-

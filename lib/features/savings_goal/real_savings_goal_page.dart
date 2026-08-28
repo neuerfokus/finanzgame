@@ -310,6 +310,47 @@ class _ActiveGoalCard extends ConsumerWidget {
     }
   }
 
+  /// Rückfrage vor dem Verwerfen. Das Ziel ist danach weg, samt dem
+  /// eingetragenen Sparstand — und dahinter steckt echtes Geld, das über
+  /// Wochen zusammengespart wurde. Eine Fehlgeste darf das nicht kosten.
+  Future<void> _confirmDiscard(
+    BuildContext context,
+    WidgetRef ref,
+    RealSavingsGoal goal,
+  ) async {
+    final gespart = (goal.savedCents / 100).toStringAsFixed(2);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: FgColors.backgroundElevated,
+        title: const Text('Ziel wirklich verwerfen?',
+            style: FgTypography.bodyL),
+        content: Text(
+          '„${goal.title}" wird gelöscht, zusammen mit den eingetragenen '
+          '$gespart €.\n\nDas lässt sich nicht rückgängig machen. Dein '
+          'echtes Geld bleibt natürlich, wo es ist — nur der Eintrag hier '
+          'verschwindet.',
+          style: FgTypography.bodyM,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('Behalten', style: FgTypography.bodyM),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: Text('Verwerfen',
+                style: FgTypography.bodyM.copyWith(color: FgColors.alert)),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    await ref
+        .read(realSavingsGoalRepositoryProvider.notifier)
+        .remove(goal.rowId);
+  }
+
   Future<void> _confirm(BuildContext context, WidgetRef ref) async {
     // Belohnung nur mit Eltern-Freigabe. Ohne gesetzten PIN führt der Gate
     // ins Einrichten — vorher gab es ohne PIN gar keine Prüfung, das Kind
@@ -412,9 +453,11 @@ class _ActiveGoalCard extends ConsumerWidget {
           ],
           const SizedBox(height: FgSpacing.s),
           TextButton(
-            onPressed: () => ref
-                .read(realSavingsGoalRepositoryProvider.notifier)
-                .remove(goal.rowId),
+            // Rückfrage, weil das Ziel unwiederbringlich weg ist und oft
+            // wochenlanges echtes Sparen mitnimmt. Vorher loeschte ein
+            // einziger Tap sofort — ausgerechnet im Feature, das reales
+            // Sparverhalten abbildet.
+            onPressed: () => _confirmDiscard(context, ref, goal),
             child: Text('Ziel verwerfen',
                 style:
                     FgTypography.bodyS.copyWith(color: FgColors.alert)),

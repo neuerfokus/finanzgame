@@ -504,6 +504,32 @@ class _ChartBody extends StatefulWidget {
 }
 
 class _ChartBodyState extends State<_ChartBody> {
+  /// Textfassung des Diagramms fuer TalkBack: pro Linie Anfangs- und
+  /// Endwert samt Richtung. Die Kurvenform bleibt visuell, aber die
+  /// Kernaussage ("was ist aus meinem Geld geworden") wird hoerbar.
+  String _diagrammBeschreibung(List<ChartLine> lines) {
+    if (lines.isEmpty) return 'Vermögensverlauf, keine Reihe ausgewählt.';
+    final teile = <String>[];
+    for (final l in lines) {
+      if (l.points.isEmpty) continue;
+      final von = l.points.first.$2;
+      final bis = l.points.last.$2;
+      final richtung = bis > von
+          ? 'gestiegen'
+          : bis < von
+              ? 'gefallen'
+              : 'unverändert';
+      teile.add('${labelForAsset(l.assetId)}: '
+          'von ${Money.cents(von).formatEur()} '
+          'auf ${Money.cents(bis).formatEur()}, $richtung');
+    }
+    if (teile.isEmpty) return 'Vermögensverlauf, noch keine Daten.';
+    final krisen = widget.crashDays.isEmpty
+        ? ''
+        : ' ${widget.crashDays.length} Krisentage markiert.';
+    return 'Vermögensverlauf. ${teile.join('. ')}.$krisen';
+  }
+
   /// Sprint C2: aktuell angetippter Crash-Tag mit Drop-%. Verschwindet
   /// beim nächsten Tap außerhalb der Marker.
   ({int day, double dayDropPct, double peakToTroughPct})? _tappedCrash;
@@ -597,15 +623,23 @@ class _ChartBodyState extends State<_ChartBody> {
                 // Bug-fix v29: CustomPaint braucht explizite size, sonst
                 // zeichnet er in 0×0 (Chart "oben links gequetscht").
                 Positioned.fill(
-                  child: GestureDetector(
-                    onTapUp: (d) => _handleTapUp(d, layout),
-                    child: CustomPaint(
-                      size: Size.infinite,
-                      painter: MultiLineChartPainter(
-                        lines: drawable,
-                        crashDays: widget.crashDays,
-                        ghosts: widget.ghosts,
-                        consumptionShadow: widget.consumptionShadow,
+                  // Fuer TalkBack ist ein CustomPaint eine leere Flaeche.
+                  // Der Vermoegensverlauf ist die zentrale Aussage der Seite,
+                  // deshalb bekommt er wenigstens Anfang, Ende und Richtung
+                  // als Text — die Kurvenform bleibt notgedrungen visuell.
+                  child: Semantics(
+                    image: true,
+                    label: _diagrammBeschreibung(drawable),
+                    child: GestureDetector(
+                      onTapUp: (d) => _handleTapUp(d, layout),
+                      child: CustomPaint(
+                        size: Size.infinite,
+                        painter: MultiLineChartPainter(
+                          lines: drawable,
+                          crashDays: widget.crashDays,
+                          ghosts: widget.ghosts,
+                          consumptionShadow: widget.consumptionShadow,
+                        ),
                       ),
                     ),
                   ),

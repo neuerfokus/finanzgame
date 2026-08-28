@@ -112,7 +112,16 @@ class AudioplayersSoundService implements SoundService {
     if (last != null && now - last < _sfxThrottleMs) return;
     _lastPlayMs[key] = now;
     try {
-      final player = AudioPlayer();
+      // Wiederverwendeter Pool statt „pro Klang ein neuer Player".
+      //
+      // Vorher entstand hier bei JEDEM Effekt ein `AudioPlayer`, der nie
+      // `dispose()` bekam. `ReleaseMode.release` gibt zwar den nativen
+      // MediaPlayer nach dem Abspielen frei, die Registrierung im Plugin und
+      // die beiden Dart-Subscriptions bleiben aber bis zum Entsorgen — ein
+      // Leck, das mit jeder eingesammelten Münze wächst. Ein Zeitsprung über
+      // fünf Jahre allein erzeugte so mehrere hundert Instanzen.
+      final player = _sfxPool[_sfxSlot];
+      _sfxSlot = (_sfxSlot + 1) % _sfxPool.length;
       final effective =
           (key.volume * _sfxVolume * _masterVolume).clamp(0.0, 1.0);
       await player.setVolume(effective);
@@ -123,6 +132,14 @@ class AudioplayersSoundService implements SoundService {
       }
     }
   }
+
+  /// Reihum genutzte Abspieler. Vier reichen: der Drossel-Abstand von
+  /// [_sfxThrottleMs] pro Klang ist kürzer als ein Effekt dauert, mehrere
+  /// dürfen sich also überlappen — aber nie mehr als eine Handvoll.
+  static const int _sfxPoolSize = 4;
+  final List<AudioPlayer> _sfxPool =
+      List.generate(_sfxPoolSize, (_) => AudioPlayer());
+  int _sfxSlot = 0;
 
   @override
   Future<void> startMusic() async {

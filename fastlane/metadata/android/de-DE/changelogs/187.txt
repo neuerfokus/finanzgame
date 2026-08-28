@@ -1,0 +1,11 @@
+Große Aufräum-Runde nach einer Prüfung mit sechs Analyse-Agenten.
+
+• Zeitsprung: kurze Sprünge haben Vermögen vernichtet — die Krise war
+  eine feste Gebühr pro Antippen statt eines Risikos pro Tag. Behoben.
+• Eltern-PIN: der Import über den Dateimanager führte daran vorbei,
+  und das Einrichten gab die Belohnung gleich mit frei. Beides zu.
+• Zurücksetzen und die Notfall-Quarantäne können den Spielstand nicht
+  mehr beschädigen.
+• Fehlermeldungen und Quiz-Antworten sind endlich lesbar; das Ergebnis
+  steht jetzt als Text da, nicht nur als Farbe.
+• Weniger Speicherverbrauch, ruhigerer Zeitsprung, adaptives App-Icon.

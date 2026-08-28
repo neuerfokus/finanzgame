@@ -3,7 +3,7 @@
 Generiert: license_check.py
 
 Files gescant: **125**
-ASSETS.md-Pfade: **22**
+ASSETS.md-Pfade: **21**
 
 ## ✅ Exakt gedeckt
 18 Files mit explizitem ASSETS.md-Eintrag.

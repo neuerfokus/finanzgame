@@ -360,18 +360,41 @@ class _OptionTile extends StatelessWidget {
     } else if (wasWrong) {
       bg = FgColors.alert.withValues(alpha: 0.6);
     }
+    // Siehe daily_quiz_page: `onSurface` auf `success` sind 1,50:1, auf
+    // `alert` 2,19:1 — schwarz ergibt 11,46:1 bzw. 7,84:1. Und das Ergebnis
+    // stand vorher nur in der Hintergrundfarbe.
+    final eingefaerbt = bg != FgColors.backgroundElevated;
+    final praefix = finalised
+        ? (isCorrect
+            ? '✓ Richtig: '
+            : (wasWrong || index == picked ? '✗ Falsch: ' : ''))
+        : (wasWrong ? '✗ ' : '');
+
     return Padding(
       padding: const EdgeInsets.only(bottom: FgSpacing.s),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.all(FgSpacing.m),
-          decoration: BoxDecoration(
-            color: bg,
-            border: Border.all(color: FgColors.outline, width: 2),
+      child: Semantics(
+        button: onTap != null,
+        selected: index == picked,
+        label: '$praefix$label',
+        child: ExcludeSemantics(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.all(FgSpacing.m),
+              decoration: BoxDecoration(
+                color: bg,
+                border: Border.all(color: FgColors.outline, width: 2),
+              ),
+              child: Text(
+                '$praefix$label',
+                style: FgTypography.bodyM.copyWith(
+                  color: eingefaerbt ? Colors.black : FgColors.onSurface,
+                ),
+                softWrap: true,
+              ),
+            ),
           ),
-          child: Text(label, style: FgTypography.bodyM, softWrap: true),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,6 +86,7 @@ class _FastForwardFlowState extends ConsumerState<FastForwardFlow> {
         _summary = summary;
         _phase = _Phase.summary;
       });
+      _ansageFuerTalkBack(summary);
       // Welle-8 Round 23: Auto-Save nach Zeitsprung — User-Bugreport.
       // Fire-and-forget, silent failure. Default AN (Drift v36 Aus-Schalter).
       final ffSettings = ref.read(settingsRepositoryProvider);
@@ -106,6 +108,25 @@ class _FastForwardFlowState extends ConsumerState<FastForwardFlow> {
       );
       setState(() => _phase = _Phase.pick);
     }
+  }
+
+  /// Der Zeitsprung endet rein visuell — Fortschrittsbalken weg, Zahlen da.
+  /// Das Gegenstueck beim Schlafen sagt seit Runde 2 Bescheid, hier fehlte es:
+  /// gerade ein Sprung ueber Jahre samt Krise ist die Lage, in der man am
+  /// wenigsten stumm bleiben sollte.
+  void _ansageFuerTalkBack(FastForwardSummary s) {
+    final delta = s.cashAfterCents - s.cashBeforeCents;
+    final vorzeichen = delta >= 0 ? 'plus' : 'minus';
+    final betrag = Money.cents(delta.abs()).formatEur();
+    final krise = s.crisisDropPct > 0
+        ? ' Eine Krise hat ${(s.crisisDropPct * 100).round()} Prozent gekostet.'
+        : '';
+    // ignore: deprecated_member_use
+    SemanticsService.announce(
+      '${s.totalDays} Tage vergangen. Konto $vorzeichen $betrag, '
+      'jetzt ${Money.cents(s.cashAfterCents).formatEur()}.$krise',
+      TextDirection.ltr,
+    );
   }
 
   @override

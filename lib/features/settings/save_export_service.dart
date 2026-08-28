@@ -309,10 +309,30 @@ class SaveExportService {
             await bak.rename(prev.path);
           }
         } catch (_) {/* silent */}
+        // Verschieben statt kopieren-und-löschen. Vorher stand hier
+        // `try { db.copy(bak) } catch (_) {}` gefolgt von `db.delete()` —
+        // scheiterte die Kopie am vollen Speicher (auf dem Zielgerät der
+        // Normalfall), gelang das Löschen trotzdem: der Spielstand war
+        // endgültig weg, es gab keine `.corrupt.bak`, und der Recovery-Dialog
+        // verwies auf eine Datei, die nie geschrieben wurde. Der Kommentar
+        // „Hauptsache die kaputte DB ist gleich weg" setzte voraus, dass sie
+        // wirklich kaputt ist — die Projekthistorie kennt genau den Gegenfall
+        // (Migrationsfehler ≠ Korruption).
+        //
+        // `rename` ist atomar, braucht keinen freien Speicher und lässt die
+        // Datei liegen, wenn es scheitert. Nur wenn das Verschieben auf einem
+        // fremden Dateisystem nicht geht, wird kopiert — und dann auch nur
+        // gelöscht, wenn die Kopie nachweislich steht.
         try {
-          await db.copy(bak.path);
-        } catch (_) {/* silent — Hauptsache die kaputte DB ist gleich weg */}
-        await db.delete();
+          await db.rename(bak.path);
+        } catch (_) {
+          var kopiert = false;
+          try {
+            await db.copy(bak.path);
+            kopiert = bak.existsSync() && await bak.length() > 0;
+          } catch (_) {/* silent */}
+          if (kopiert) await db.delete();
+        }
       }
       for (final suffix in const ['-wal', '-shm', '-journal']) {
         final f = File('${db.path}$suffix');
@@ -320,7 +340,12 @@ class SaveExportService {
           if (f.existsSync()) await f.delete();
         } catch (_) {/* silent */}
       }
-      return true;
+      // Liegt die Datei noch da, ist NICHTS quarantänt worden — dann darf hier
+      // auch kein Erfolg gemeldet werden. `main()` würde sonst den
+      // Recovery-Hinweis zeigen („dein Spielstand war beschädigt") und beim
+      // Retry-Open erneut über dieselbe Datei stolpern; richtig ist in dem
+      // Fall der lesbare Fehlerscreen der zweiten Ebene.
+      return !db.existsSync();
     } catch (_) {
       return false;
     }
@@ -403,7 +428,7 @@ class SaveExportService {
   /// Installation unberührt — es gibt nichts zurückzurollen.
   /// Test-Einstieg: dieselbe Logik, aber mit injizierbarem Ziel. Ohne das
   /// wäre der Ablauf nur am Gerät prüfbar (`getApplicationSupportDirectory`).
-  Future<({bool success, String? error})> applySaveFileTo(
+  Future<({bool success, String? error, bool dbClosed})> applySaveFileTo(
     File source, {
     required File prod,
     required Directory photoDir,
@@ -418,7 +443,7 @@ class SaveExportService {
         photoDirOverride: photoDir,
       );
 
-  Future<({bool success, String? error})> _applySaveFile(
+  Future<({bool success, String? error, bool dbClosed})> _applySaveFile(
     File source, {
     String? backupFolderUri,
     AppDatabase? live,
@@ -426,19 +451,26 @@ class SaveExportService {
     Directory? photoDirOverride,
   }) async {
     if (!source.existsSync()) {
-      return (success: false, error: 'Datei nicht gefunden');
+      return (success: false, error: 'Datei nicht gefunden', dbClosed: false);
     }
     final head = await readHeadBytes(source);
     if (!isZipBytes(head) && !isSqliteBytes(head)) {
       return (
         success: false,
         error: 'Keine gültige Spielstand-Datei (weder ZIP noch SQLite).',
+        dbClosed: false,
       );
     }
 
     final prod = prodOverride ?? await _dbFile();
     final photoDir = photoDirOverride ?? await _wishPhotoDir();
     Directory? staging;
+    // Wird true, sobald die Live-Verbindung zu ist. Scheitert danach noch
+    // etwas, MUSS der Aufrufer einen Neustart erzwingen: jede weitere
+    // Schreiboperation liefe gegen eine geschlossene Verbindung und wird von
+    // den `catchError`-Handlern der Repositories still verschluckt — die App
+    // sähe heil aus und würde nichts mehr speichern.
+    var dbClosed = false;
     try {
       staging = await Directory.systemTemp.createTemp('fg_save_staging');
       final stagingDb = File(p.join(staging.path, _dbFileName));
@@ -457,6 +489,7 @@ class SaveExportService {
             success: false,
             error: 'Spielstand-Datei beschädigt (ZIP konnte nicht gelesen '
                 'werden).',
+            dbClosed: false,
           );
         }
       } else {
@@ -469,7 +502,7 @@ class SaveExportService {
       // laufende Installation hat davon nichts gemerkt.
       final problem = await validateCandidateDb(stagingDb);
       if (problem != null) {
-        return (success: false, error: problem);
+        return (success: false, error: problem, dbClosed: false);
       }
 
       // Migration + Foto-Remap + Backup-URI: alles auf dem Staging.
@@ -479,28 +512,62 @@ class SaveExportService {
         backupFolderUri: backupFolderUri,
       );
 
-      // Ab hier wird ersetzt. Erst die Live-Verbindung schließen, damit sie
-      // keine veralteten Seiten über die neue Datei schreiben kann; der
-      // Aufrufer erzwingt direkt danach den App-Neustart.
+      // Ab hier wird ersetzt. Die Reihenfolge IST der Schutz: solange die
+      // Live-Verbindung offen ist, darf nichts laufen, was sich nicht
+      // folgenlos abbrechen lässt.
+      //
+      // Vorher stand `close()` an ERSTER Stelle und danach zwei
+      // Kopiervorgänge. Scheiterte einer davon — voller Speicher, auf dem
+      // Zielgerät der dokumentierte Normalfall —, war die Verbindung zu, der
+      // Aufrufer zeigte nur eine Fehlermeldung, und die App speicherte ab
+      // diesem Moment stillschweigend nicht mehr.
+      final incoming = File('${prod.path}.incoming');
+      try {
+        if (incoming.existsSync()) await incoming.delete();
+      } catch (_) {/* silent — der copy unten würde sonst ohnehin werfen */}
+
+      // 1. Teuerster Schritt zuerst: die neue Datei vollständig daneben
+      //    legen. Braucht Platz, kann scheitern — Verbindung noch offen.
+      await stagingDb.copy(incoming.path);
+      // 2. Sicherung der alten Datei, ebenfalls noch mit offener Verbindung.
+      if (prod.existsSync()) {
+        await prod.copy('${prod.path}.bak');
+      }
+      // 3. Erst jetzt schließen ...
       if (live != null) {
         try {
           await live.close();
         } catch (_) {/* silent — Hauptsache sie schreibt nicht mehr */}
+        dbClosed = true;
       }
-      if (prod.existsSync()) {
-        await prod.copy('${prod.path}.bak');
+      // 4. ... und tauschen. `rename` ist atomar und braucht keinen freien
+      //    Speicher; das Zeitfenster für einen Fehlschlag ist damit winzig.
+      try {
+        await incoming.rename(prod.path);
+      } catch (_) {
+        // Manche Dateisysteme benennen nicht über ein bestehendes Ziel.
+        // Die Sicherung aus Schritt 2 liegt vor, der Moment ohne Zieldatei
+        // ist deshalb vertretbar.
+        if (prod.existsSync()) await prod.delete();
+        await incoming.rename(prod.path);
       }
-      await stagingDb.copy(prod.path);
       await _deleteDbSidecars(prod);
-      return (success: true, error: null);
+      return (success: true, error: null, dbClosed: dbClosed);
     } catch (e) {
       return (
         success: false,
         error: 'Spielstand konnte nicht eingespielt werden ($e).',
+        dbClosed: dbClosed,
       );
     } finally {
       try {
         await staging?.delete(recursive: true);
+      } catch (_) {/* silent */}
+      // Halbfertige `.incoming` nicht liegen lassen: sie ist so groß wie der
+      // ganze Spielstand und der nächste Versuch braucht den Platz.
+      try {
+        final rest = File('${prod.path}.incoming');
+        if (rest.existsSync()) await rest.delete();
       } catch (_) {/* silent */}
     }
   }
@@ -582,7 +649,7 @@ class SaveExportService {
   ///
   /// Liefert (success, error): success=false+error=null bei Abbruch,
   /// error!=null bei Validierungs-Fehler.
-  Future<({bool success, String? error})> importFromFilePicker({
+  Future<({bool success, String? error, bool dbClosed})> importFromFilePicker({
     AppDatabase? live,
   }) async {
     final picked = await FilePicker.platform.pickFiles(
@@ -590,11 +657,11 @@ class SaveExportService {
       allowMultiple: false,
     );
     if (picked == null || picked.files.isEmpty) {
-      return (success: false, error: null); // Cancelled.
+      return (success: false, error: null, dbClosed: false); // Cancelled.
     }
     final path = picked.files.single.path;
     if (path == null) {
-      return (success: false, error: 'Keine Datei ausgewählt');
+      return (success: false, error: 'Keine Datei ausgewählt', dbClosed: false);
     }
     return _applySaveFile(File(path), live: live);
   }
@@ -603,7 +670,7 @@ class SaveExportService {
   /// Legacy-SQLite). Genutzt vom Datei-Öffnen-Intent (WhatsApp → "Öffnen"):
   /// MainActivity kopiert den content://-Stream in den Cache + reicht den
   /// Pfad hier herein. App muss danach neu gestartet werden.
-  Future<({bool success, String? error})> importFromPath(
+  Future<({bool success, String? error, bool dbClosed})> importFromPath(
     String path, {
     AppDatabase? live,
   }) {
@@ -815,7 +882,7 @@ class SaveExportService {
   /// Liest die `autosave.fgsave` aus dem SAF-Ordner [treeUri] + spielt sie über
   /// die aktive DB ein. App muss danach neu gestartet werden. Genutzt für
   /// Restore nach Reinstall (Nutzer wählt seinen Backup-Ordner erneut).
-  Future<({bool success, String? error})> restoreFromSafFolder(
+  Future<({bool success, String? error, bool dbClosed})> restoreFromSafFolder(
     String treeUri, {
     AppDatabase? live,
   }) async {
@@ -826,6 +893,7 @@ class SaveExportService {
           success: false,
           error: 'Im gewählten Ordner liegt keine Sicherung '
               '($_autoSaveFileName).',
+          dbClosed: false,
         );
       }
       final tmp = await getTemporaryDirectory();
@@ -836,6 +904,7 @@ class SaveExportService {
       return (
         success: false,
         error: 'Sicherung konnte nicht aus dem Ordner gelesen werden.',
+        dbClosed: false,
       );
     }
   }

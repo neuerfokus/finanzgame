@@ -1,7 +1,7 @@
-Erste öffentliche Veröffentlichung als freie Software.
+First public release as free software.
 
-• Zeitreise erfasst jetzt alle elf Anlageklassen
-• Immobilien: selbst bewohnen oder vermieten
-• Bäume fällen zahlt den Verkehrswert statt Schrottwert
-• Markt-Balance überarbeitet — ETF, Gold und Bitcoin wachsen wieder wie vorgesehen
-• Neue Seite "Über & Lizenzen"
+• Time travel now records every asset class
+• Property: live in it yourself or rent it out
+• Felling a tree pays its market value instead of scrap value
+• Market balance reworked — ETFs, gold and bitcoin grow as intended again
+• New "About & licences" page

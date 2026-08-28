@@ -25,16 +25,60 @@ import 'settings_repository.dart';
 class ParentGate {
   const ParentGate._();
 
-  /// True = freigegeben. Fragt den PIN ab, oder bietet an, einen einzurichten.
+  /// Freigabe für eine BELOHNUNG. Fragt den PIN ab, oder bietet an, einen
+  /// einzurichten — gibt die Belohnung dann aber **nicht** im selben Zug frei.
+  ///
+  /// Vorher lieferte [_offerSetup] direkt `true`: wer zweimal dieselben vier
+  /// Ziffern eintippte, bekam die Belohnung sofort, ohne dass je ein
+  /// Erwachsener beteiligt war — das Einrichten WAR die Freigabe. Jetzt sind
+  /// es zwei getrennte Handlungen: erst richtet jemand den PIN ein, danach
+  /// muss die Bestätigung neu angestoßen werden. Ein Elternteil, das den PIN
+  /// anlegt, stimmt damit nicht nebenbei der Belohnung zu, die den Dialog
+  /// ausgelöst hat.
   static Future<bool> require(BuildContext context, WidgetRef ref) async {
     final repo = ref.read(settingsRepositoryProvider.notifier);
     final hasPin = ref.read(settingsRepositoryProvider).parentPin.isNotEmpty;
 
     if (!hasPin) {
       final created = await _offerSetup(context, repo);
-      return created;
+      if (created && context.mounted) {
+        showFgSnack(
+          context,
+          '✓ Eltern-PIN gesetzt. Zum Bestätigen bitte noch einmal tippen.',
+        );
+      }
+      return false;
     }
 
+    return _verify(context, repo);
+  }
+
+  /// Freigabe für eine Aktion, die den ganzen Spielstand ersetzt oder löscht.
+  ///
+  /// Anders als [require] wird hier **kein** PIN eingefordert, wenn gar keiner
+  /// eingerichtet ist. Begründung: ohne PIN ist auch die Einstellungsseite
+  /// offen, es gäbe also nichts zu schützen — und der Datei-Öffnen-Import ist
+  /// zugleich der Rettungsweg nach einem beschädigten Spielstand. Wer nach
+  /// einem Absturz seine Sicherung einspielen will, soll nicht zuerst ein
+  /// Einrichtungsformular ausfüllen müssen.
+  ///
+  /// Ist ein PIN gesetzt, greift er. Das schließt die Lücke, dass der Import
+  /// über den Dateimanager an der gesperrten Einstellungsseite vorbeiführte:
+  /// ein mitgebrachter Spielstand bringt seine eigene (womöglich leere)
+  /// `parentPin`, sein eigenes Geburtsjahr und beliebiges Vermögen mit.
+  static Future<bool> verifyIfConfigured(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final repo = ref.read(settingsRepositoryProvider.notifier);
+    if (ref.read(settingsRepositoryProvider).parentPin.isEmpty) return true;
+    return _verify(context, repo);
+  }
+
+  static Future<bool> _verify(
+    BuildContext context,
+    SettingsRepository repo,
+  ) async {
     final entered = await _promptPin(context, '🔒 Eltern-PIN');
     if (entered == null) return false;
     if (!repo.parentPinMatches(entered)) {
@@ -95,7 +139,6 @@ class ParentGate {
       return false;
     }
     repo.setParentPin(first);
-    if (context.mounted) showFgSnack(context, '✓ Eltern-PIN gesetzt.');
     return true;
   }
 

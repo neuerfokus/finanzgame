@@ -23,6 +23,7 @@ import '../quest_runner/quest_progress_repository.dart';
 import '../quest_runner/quest_runner_page.dart';
 import 'about_page.dart';
 import 'birth_year_prompt.dart';
+import 'import_failure_dialog.dart';
 import 'parent_math_gate.dart';
 import 'save_export_service.dart';
 import 'settings_repository.dart';
@@ -266,16 +267,20 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: Text('Sound', style: FgTypography.bodyM),
-                      ),
-                      Switch(
-                        value: settings.soundEnabled,
-                        onChanged: notifier.setSoundEnabled,
-                      ),
-                    ],
+                  // MergeSemantics wie bei den anderen beiden Schaltern:
+                  // sonst liest TalkBack nur "Schalter, aus" ohne den Namen.
+                  MergeSemantics(
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Text('Sound', style: FgTypography.bodyM),
+                        ),
+                        Switch(
+                          value: settings.soundEnabled,
+                          onChanged: notifier.setSoundEnabled,
+                        ),
+                      ],
+                    ),
                   ),
                   // spec-37: Musik-Slider entfernt (keine Musik mehr).
                   const SizedBox(height: FgSpacing.s),
@@ -792,8 +797,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         ),
       );
       await SystemNavigator.pop();
-    } else if (result.error != null) {
-      showFgSnack(context, result.error!, isError: true);
+    } else if (result.error != null || result.dbClosed) {
+      await showImportFailure(
+        context,
+        error: result.error,
+        dbClosed: result.dbClosed,
+      );
     }
   }
 
@@ -843,11 +852,39 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           .clearCurrentRun();
     } on Object {/* ignore — kein Highscore-File OK */}
     if (!mounted) return;
-    showFgSnack(
-      context,
-      '✓ Spiel zurückgesetzt. Bitte App neu starten für sauberen Neustart.',
-      duration: const Duration(seconds: 10),
+    // App SOFORT schließen, nicht nur darum bitten — dieselbe Begründung wie
+    // beim Import zehn Zeilen darüber, nur mit schlimmeren Folgen:
+    // `wipeAll()` leert die DB, die Riverpod-Provider behalten aber alles im
+    // Speicher. `_RootSwitcher` liest `onboardingComplete` weiter als true und
+    // zeigt das Springboard statt des Onboardings. Der nächste Tap auf
+    // „Schlafen" schreibt Tag, Geld und Level aus dem RAM in die geleerte DB
+    // zurück, während Quests, Trophäen, Pflanzen und Immobilien weg bleiben —
+    // ein Mischzustand ohne Rückweg. Der anschließende Auto-Save legt ihn
+    // dann über die einzige Sicherung, die eine Deinstallation überlebt.
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => PopScope(
+        canPop: false,
+        child: AlertDialog(
+          backgroundColor: FgColors.backgroundElevated,
+          title: const Text('✓ Spiel zurückgesetzt',
+              style: FgTypography.bodyL),
+          content: const Text(
+            'Die App wird jetzt geschlossen. Öffne sie neu — dann startest du '
+            'von vorn.',
+            style: FgTypography.bodyM,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(),
+              child: const Text('App schließen', style: FgTypography.bodyM),
+            ),
+          ],
+        ),
+      ),
     );
+    await SystemNavigator.pop();
   }
 }
 

@@ -232,7 +232,7 @@ Flame ist 2025/26 production-ready (live-coded Beispiele auf flutter.dev/games).
 # FINANZGAME — CLAUDE.md
 
 ## WHY
-Finanzbildungs-App für meinen 13/14-jährigen Sohn.
+Finanzbildungs-App für Jugendliche.
 Hardregeln: keine echten Marken, keine echten Aktien, keine
 Lootboxen/Mikrotransaktionen, offline-first, keine PII, kein Tracking,
 anti-Konsum ohne Moralkeule.

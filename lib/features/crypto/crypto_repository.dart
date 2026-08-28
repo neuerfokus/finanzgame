@@ -165,9 +165,7 @@ class CryptoRepository extends _$CryptoRepository
       );
     }
     state = state.copyWith(quotes: newQuotes);
-    for (final q in newQuotes.values) {
-      _persistQuote(q);
-    }
+    _persistAllQuotes();
     return newQuotes.keys.toList();
   }
 
@@ -255,16 +253,42 @@ class CryptoRepository extends _$CryptoRepository
     unawaited(db.cryptoDao.deleteHolding(assetId).catchError((Object _) {}));
   }
 
-  void _persistQuote(CryptoQuote q) {
+  /// Sammelt die Kurs-Schreibvorgaenge zu EINEM Batch.
+  ///
+  /// Vorher schrieb jede Kursaenderung sofort ihre eigene Zeile, also ein
+  /// `insertOnConflictUpdate` pro Anlage und Spieltag. Ueber alle vier
+  /// Klassen waren das gut zwei Dutzend Einzelschreibvorgaenge taeglich und
+  /// rund 42.000 bei einem Fuenf-Jahres-Sprung — obwohl die Quote-Zeile
+  /// ohnehin nur den AKTUELLEN Kurs haelt. Die Zwischenstaende der
+  /// uebersprungenen Tage muss niemand speichern; die Kurshistorie liegt
+  /// getrennt in `price_history`.
+  ///
+  /// Der Microtask laeuft am naechsten Await-Punkt. Im Zeitsprung ist das
+  /// alle zehn Tage (der Fortschritts-Yield), im normalen Spiel sofort nach
+  /// der Tages-Pipeline. `ref.mounted` schuetzt den Fall, dass der Container
+  /// zwischen Planung und Ausfuehrung verworfen wurde.
+  void _persistQuote(CryptoQuote _) {
+    if (_flushGeplant) return;
+    _flushGeplant = true;
+    scheduleMicrotask(() {
+      _flushGeplant = false;
+      if (!ref.mounted) return;
+      _persistAllQuotes();
+    });
+  }
+
+  bool _flushGeplant = false;
+
+  void _persistAllQuotes() {
     final db = ref.read(appDatabaseProvider);
-    unawaited(
-      db.cryptoDao
-          .upsertQuote(CryptoQuoteRow(
-            assetId: q.assetId,
-            pricePerShareCents: q.pricePerShare.cents,
-            onDayIndex: q.onDayIndex,
-          ))
-          .catchError((Object _) {}),
-    );
+    final rows = [
+      for (final q in state.quotes.values)
+        CryptoQuoteRow(
+          assetId: q.assetId,
+          pricePerShareCents: q.pricePerShare.cents,
+          onDayIndex: q.onDayIndex,
+        ),
+    ];
+    unawaited(db.cryptoDao.upsertQuotes(rows).catchError((Object _) {}));
   }
 }

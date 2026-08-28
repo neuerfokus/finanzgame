@@ -58,3 +58,6 @@ Zusätze/
 android/hs_err_*.log
 android/replay_*.log
 test/**/failures/
+
+# Geraete-Screenshots der adb-Werkzeuge (koennen Personenbezug tragen).
+tools/out/

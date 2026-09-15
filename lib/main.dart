@@ -396,8 +396,9 @@ class _RootSwitcherState extends ConsumerState<_RootSwitcher> {
     final found = await svc.findAnyRestoreCandidate();
     if (!mounted) return;
     if (found == null) {
-      // Nichts im Download-Ordner gefunden (z.B. nach Reinstall ohne
-      // MANAGE_EXTERNAL_STORAGE) → SAF-Ordnerwahl anbieten.
+      // Nichts im Download-Ordner gefunden — auf Android 11+ der Normalfall,
+      // seit MANAGE_EXTERNAL_STORAGE nicht mehr deklariert ist → SAF-
+      // Ordnerwahl anbieten.
       await _offerSafRestore();
       return;
     }
@@ -492,7 +493,9 @@ class _RootSwitcherState extends ConsumerState<_RootSwitcher> {
   /// Restore über den SAF-Backup-Ordner: der Nutzer wählt den Ordner, in den
   /// er beim ersten Start gesichert hat, erneut aus — wir lesen die
   /// `autosave.fgsave` daraus. Greift nach Reinstall, wenn der Download-Scan
-  /// nichts findet (keine MANAGE_EXTERNAL_STORAGE-Berechtigung).
+  /// nichts findet — auf Android 11+ also praktisch immer. Auch der Weg für
+  /// Alt-Stände: wer früher nach `Download/Finanzgame/` gesichert hat, wählt
+  /// hier genau diesen Ordner und bekommt seine Sicherung zurück.
   Future<void> _offerSafRestore() async {
     if (!mounted) return;
     final yes = await showDialog<bool>(

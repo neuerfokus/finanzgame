@@ -687,20 +687,14 @@ class SaveExportService {
     );
   }
 
-  /// Fragt MANAGE_EXTERNAL_STORAGE-Permission. Liefert true wenn
-  /// gewährt. Kein Prompt-Spam — gibt false ohne Re-Request wenn
-  /// permanent denied.
-  Future<bool> ensureStoragePermission() async {
-    if (!Platform.isAndroid) return false;
-    final status = await Permission.manageExternalStorage.status;
-    if (status.isGranted) return true;
-    if (status.isPermanentlyDenied) return false;
-    final result = await Permission.manageExternalStorage.request();
-    return result.isGranted;
-  }
-
-  /// Reiner Status-Check OHNE Request (für die Anzeige "Auto-Sicherung
-  /// AN/AUS" in Onboarding + Settings). Kein Settings-Screen-Aufruf.
+  /// Reiner Status-Check OHNE Request.
+  ///
+  /// Seit die App MANAGE_EXTERNAL_STORAGE nicht mehr deklariert, kann das auf
+  /// Android 11+ nur noch `false` liefern. Übrig bleibt genau ein Zweck: auf
+  /// Alt-Installationen, die die Berechtigung früher einmal erteilt haben,
+  /// darf der Legacy-Schreibpfad in [writeAutoSave] weiterlaufen, statt deren
+  /// gewohnte Sicherung kommentarlos einzustellen. Für Neuinstallationen ist
+  /// der SAF-Ordner der einzige Weg — und der braucht das hier nicht.
   Future<bool> hasStoragePermission() async {
     if (!Platform.isAndroid) return false;
     try {
@@ -712,12 +706,14 @@ class SaveExportService {
 
   /// Fire-and-forget ZIP-Bündel.
   ///
-  /// **Bevorzugt** den SAF-Ordner [safFolderUri] (vom Nutzer gewählt → keine
-  /// MANAGE_EXTERNAL_STORAGE-Berechtigung nötig). Ist keiner gesetzt oder das
-  /// SAF-Schreiben scheitert, fällt es auf den Legacy-Pfad
-  /// `Download/Finanzgame/` zurück (braucht MANAGE_EXTERNAL_STORAGE).
+  /// Der SAF-Ordner [safFolderUri] ist der reguläre Weg — und seit die App
+  /// MANAGE_EXTERNAL_STORAGE nicht mehr deklariert, auf Android 11+ der
+  /// einzige. Der Legacy-Pfad `Download/Finanzgame/` bleibt nur noch als
+  /// Rückfall für Alt-Installationen stehen, die die Berechtigung früher
+  /// einmal erteilt haben; dort schreibt er weiter wie gewohnt.
   ///
-  /// Silent failure wenn weder SAF-Ordner noch Legacy-Permission verfügbar.
+  /// Silent failure, wenn weder SAF-Ordner noch Alt-Berechtigung greifen —
+  /// der Aufrufer feuert fire-and-forget nach jedem Schlafen.
   Future<bool> writeAutoSave({String? safFolderUri, AppDatabase? live}) async {
     File? snapshot;
     try {
@@ -807,14 +803,12 @@ class SaveExportService {
   ///
   /// Pickt über alle Kandidaten den mit der jüngsten `lastModified`.
   ///
-  /// Fragt die Storage-Permission NICHT an: dieser Scan läuft beim ersten
-  /// App-Start noch vor jedem Spielinhalt, und ein
-  /// `manageExternalStorage.request()` schickt den Nutzer auf Android 11+ in
-  /// die System-Einstellungen („Zugriff auf alle Dateien") — als Erstkontakt
-  /// mit der App unzumutbar. Ohne Berechtigung findet der Scan eben nichts;
-  /// den Reinstall-Fall deckt dann das SAF-Ordner-Restore-Angebot ab. Ein
-  /// Request passiert nur noch in ausdrücklichen Nutzer-Aktionen (Onboarding-
-  /// Angebot, Settings-Buttons).
+  /// Fragt die Storage-Permission NICHT an — inzwischen tut das nirgends mehr
+  /// etwas: MANAGE_EXTERNAL_STORAGE ist nicht mehr deklariert. Auf Android 11+
+  /// findet dieser Scan deshalb regulär nichts und der Reinstall-Fall läuft
+  /// über das SAF-Ordner-Restore-Angebot (`_offerSafRestore` in main.dart).
+  /// Auf Android ≤ 10 greift weiterhin das Legacy-Storage-Flag, dort findet er
+  /// Alt-Sicherungen wie bisher.
   Future<({File file, DateTime modified})?> findAnyRestoreCandidate() async {
     try {
       if (!Platform.isAndroid) return null;

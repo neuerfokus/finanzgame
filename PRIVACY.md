@@ -45,19 +45,22 @@ Nichts davon verlässt das Gerät, außer du gibst es selbst weiter (siehe unten
 - **Speicherzugriff**: um deine Sicherungsdatei in den von dir gewählten Ordner
   zu schreiben und wieder zu lesen.
 
-  Die App fordert dafür „**Zugriff auf alle Dateien**"
-  (`MANAGE_EXTERNAL_STORAGE`) an. Das ist eine weitreichende Berechtigung, und
-  du sollst wissen, warum sie dasteht: sie ist der **Rückfallweg** für ältere
-  Installationen. Der reguläre Weg ist seit Version 1.10.0+172 der
-  System-Ordnerwähler — du suchst einmal einen Ordner aus, und die App darf
-  genau dort schreiben, sonst nirgends. Wer diesen Weg nutzt, für den bleibt
-  die Berechtigung ungenutzt; du kannst sie in den Android-Einstellungen
-  verweigern, ohne dass die Sicherung aufhört zu funktionieren.
+  Der Weg dorthin ist seit Version 1.10.0+172 der System-Ordnerwähler: Du
+  suchst einmal einen Ordner aus, und die App darf genau dort schreiben, sonst
+  nirgends.
 
-  Sie soll verschwinden, sobald der Rückfallweg nicht mehr gebraucht wird.
-- **Deine Sicherungsdatei ist nicht verschlüsselt.** Nutzt du den alten Weg,
-  landet sie in `Download/Finanzgame/` — dort kann jede App mit
-  Datei-Zugriff sie lesen. Darin stehen dein Spielername, dein Geburtsjahr
+  „**Zugriff auf alle Dateien**" (`MANAGE_EXTERNAL_STORAGE`) fordert die App
+  **nicht mehr an** — die Berechtigung wurde am 11.09.2026 entfernt. Sie stand
+  bis dahin als Rückfallweg für ältere Installationen im Manifest, verbunden
+  mit dem Versprechen, dass sie verschwindet, sobald sie nicht mehr gebraucht
+  wird. Eine Prüfung ergab, dass die App sie ohnehin längst nicht mehr
+  angefragt hatte; damit ist das Versprechen eingelöst. Wer eine alte Sicherung
+  aus `Download/Finanzgame/` zurückholen möchte, wählt genau diesen Ordner im
+  System-Ordnerwähler aus — die App findet die Datei dort unter ihrem gewohnten
+  Namen.
+- **Deine Sicherungsdatei ist nicht verschlüsselt.** Liegt sie noch aus einer
+  älteren Version in `Download/Finanzgame/`, kann jede App mit Datei-Zugriff
+  sie lesen. Darin stehen dein Spielername, dein Geburtsjahr
   (falls eingegeben) und die Bilder, die du für deine Wunschliste ausgesucht
   hast. Wähle einen eigenen Ordner, wenn dir das wichtig ist.
 - **Fotos**: nur, wenn du ein Bild für deine Wunschliste aussuchst.
@@ -117,16 +120,18 @@ INTERNET permission at all**, so Android prevents it from opening any network
 connection; the only way out is a link you deliberately tap, which opens your
 browser.
 
-The app does declare "**All files access**" (`MANAGE_EXTERNAL_STORAGE`). That
-is a broad permission and you should know why it is there: it is the
-**fallback path** for older installations. Since version 1.10.0+172 the
-regular path is the system folder picker — you pick a folder once, and the app
-may write there and nowhere else. If you use that path the permission stays
-unused, and you can deny it in Android's settings without breaking backups. It
-is meant to go away once the fallback is no longer needed.
+The app **no longer declares** "All files access" (`MANAGE_EXTERNAL_STORAGE`) —
+it was removed on 11 September 2026. Until then it sat in the manifest as a
+fallback path for older installations, with the promise that it would go away
+once it was no longer needed; a review found the app had long stopped
+requesting it, so the promise is now kept. Since version 1.10.0+172 the regular
+path is the system folder picker — you pick a folder once, and the app may
+write there and nowhere else. To recover an older backup from
+`Download/Finanzgame/`, pick that folder in the system picker and the app will
+find the file there.
 
-**Your backup file is not encrypted.** On the old path it lands in
-`Download/Finanzgame/`, where any app with file access can read it. It
+**Your backup file is not encrypted.** If an older version left it in
+`Download/Finanzgame/`, any app with file access can read it. It
 contains your player name, your birth year (if you entered one) and the images
 you picked for your wish list. Pick your own folder if that matters to you.
 

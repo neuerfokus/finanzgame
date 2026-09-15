@@ -548,8 +548,9 @@ class SettingsTable extends Table {
       boolean().withDefault(const Constant(false))();
 
   /// Drift v37: Storage-Access-Framework Tree-URI des vom Nutzer gewählten
-  /// Backup-Ordners. Null = kein Ordner gewählt (dann Legacy-Pfad über
-  /// MANAGE_EXTERNAL_STORAGE). Überlebt App-Neustart, NICHT Deinstall (die
+  /// Backup-Ordners. Null = kein Ordner gewählt — dann schreibt der Auto-Save
+  /// auf Android 11+ nirgendwohin mehr, seit MANAGE_EXTERNAL_STORAGE nicht
+  /// mehr deklariert ist. Überlebt App-Neustart, NICHT Deinstall (die
   /// DB wird mit deinstalliert) — nach Reinstall wählt der Nutzer neu.
   TextColumn get backupFolderUri => text().nullable()();
 

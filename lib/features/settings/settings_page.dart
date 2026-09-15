@@ -646,20 +646,22 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           '${two(m.day)}.${two(m.month)}.${m.year} ${two(m.hour)}:'
           '${two(m.minute)}';
     }
-    // Legacy-Pfad: MANAGE_EXTERNAL_STORAGE.
-    final granted = await svc.hasStoragePermission();
-    if (!granted) {
+    // Kein SAF-Ordner gewählt. Statt den Permission-Status abzufragen (die
+    // Berechtigung wird nicht mehr deklariert, die Antwort wäre auf Android
+    // 11+ immer „nein") direkt nachsehen, ob aus einer älteren Version noch
+    // eine Sicherung in Download/Finanzgame/ liegt. Die Datei ist die
+    // ehrlichere Auskunft als eine Berechtigung, die niemand mehr anfragt.
+    final found = await svc.findExternalAutoSave();
+    if (found == null) {
       return '⚠ Kein Backup-Ordner gewählt. Tippe „Backup-Ordner wählen" '
           '— so überlebt dein Spielstand eine Neu-Installation.';
     }
-    final found = await svc.findExternalAutoSave();
-    if (found == null) {
-      return 'Alt-Berechtigung erteilt ✓ — noch keine Sicherung.';
-    }
+    // Gefunden, aber sie veraltet: ohne Ordner schreibt der Auto-Save nicht
+    // mehr dorthin. Deshalb Warnzeichen statt Haken.
     final m = found.modified;
-    return 'Alt-Berechtigung erteilt ✓ — letzte Sicherung: '
-        '${two(m.day)}.${two(m.month)}.${m.year} ${two(m.hour)}:'
-        '${two(m.minute)}';
+    return '⚠ Alte Sicherung gefunden (${two(m.day)}.${two(m.month)}.'
+        '${m.year} ${two(m.hour)}:${two(m.minute)}) — wähle einen '
+        'Backup-Ordner, damit sie wieder aktualisiert wird.';
   }
 
   /// Teilt Diagnose-Dateien (kaputte .corrupt.bak + aktuelle DB + Auto-Save)

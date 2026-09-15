@@ -5,7 +5,16 @@
         android:maxSdkVersion="29" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <!-- MANAGE_EXTERNAL_STORAGE ist bewusst NICHT deklariert. Die Sicherung
+         laeuft ueber das Storage Access Framework (MainActivity.kt, Channel
+         finanzgame/saf): der Nutzer waehlt einmal einen Ordner, wir halten
+         eine persistente URI-Berechtigung. Das reicht fuer Schreiben, Lesen
+         und Deinstall-Ueberleben -- "Zugriff auf alle Dateien" brauchte es
+         nie, angefragt hat es zuletzt niemand mehr (der Request-Pfad war
+         toter Code), und in einer Kinder-App ist es die denkbar breiteste
+         Berechtigung. Bestandsstaende in Download/Finanzgame/ bleiben
+         erreichbar: im SAF-Picker genau diesen Ordner waehlen, readBackup
+         findet die autosave.fgsave dort unter ihrem gewohnten Namen. -->
     <!-- allowBackup=false: Google Auto-Backup wuerde eine (evtl. veraltete)
          Cloud-DB nach Reinstall wiederherstellen und damit den eigenen
          SAF/Download-Restore-Flow umgehen (onboardingComplete=true =>

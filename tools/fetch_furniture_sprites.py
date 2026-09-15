@@ -8,6 +8,7 @@ zu Bezeichnung passend.
 """
 import os
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -65,7 +66,12 @@ ITEMS = [
     ('lamp_starlight', '✨'),
 ]
 
-BASE = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/72x72'
+# Pinned, not @latest: this script writes files that ship inside the app, so
+# an unpinned CDN tag would let a re-run silently change shipped assets.
+# v14.0.2 is the final Twemoji release (repo archived) and is what @latest
+# resolves to today — pinning changes no bytes now, only future surprises.
+BASE = 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72'
+ALLOWED_HOST = 'cdn.jsdelivr.net'
 
 
 def emoji_to_codepoint(emoji: str) -> str:
@@ -75,6 +81,18 @@ def emoji_to_codepoint(emoji: str) -> str:
     if len(cps) > 1:
         cps = [c for c in cps if c != 'fe0f']
     return '-'.join(cps)
+
+
+def check_url(url: str) -> None:
+    """Refuse anything that left the pinned CDN.
+
+    urllib follows file:// and plain http:// without complaint. ITEMS is
+    static today, but a mistyped BASE or a stray codepoint should abort the
+    run rather than write whatever came back into assets/.
+    """
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme != 'https' or parsed.netloc != ALLOWED_HOST:
+        raise ValueError(f'refusing non-allowlisted URL: {url}')
 
 
 def main():
@@ -98,6 +116,7 @@ def main():
     for item_id, emoji in ITEMS:
         cp = emoji_to_codepoint(emoji)
         url = f'{BASE}/{cp}.png'
+        check_url(url)
         dst = out_dir / f'{item_id}.png'
         if dst.exists() and not force:
             print(f'  skip {item_id} (exists)')

@@ -47,11 +47,11 @@ Pro Asset: Pfad + Quelle + Lizenz + Datum. Pflicht beim Add.
 
 ## images/furniture/
 
-42 Twemoji-PNGs (CC-BY 4.0), 72×72 px, gefetcht via `tools/fetch_furniture_sprites.py` von jsDelivr-CDN. Pro FurnitureItem.id eine PNG.
+42 Twemoji-PNGs (CC-BY 4.0), 72×72 px, gefetcht via `tools/fetch_furniture_sprites.py` von jsDelivr-CDN. Pro FurnitureItem.id eine PNG. Das Skript ist auf `twemoji@14.0.2` gepinnt (letzter Release, Repo archiviert) — nie `@latest`, weil ausgeliefert wird, was es herunterlaedt.
 
 | Pfad | Quelle | Lizenz | Datum |
 |---|---|---|---|
-| assets/images/furniture/*.png (alle 42) | Twemoji v15+ via jsDelivr CDN | CC-BY 4.0 (Twitter) | 2026-05-24 |
+| assets/images/furniture/*.png (alle 42) | Twemoji v14.0.2 via jsDelivr CDN | CC-BY 4.0 (Twitter) | 2026-05-24 |
 
 ## quests/ (eigene Inhalte)
 

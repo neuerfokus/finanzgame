@@ -34,8 +34,8 @@ Repo: https://github.com/neuerfokus/finanzgame.git
 
 Builds:
   - versionName: 1.10.0
-    versionCode: 188
-    commit: v1.10.0+188
+    versionCode: 189
+    commit: v1.10.0+189
     # KEIN `subdir`: fdroidserver fuehrt die Build-Schritte darin aus, und
     # `pubspec.yaml` liegt im Wurzelverzeichnis. Mit `subdir: android/app`
     # lief `flutter pub get` in einem Verzeichnis ohne pubspec.yaml und der
@@ -59,7 +59,7 @@ Builds:
 AutoUpdateMode: Version v%v+%c
 UpdateCheckMode: Tags
 CurrentVersion: 1.10.0
-CurrentVersionCode: 188
+CurrentVersionCode: 189
 
 # Hinweise zum MR
 #

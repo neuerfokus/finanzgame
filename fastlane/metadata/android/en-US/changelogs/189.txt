@@ -1,0 +1,9 @@
+First public version.
+
+• Tips now go through Ko-fi instead of a direct PayPal link. Nothing else
+  changes: voluntary, with nothing in return, unlocking nothing and changing
+  nothing in the game.
+• The birth year can be filled in later without solving the parent maths
+  task first. Anyone who skipped the question at first launch previously had
+  to solve it twice — once to fill it in and once before tipping. Changing an
+  answer that is already there stays protected.

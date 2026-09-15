@@ -1,0 +1,9 @@
+Erste öffentliche Fassung.
+
+• Das Trinkgeld läuft über Ko-fi statt über einen direkten PayPal-Link. An der
+  Sache ändert sich nichts: freiwillig, ohne Gegenleistung, es schaltet nichts
+  frei und ändert nichts im Spiel.
+• Das Geburtsjahr lässt sich nachtragen, ohne vorher die Eltern-Rechenaufgabe
+  zu lösen. Wer die Frage beim ersten Start übersprungen hat, musste sie sonst
+  zweimal lösen — einmal zum Nachtragen und einmal vor dem Trinkgeld. Das
+  Ändern einer bereits gemachten Angabe bleibt geschützt.

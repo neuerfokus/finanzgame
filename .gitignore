@@ -61,3 +61,7 @@ test/**/failures/
 
 # Geraete-Screenshots der adb-Werkzeuge (koennen Personenbezug tragen).
 tools/out/
+
+# Projektgedaechtnis und interne Sicherheitsberichte: lokal ja, oeffentlich nein.
+CLAUDE.md
+Scan/

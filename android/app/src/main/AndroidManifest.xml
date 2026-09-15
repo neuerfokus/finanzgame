@@ -9,7 +9,7 @@
          laeuft ueber das Storage Access Framework (MainActivity.kt, Channel
          finanzgame/saf): der Nutzer waehlt einmal einen Ordner, wir halten
          eine persistente URI-Berechtigung. Das reicht fuer Schreiben, Lesen
-         und Deinstall-Ueberleben -- "Zugriff auf alle Dateien" brauchte es
+         und Deinstall-Ueberleben; "Zugriff auf alle Dateien" brauchte es
          nie, angefragt hat es zuletzt niemand mehr (der Request-Pfad war
          toter Code), und in einer Kinder-App ist es die denkbar breiteste
          Berechtigung. Bestandsstaende in Download/Finanzgame/ bleiben

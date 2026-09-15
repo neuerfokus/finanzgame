@@ -25,8 +25,13 @@
   .\tools\test.ps1 --update-goldens test/ui/widgets/pixel_widgets_golden_test.dart
 #>
 param(
+  # Kein Positionsargument: sonst bindet der erste freie Wert hier an, und
+  # `.	ools	est.ps1 test/android` scheitert mit einem Konvertierungsfehler
+  # nach [int], statt den Pfad durchzureichen.
+  [Parameter(ValueFromPipeline = $false)]
+  [ValidateRange(1, 64)]
   [int]$Jobs = 4,
-  [Parameter(ValueFromRemainingArguments = $true)]
+  [Parameter(Position = 0, ValueFromRemainingArguments = $true)]
   [string[]]$Args
 )
 

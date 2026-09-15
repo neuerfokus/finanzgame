@@ -12,10 +12,10 @@ seinem eigenen Schlüssel. Eine F-Droid-Installation lässt sich nicht über
 eine bestehende Sideload-Installation drüberinstallieren und umgekehrt — wer
 wechselt, exportiert vorher den Spielstand und importiert ihn danach.
 
-Der Play Store ist bewusst noch nicht vorbereitet: `MANAGE_EXTERNAL_STORAGE`
-ist dort für ein Lernspiel policy-widrig, Privatkonten brauchen zwölf Tester
-über vierzehn Tage, und der Klarname stünde im Eintrag. Das braucht eine
-eigene Spec.
+Der Play Store ist bewusst noch nicht vorbereitet: Privatkonten brauchen
+zwölf Tester über vierzehn Tage, und der Klarname stünde im Eintrag. Das
+braucht eine eigene Spec. `MANAGE_EXTERNAL_STORAGE` war der dritte Grund und
+ist seit 1.10.0+188 keiner mehr — die Berechtigung ist entfernt.
 
 ## Vor einer öffentlichen Veröffentlichung
 

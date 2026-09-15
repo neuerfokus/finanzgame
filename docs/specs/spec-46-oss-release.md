@@ -1,7 +1,7 @@
 # spec-46 — Open-Source-Release (GitHub + F-Droid)
 
 Ziel: Finanzgame öffentlich als freie Software veröffentlichen. Play Store
-später (eigene Spec) — dort blockiert `MANAGE_EXTERNAL_STORAGE`.
+später (eigene Spec).
 
 ## Entscheidungen (User, 2026-08-23)
 
@@ -62,9 +62,10 @@ braucht ohnehin nur Tags ab heute.
 - [ ] Merge Request an `fdroiddata` (nach dem ersten öffentlichen Tag)
 
 ## Nicht in dieser Spec (Play, später)
-`MANAGE_EXTERNAL_STORAGE` entfernen (SAF-only), `.aab` statt APK,
-Adaptive Icon, Store-Grafiken, Data-Safety, IARC, 12-Tester-Regel,
-Klarname im Store-Eintrag.
+`.aab` statt APK, Store-Grafiken, Data-Safety, IARC, 12-Tester-Regel,
+Klarname im Store-Eintrag. `MANAGE_EXTERNAL_STORAGE` entfernen (SAF-only)
+und das adaptive Icon stehen hier nur noch der Vollständigkeit halber —
+beides ist inzwischen erledigt.
 
 ## Abnahme
 `flutter test` grün · `flutter analyze --fatal-infos` 0 · Über-Seite
@@ -138,3 +139,31 @@ am Gerät verifiziert. Für dieses Spec relevant:
 
 Unverändert offen: Repo auf öffentlich stellen (Entscheidung des Users),
 danach der Merge Request an fdroiddata.
+
+## Stand 2026-09-15
+
+Das öffentliche Repo steht jetzt auf **1.10.0+188**. Der Anlass war die
+Nachbereitung des Sicherheits-Scans vom 11.09.2026:
+`MANAGE_EXTERNAL_STORAGE` ist aus dem Manifest entfernt, der Twemoji-Download
+auf `v14.0.2` gepinnt. Damit zeigte das F-Droid-Rezept auf einen Tag
+(`v1.10.0+187`), der beides noch enthielt — `commit`, `versionCode` und
+`CurrentVersionCode` stehen deshalb auf 188, Änderungsprotokolle in beiden
+Sprachen liegen bei.
+
+Zum Arbeitsweg: der Export läuft **nicht** mehr über
+`tools/prepare_public_repo.ps1`. Das Skript ist ein Bootstrap — es löscht das
+Ziel und legt ein frisches Repo mit einem Initial-Commit an. Ein zweiter Lauf
+würde die gepushte Historie samt Tags wegwerfen. Seit dem ersten Push ist der
+Weg: im privaten Repo entwickeln, die veröffentlichungsfähigen Commits in den
+Release-Ordner übernehmen, dort normal committen.
+
+`CLAUDE.md` und `Scan/` waren versehentlich in den Release-Ordner geraten und
+sind wieder heraus (nicht getrackt, in `.gitignore`); in der Historie tauchen
+sie nie auf, weil die betroffenen Commits vor dem Push neu geschnitten wurden.
+
+Vor dem Tag geprüft: 731 Tests grün, `flutter analyze --fatal-infos` ohne
+Befund, `license_check.py` 18 exakt / 107 bulk / 0 unbekannt / 0 verwaist.
+
+Unverändert offen: Release-Build ohne `key.properties` verifizieren, Repo auf
+öffentlich stellen (Entscheidung des Users), danach der Merge Request an
+fdroiddata.

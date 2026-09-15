@@ -1,0 +1,10 @@
+A clean-up round following a security scan.
+
+• The "All files access" permission is gone. It was still in the manifest
+  but no path in the app had requested it for a long time — backups run
+  entirely through the system folder picker. To recover an older backup
+  from Download/Finanzgame/, simply pick that folder there.
+• The status line in the settings now tells the truth: it checks whether
+  the backup file is actually there instead of reporting a permission.
+• The emoji images in the game are pinned to a fixed version rather than
+  the latest one — what ships stays the same.

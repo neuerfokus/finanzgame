@@ -1,0 +1,11 @@
+Aufräum-Runde nach einem Sicherheits-Scan.
+
+• Die Berechtigung „Zugriff auf alle Dateien" ist weg. Sie stand noch im
+  Manifest, wurde aber längst von keinem Weg der App mehr angefragt — die
+  Sicherung läuft vollständig über den System-Ordnerwähler. Wer eine alte
+  Sicherung aus Download/Finanzgame/ zurückholen will, wählt dort einfach
+  diesen Ordner aus.
+• Die Statuszeile in den Einstellungen sagt jetzt die Wahrheit: Sie prüft,
+  ob die Sicherungsdatei wirklich da ist, statt eine Berechtigung zu melden.
+• Die Emoji-Bilder im Spiel hängen an einer festen Version, nicht mehr am
+  jeweils neuesten Stand — was ausgeliefert wird, bleibt gleich.

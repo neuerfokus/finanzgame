@@ -2,7 +2,7 @@
 
 ## Goal
 
-Sohn-Tag-2-Feedback abarbeiten:
+Test-Tag-2-Feedback abarbeiten:
 1. Musik mit echtem Lautstärke-Slider, nicht nur on/off
 2. Schrift gut lesbar (Font + Größe)
 3. Karte ansehnlich (Sprites + Wasser)

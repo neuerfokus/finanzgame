@@ -9,7 +9,7 @@ Drei fehlende Springboard-Features:
 
 ## Why
 
-Sohn-Feedback: „Bank und Zimmer geht noch nicht. Auch die XP werden
+Test-Feedback: „Bank und Zimmer geht noch nicht. Auch die XP werden
 nicht gutgeschrieben." Springboard-Icons sind seit Sprint 3 SnackBar-
 Stubs. XP wird im MoneyHeader angezeigt aber bleibt auf 0.
 
@@ -132,6 +132,6 @@ Schema-Version bleibt 1 (Pre-Release-Wipe OK).
 
 ## Done When
 
-Sohn tippt Bank → Konto-Übersicht + Transfer. Tippt Zimmer → Avatar +
+Testspieler tippt Bank → Konto-Übersicht + Transfer. Tippt Zimmer → Avatar +
 Trophäen-Wand mit erworbenen Artikeln. XP zählt nach Quests, Ernte,
 Quiz.

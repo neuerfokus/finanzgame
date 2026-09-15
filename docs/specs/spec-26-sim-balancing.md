@@ -6,7 +6,7 @@ Realistische Werte + 80-Jahr-Horizont. Crypto auf 2 Klassen reduzieren. Asset-Na
 
 ## Why
 
-Sohn-Feedback: 0,1%/Tag = absurd. Crypto-Liste zu lang. Tickers nichtssagend. Platinum sieht aus wie Gold. Rot/Blau auf Charts = unintuitiv.
+Test-Feedback: 0,1%/Tag = absurd. Crypto-Liste zu lang. Tickers nichtssagend. Platinum sieht aus wie Gold. Rot/Blau auf Charts = unintuitiv.
 
 ## Non-Goals
 

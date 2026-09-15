@@ -4,8 +4,8 @@ Ein Lernspiel über Geld für Jugendliche ab etwa 13 Jahren. Taschengeld
 einteilen, sparen, anlegen, abwarten — und sehen, was daraus wird. Flutter +
 Flame, Android, komplett offline.
 
-Entstanden als Vater-Kind-Projekt und über viele Testrunden mit echten
-Jugendlichen gewachsen.
+Entstanden als privates Projekt und über viele Testrunden mit einem
+jugendlichen Testspieler gewachsen.
 
 > **Das ist eine Simulation, keine Anlageberatung.** Alle Kurse, Firmen,
 > Renditen und Preise im Spiel sind erfunden. Echtes Geld verhält sich anders.
@@ -106,7 +106,7 @@ Siehe [CONTRIBUTING.md](CONTRIBUTING.md). Fehler und Ideen gern als Issue.
 
 Das Spiel ist kostenlos, werbefrei und ohne In-App-Käufe — und bleibt es. Wer
 die Weiterentwicklung freiwillig unterstützen möchte, kann ein Trinkgeld
-geben: [paypal.me/SLeipziger](https://www.paypal.me/SLeipziger)
+geben: [ko-fi.com/finanzgame](https://ko-fi.com/finanzgame)
 
 Ohne Gegenleistung. Es schaltet nichts frei, ändert nichts im Spiel, und es
 gibt kein Abzeichen dafür — sonst wäre es ein Kauf digitaler Inhalte statt

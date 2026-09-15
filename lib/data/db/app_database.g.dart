@@ -7859,7 +7859,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
   /// been shown + dismissed. Default false = show on first open.
   final bool zeitreiseTutorialSeen;
 
-  /// Spec-23: music volume in percent (0..100). Default 25 — Sohn-Tag-2
+  /// Spec-23: music volume in percent (0..100). Default 25 — Test-Tag-2
   /// feedback: music at full volume is "nervig". Applied to the
   /// AudioPlayer at startMusic + on slider change.
   final int musicVolume;

@@ -65,7 +65,7 @@ Future<void> main() async {
   // Spec-23: respect persisted music volume before starting playback so
   // the loop never blasts at default volume between snapshot load + first
   // user interaction.
-  // spec-37: Musik komplett entfernt (Sohn-Feedback: nervig). Nur SFX
+  // spec-37: Musik komplett entfernt (Test-Feedback: nervig). Nur SFX
   // bleiben — Coin/Harvest/Sleep/Crash/UI-Tap.
   SoundService.instance.setMusicVolume(0);
 

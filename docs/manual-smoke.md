@@ -1,6 +1,6 @@
 # Manual Smoke Test — Finanzgame (10 Min)
 
-Vor Versand der APK an den Sohn diesen Pfad einmal durchspielen. Crash
+Vor Versand der APK an den Testspieler diesen Pfad einmal durchspielen. Crash
 oder unerwartetes Verhalten = Release stoppen.
 
 ## Voraussetzung

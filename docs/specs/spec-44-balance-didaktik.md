@@ -246,7 +246,7 @@ Neue DayEvent-Varianten (Freezed sealed, `day_event.dart`):
 
 ## Anhang — Balancing-Referenztabelle (Startwerte)
 
-> **Alle Werte sind Startwerte zum Spieltesten mit dem Sohn**, keine finalen Konstanten. Sie sind so gewählt, dass die drei Leitprinzipien aufgehen: Passiv schlägt Aktiv im Lategame, Edelmetalle liegen unter dem breiten Index, Pflanzen plateauen. Diesen ganzen Anhang als Kommentar-Block in `game_balance.dart` spiegeln.
+> **Alle Werte sind Startwerte zum Spieltesten mit dem Testspieler**, keine finalen Konstanten. Sie sind so gewählt, dass die drei Leitprinzipien aufgehen: Passiv schlägt Aktiv im Lategame, Edelmetalle liegen unter dem breiten Index, Pflanzen plateauen. Diesen ganzen Anhang als Kommentar-Block in `game_balance.dart` spiegeln.
 
 ### A.1 — Ziel-Renditen pro Asset-Klasse
 
@@ -344,7 +344,7 @@ Crossover je Asset = `550 € / jahresRendite`: **ETF ~6.900 €**, Gold ~13.750
 3. `plantDailyYieldCapCents = 150` einführen + Clamp in `plant_repository.dart`.
 4. Crossover-Schwelle (~6.900 €) als Trigger-Konstante für `firstPassiveBeatActive`.
 5. Diversifikations-Vol-Dämpfung (A.4) in der Ertrags-/Markt-Auflösung.
-6. **Nach dem Spieltest mit dem Sohn nachjustieren** — diese Tabelle ist der Startpunkt, nicht das Ziel.
+6. **Nach dem Spieltest mit dem Testspieler nachjustieren** — diese Tabelle ist der Startpunkt, nicht das Ziel.
 
 ### A.7 — Sammlerwerte (Sektion F1, Startwerte)
 

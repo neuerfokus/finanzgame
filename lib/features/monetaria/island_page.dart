@@ -355,7 +355,7 @@ class _IslandPageState extends ConsumerState<IslandPage> {
     );
   }
 
-  /// 2026-06-04 (Sohn-Feedback): 🧹 räumt nur VERDORRTE Felder auf — wachsende
+  /// 2026-06-04 (Test-Feedback): 🧹 räumt nur VERDORRTE Felder auf — wachsende
   /// und reife Pflanzen bleiben stehen (vorher löschte der Button ALLES, auch
   /// laufende Ernten). Cash + XP unverändert.
   Future<void> _confirmClearWithered() async {

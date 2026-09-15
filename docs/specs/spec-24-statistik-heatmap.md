@@ -8,7 +8,7 @@ Insel-/Asset-Namen bleiben beim Wischen am Bildschirmrand fixiert
 
 ## Why
 
-Sohn-Wunsch: „Bei der Heatmap in Statistik sollte die Namen fixiert
+Test-Wunsch: „Bei der Heatmap in Statistik sollte die Namen fixiert
 sein, dass wenn man durch den Zeitplan wischt die App direkt sieht."
 
 Aktuell: keine Statistik-Seite, keine Heatmap. Zeitreise zeigt Lines.
@@ -105,7 +105,7 @@ Header/Row-Label-Layer.
 
 ## Done When
 
-Sohn tippt 📊 → sieht Heatmap aller Assets über letzte 60 Tage. Wischt
+Testspieler tippt 📊 → sieht Heatmap aller Assets über letzte 60 Tage. Wischt
 horizontal durch die Tage → Asset-Namen bleiben links sichtbar. Wischt
 vertikal → Tag-Header bleibt oben. Farben zeigen sofort, wo's gut/
 schlecht lief.

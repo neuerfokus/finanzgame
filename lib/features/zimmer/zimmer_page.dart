@@ -95,7 +95,7 @@ class ZimmerPage extends ConsumerWidget {
 }
 
 /// Welle-8 Round 24 (#10): Reihe „Echte Erfolge (von Papa)" in der
-/// Trophäenwand. Zeigt vom Vater eingetragene reale Spar-/Lern-Erfolge.
+/// Trophäenwand. Zeigt von einem Elternteil eingetragene reale Spar-/Lern-Erfolge.
 /// Versteckt sich komplett wenn keine Einträge existieren.
 class _RealMilestonesWall extends ConsumerWidget {
   const _RealMilestonesWall();

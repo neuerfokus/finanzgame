@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:finanzgame/features/settings/parent_gate.dart';
 import 'package:finanzgame/features/settings/settings_repository.dart';
 
-/// Sohn-Fund: ohne gesetzten Eltern-PIN liess sich „Eltern bestätigen"
+/// Test-Fund: ohne gesetzten Eltern-PIN liess sich „Eltern bestätigen"
 /// einfach selbst drücken — XP (bis 600 beim Sparziel, 150 pro echtem Erfolg)
 /// plus Trophäe auf Knopfdruck, beliebig oft. Der Gate verlangt jetzt einen
 /// PIN und führt, wenn keiner existiert, ins Einrichten.

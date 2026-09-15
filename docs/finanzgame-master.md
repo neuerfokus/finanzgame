@@ -39,7 +39,7 @@
 2. **Anti-Konsum-Haltung als Feature** — sonst überall „spend more"-Loops.
 3. **Offline-first, ohne Tracking, ohne PII** — quasi einzigartig im Sektor.
 4. **Deutschsprachig, kulturell verankert** — DACH-Apps pädagogisch dünn, US-Apps schlecht lokalisiert.
-5. **Vater-Sohn-Produktion** ohne Monetarisierungs-Verzerrung — emotional ehrlich.
+5. **Produktion ohne Geschäftsmodell** ohne Monetarisierungs-Verzerrung — emotional ehrlich.
 
 ---
 
@@ -133,7 +133,7 @@ Apple Developer Guidelines + UX-Collective-Best-Practices:
 
 ### C.4 Belohnungen ethisch (Self-Determination Theory)
 
-Ryan/Deci SDT: **Autonomie, Kompetenz, Verbundenheit**. Für eine Vater-Sohn-App besonders wichtig:
+Ryan/Deci SDT: **Autonomie, Kompetenz, Verbundenheit**. Für eine App für Jugendliche besonders wichtig:
 - **Variable Money-Rewards (Zogo-Gift-Cards-Modell) sind tabu** — Operant Conditioning bei Minderjährigen.
 - **XP & Badges OK**, wenn an echte Kompetenz gekoppelt („Du hast die Krise überstanden, ohne Notgroschen anzutasten").
 - **Streaks-mit-Bestrafung vermeiden** (Duolingo-Falle: introjizierte Motivation, nicht intrinsisch).
@@ -293,7 +293,7 @@ Best-Practice-Hintergrund: HumanLayer empfiehlt <300 Zeilen, gerne <60 (HumanLay
 - **Kenney.nl**: **CC0 / Public Domain**. Selbst kommerziell ohne Attribution. Erste Wahl für Tiles/UI/SFX. Offiziell auf kenney.nl/support: „Yes, all game assets on the asset pages are public domain licensed (CC0). You're free to use them, even in commercial projects."
 - **OpenGameArt.org**: Gemischt (CC0, CC-BY, CC-BY-SA, GPL). **Pro Asset prüfen.** CC-BY-SA hat Copyleft — beim privaten Projekt OK, bei späterer Veröffentlichung beachten.
 - **itch.io Asset-Packs**: Pro Pack Lizenz lesen, meist „commercial OK, no redistribution".
-- **Retro Diffusion EULA**: enthält explizit „You are not permitted to … reproduce, copy, distribute, resell or otherwise use the **Model** for any commercial purpose". Bezieht sich auf das **Modell**, nicht zwingend auf generierte Bilder — aber ambig. Für privates Vater-Sohn-Projekt unkritisch; bei Store-Release vorher mit Astropulse klären oder selbst pixeln.
+- **Retro Diffusion EULA**: enthält explizit „You are not permitted to … reproduce, copy, distribute, resell or otherwise use the **Model** for any commercial purpose". Bezieht sich auf das **Modell**, nicht zwingend auf generierte Bilder — aber ambig. Für privates privates Projekt unkritisch; bei Store-Release vorher mit Astropulse klären oder selbst pixeln.
 - **Pixel-Fonts**: m6x11 (Daniel Linssen, free for commercial), PixelOperator (Jayvee Enaguas, CC0).
 - **Faustregel:** `ASSETS.md` mit Quelle + Lizenz + Datum pro Asset. Claude Code pflegt das mit, wenn im CLAUDE.md verlinkt.
 
@@ -319,7 +319,7 @@ Best-Practice-Hintergrund: HumanLayer empfiehlt <300 Zeilen, gerne <60 (HumanLay
 
 **P9 — Sound, Game-Feel-Polish, Balancing (Woche 10–11).**
 
-**P10 — Privat-Release (Woche 11–12):** APK signieren, sideloaden auf Sohn-Phone, kein Store.
+**P10 — Privat-Release (Woche 11–12):** APK signieren, sideloaden auf Testgerät, kein Store.
 
 ### E.7 Erste 5 Claude-Code-Sprints — konkrete Beispiel-Prompts
 
@@ -381,13 +381,13 @@ Begründung: Die bestehende Architektur (Flutter, Riverpod, Drift, Freezed, Clea
 
 1. **Diese Woche:** Reiß die Echtzeit-Sim-Engine raus. Bau `GameClock` + „Schlafen"-Button + Day-Summary-Screen. Das eliminiert das +20 €-Gefühl sofort und schafft Game-Feel.
 2. **Woche 2–3:** Schreib eine knappe CLAUDE.md (max. 200 Zeilen) + `specs/`-Ordner mit den ersten 5 Sprint-Specs (jede ≤100 Zeilen). Vibe Coding wird damit deutlich ruhiger und produktiver.
-3. **Woche 3–4:** Erste echte Insel (Spar-Insel mit Elefantenfuß) mit Flame und Kenney-Assets. Sonntag deinem Sohn zeigen, direktes Feedback holen.
+3. **Woche 3–4:** Erste echte Insel (Spar-Insel mit Elefantenfuß) mit Flame und Kenney-Assets. Sonntag dem Testspieler zeigen, direktes Feedback holen.
 
 ### G.3 Top-3-Risiken
 
-1. **Scope Creep**: 8 Inseln + Zeitreise + Boote + Wetter ist *viel*. Risiko: nach 6 Monaten halbfertig. **Gegenmaßnahme:** V1 = 2 Inseln + Tageszyklus + Quest-Runner. Veröffentlichung an den Sohn = MVP.
+1. **Scope Creep**: 8 Inseln + Zeitreise + Boote + Wetter ist *viel*. Risiko: nach 6 Monaten halbfertig. **Gegenmaßnahme:** V1 = 2 Inseln + Tageszyklus + Quest-Runner. Veröffentlichung an den Testspieler = MVP.
 2. **Art-Bottleneck**: Du bist kein Pixel-Artist. **Gegenmaßnahme:** Kenney CC0 als Fundament, eigenes Pixeln nur für Schlüssel-Inseln, Retro Diffusion nur als Inspiration nicht als End-Asset.
-3. **Pädagogische Übertreibung**: „Lehre" zu sehr im Vordergrund → Sohn merkt Schule → spielt nicht mehr. **Gegenmaßnahme:** Story und Quest als Haupttreiber, „Wiki-Seiten" als optionale Tiefe.
+3. **Pädagogische Übertreibung**: „Lehre" zu sehr im Vordergrund → Testspieler merkt Schule → spielt nicht mehr. **Gegenmaßnahme:** Story und Quest als Haupttreiber, „Wiki-Seiten" als optionale Tiefe.
 
 ### G.4 Refactor vs. Neustart — Pro/Contra
 
@@ -398,7 +398,7 @@ Begründung: Die bestehende Architektur (Flutter, Riverpod, Drift, Freezed, Clea
 | Tech-Debt-Risiko | Mittel (alte Annahmen leben mit) | Niedrig (Greenfield) |
 | Bestehende Tests | Bleiben als Anker | Verloren |
 | Claude-Code-Effizienz | Etwas schwieriger (mehr Kontext) | Einfacher (kleines Repo) |
-| Sohn sieht Fortschritt | Schnell | Spät |
+| Testspieler sieht Fortschritt | Schnell | Spät |
 | Motivation für dich | Hoch (sichtbare Verbesserung) | Risiko Frust („noch nicht spielbar") |
 | Architektur-Sauberkeit | 80 % erreichbar | 100 % möglich |
 
@@ -413,7 +413,7 @@ Begründung: Die bestehende Architektur (Flutter, Riverpod, Drift, Freezed, Clea
 - **Flame Engine** ist 2D-only und hat keinen visuellen Scene-Editor. Für 2D-Pixel-Sim ideal; falls je 3D nötig, wäre Wechsel auf Unity/Godot nötig.
 - **Retro Diffusion EULA** ist ambig formuliert; bei Store-Release vorher mit Astropulse klären.
 - **Sound-Lizenzen:** Bei Musik besonders aufmerksam — viele YouTube-Music-Libraries sind NICHT für App-Embedding lizenziert.
-- **Sim-Balancing:** Pflanzenwerte oben sind Startpunkte, keine finalen Zahlen — iterieren mit dem Sohn als Testpilot.
+- **Sim-Balancing:** Pflanzenwerte oben sind Startpunkte, keine finalen Zahlen — iterieren mit dem Testspieler.
 - **Bankenverband-Studie** ist methodisch valide (Kantar, n=700), aber interessengeleitet interpretiert — als Anhaltspunkt für Wissenslücken nutzen, nicht als Beleg für eine spezifische Lösungspolitik.
 
 ---

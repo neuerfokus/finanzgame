@@ -12,7 +12,7 @@ Future<void> _flush() async {
 }
 
 void main() {
-  // Sohn-Report: „Tagesfrage wiederholt sich oft." Root cause: der Spaced-Rep-
+  // Test-Report: „Tagesfrage wiederholt sich oft." Root cause: der Spaced-Rep-
   // Review-Pfad ist topic-gelockt. Bei einem dünnen Topic (1-2 Fragen) waren
   // nach 1-2 Tagen alle gesehen — der alte Picker fiel dann auf den VOLLEN
   // Topic-Pool zurück (seen-Set ignoriert) → dieselbe Frage Tag für Tag.

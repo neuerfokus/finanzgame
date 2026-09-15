@@ -10,7 +10,7 @@ Zwei neue Asset-Klassen mit eigenen Insel-Mechaniken:
 
 ## Why
 
-Sohn-Feedback: „Es fehlt als Assets auch noch Bitcoin, Gold usw.? …
+Test-Feedback: „Es fehlt als Assets auch noch Bitcoin, Gold usw.? …
 Bitcoin Vulkan, Edelsteine, Gold und Edelmetalle extra Insel?"
 
 Beide Klassen sind im Real-Life finanzbildungs-relevant: Krypto = extreme
@@ -117,6 +117,6 @@ Catalog-Definitionen in `lib/domain/crypto/crypto.dart` +
 
 ## Done When
 
-Sohn betritt Vulkan → sieht 3 Krypto-Coins mit dramatischen Preis-
+Testspieler betritt Vulkan → sieht 3 Krypto-Coins mit dramatischen Preis-
 Schwankungen. Inflation steigt → Gold-Preis steigt mit. Crash-Tag →
 Crypto bricht massiv ein.

@@ -2,7 +2,7 @@
 
 **Stand:** HEAD `85c6a6b` · APK 1.10.0+35 auf Mi A3 · 450 Tests grün
 
-Plan ist Bucket-orientiert, nicht streng linear. Sohn-Bugs werden in
+Plan ist Bucket-orientiert, nicht streng linear. Test-Bugs werden in
 **Welle-7** (am Ende) aufgenommen und nach Schwere in P0/P1/P2 sortiert,
 sobald sie kommen.
 
@@ -109,7 +109,7 @@ aufbauend wie Quests, mit Zeit schwieriger.
 - ✅ I3 Quiz-Pick filtert nach `learnedTopicsProvider` aus Quest-Progress
 - ✅ I4 `tiersFor(dayIndex)` — <30 easy, <90 +mid, sonst all
 
-## Bucket Welle-7 — Sohn-Test 2026-05-23 (laufend)
+## Bucket Welle-7 — Testlauf 2026-05-23 (laufend)
 
 Bugs vom User aus dieser Sideload (Test-Session 2026-05-23):
 
@@ -133,13 +133,13 @@ Bugs vom User aus dieser Sideload (Test-Session 2026-05-23):
 - ✅ Vorsorge minAgeYears (Hausrat 18, BU/Bausparer/Riester 14-16)
 - ✅ JobConfig.forAge(ageYears) statt forDay
 - ✅ Brutto/Netto-Modell mit progressiver Steuer + Soli/KiSt
-- ⏳ noch offen: weitere Bugs vom Sohn-Test (live)
+- ⏳ noch offen: weitere Bugs vom Testlauf (live)
 
 ---
 
 ## Vorgehen pro Session
 
-1. Aktuelle Sohn-Bugs einsammeln → in Welle-7 priorisieren (P0/P1/P2)
+1. Aktuelle Test-Bugs einsammeln → in Welle-7 priorisieren (P0/P1/P2)
 2. Pro Session 1 Bucket primär + Welle-7-Hotfixes inline
 3. Tests + Codegen + analyze --fatal-infos vor jedem Commit
 4. Release via `tools/release.ps1` + `install_keep_data.ps1`

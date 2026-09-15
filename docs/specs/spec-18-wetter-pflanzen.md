@@ -10,7 +10,7 @@ Wetter ist:
 
 ## Why
 
-Sohn-Feedback: „wie wirkt sich das Wetter aus? Auch auf die Pflanzen?"
+Test-Feedback: „wie wirkt sich das Wetter aus? Auch auf die Pflanzen?"
 Aktuell: Wetter wird gerollt, modifiziert ETF-Preise, ist sonst
 unsichtbar und beeinflusst Spar-Insel nicht.
 
@@ -103,5 +103,5 @@ Migration: Pre-Release-Wipe oder transparent: bei Load default
 
 ## Done When
 
-Sohn pflanzt im Regen → ist schneller reif. Sturm-Tag → eine Pflanze
+Testspieler pflanzt im Regen → ist schneller reif. Sturm-Tag → eine Pflanze
 weg. Day-Summary erklärt es. Springboard zeigt Wetter sofort.

@@ -6,7 +6,7 @@ Monetaria-Karte ansehnlich + lesbar. Iso-Tiles statt flacher Polygone. Großes s
 
 ## Why
 
-Sohn-Feedback: Karte zu klein, Boot kaum erkennbar, Namen schlecht lesbar.
+Test-Feedback: Karte zu klein, Boot kaum erkennbar, Namen schlecht lesbar.
 
 ## Non-Goals
 

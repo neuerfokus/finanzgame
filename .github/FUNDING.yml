@@ -3,7 +3,7 @@
 # Wirkt nur aus dem Standard-Branch heraus — auf einem Feature-Branch
 # passiert nichts.
 #
-# `custom` statt eines der vorkonfigurierten Felder: GitHub Sponsors würde
-# ein eingerichtetes Sponsoren-Profil voraussetzen, hier reicht der direkte
-# Link. Trinkgeld ohne Gegenleistung, siehe README.
-custom: ["https://www.paypal.me/SLeipziger"]
+# Ko-fi statt einer direkten PayPal.me-Adresse: die trüge den Nachnamen des
+# Empfängers in der URL. Gezahlt wird bei Ko-fi weiterhin über PayPal oder
+# Stripe, nach außen sichtbar ist aber der Projektname.
+ko_fi: finanzgame

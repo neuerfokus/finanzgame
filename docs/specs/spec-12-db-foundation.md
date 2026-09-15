@@ -9,7 +9,7 @@ persistent.
 
 ## Why
 
-Größtes ausstehendes Deferral nach Sprints 5–10. Sohn schließt App,
+Größtes ausstehendes Deferral nach Sprints 5–10. Testspieler schließt die App,
 verliert kompletten Fortschritt. Killt jede Langzeit-Motivation.
 Drift ist seit Sprint 0 in `pubspec.yaml`, drift_dev codegen vorhanden,
 nur Schema fehlt.
@@ -59,7 +59,7 @@ Tabellen:
 ## Migration-Strategie
 
 Pre-Release ist OK: bei Schema-Bruch wird App-Daten gelöscht.
-Sobald **erste echte Sideload-APK beim Sohn** läuft, friert
+Sobald **erste echte Sideload-APK beim Testspieler** läuft, friert
 `schemaVersion = 1`. Spätere Sprints inkrementieren + schreiben
 `MigrationStrategy`.
 

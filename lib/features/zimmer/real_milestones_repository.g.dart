@@ -8,7 +8,7 @@ part of 'real_milestones_repository.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Echte Erfolge des Kindes, die der Vater im Eltern-Modus (PIN-geschützt)
+/// Echte Erfolge des Kindes, die ein Elternteil im Eltern-Modus (PIN-geschützt)
 /// einträgt. Reine Eltern-kuratierte Liste — keine Spiel-Mechanik, nur
 /// Anzeige in der Zimmer-Trophäenwand. Persistent via [RealMilestonesTable]
 /// (Drift v26). Neueste zuerst.
@@ -16,13 +16,13 @@ part of 'real_milestones_repository.dart';
 @ProviderFor(RealMilestonesRepository)
 final realMilestonesRepositoryProvider = RealMilestonesRepositoryProvider._();
 
-/// Echte Erfolge des Kindes, die der Vater im Eltern-Modus (PIN-geschützt)
+/// Echte Erfolge des Kindes, die ein Elternteil im Eltern-Modus (PIN-geschützt)
 /// einträgt. Reine Eltern-kuratierte Liste — keine Spiel-Mechanik, nur
 /// Anzeige in der Zimmer-Trophäenwand. Persistent via [RealMilestonesTable]
 /// (Drift v26). Neueste zuerst.
 final class RealMilestonesRepositoryProvider
     extends $NotifierProvider<RealMilestonesRepository, List<RealMilestone>> {
-  /// Echte Erfolge des Kindes, die der Vater im Eltern-Modus (PIN-geschützt)
+  /// Echte Erfolge des Kindes, die ein Elternteil im Eltern-Modus (PIN-geschützt)
   /// einträgt. Reine Eltern-kuratierte Liste — keine Spiel-Mechanik, nur
   /// Anzeige in der Zimmer-Trophäenwand. Persistent via [RealMilestonesTable]
   /// (Drift v26). Neueste zuerst.
@@ -56,7 +56,7 @@ final class RealMilestonesRepositoryProvider
 String _$realMilestonesRepositoryHash() =>
     r'd723659d45989c365261ecf1196482d52395856e';
 
-/// Echte Erfolge des Kindes, die der Vater im Eltern-Modus (PIN-geschützt)
+/// Echte Erfolge des Kindes, die ein Elternteil im Eltern-Modus (PIN-geschützt)
 /// einträgt. Reine Eltern-kuratierte Liste — keine Spiel-Mechanik, nur
 /// Anzeige in der Zimmer-Trophäenwand. Persistent via [RealMilestonesTable]
 /// (Drift v26). Neueste zuerst.

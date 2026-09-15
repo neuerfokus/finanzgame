@@ -65,7 +65,7 @@ class PlantRepository extends _$PlantRepository implements PlantGrowthSource {
     await db.plantsDao.deleteAll().catchError((Object _) {});
   }
 
-  /// 2026-06-04 (Sohn-Feedback): räumt NUR verdorrte (withered) Felder auf —
+  /// 2026-06-04 (Test-Feedback): räumt NUR verdorrte (withered) Felder auf —
   /// und nur auf [islandId] (Sparinsel; andere Inseln haben keine
   /// verdorrenden Felder). Wachsende und reife Pflanzen bleiben unberührt —
   /// der 🧹-Button soll aufräumen, nicht laufende Ernten vernichten. Gibt die

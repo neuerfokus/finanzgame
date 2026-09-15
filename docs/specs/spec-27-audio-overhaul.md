@@ -6,7 +6,7 @@ Sound von „schrecklich" zu „angenehm". Neue Music-Loops + UI-SFX kuratiert. 
 
 ## Why
 
-Sohn-Feedback: Sound nervt. Aktuelle Tracks zu laut/aggressiv/repetitiv.
+Test-Feedback: Sound nervt. Aktuelle Tracks zu laut/aggressiv/repetitiv.
 
 ## Non-Goals
 

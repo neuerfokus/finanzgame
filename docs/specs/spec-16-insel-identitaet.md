@@ -7,7 +7,7 @@ visuelle Identität. Auch Boot bekommt Gestalt.
 
 ## Why
 
-Sohn-Feedback: „man sieht nicht bei jeder Insel welcher Schwerpunkt und
+Test-Feedback: „man sieht nicht bei jeder Insel welcher Schwerpunkt und
 Asset hier vorherrscht, außerdem sind die Inseln und das Boot nicht
 gestaltet." Aktuell sind alle Inseln gleichfarbige Kreise mit Label.
 

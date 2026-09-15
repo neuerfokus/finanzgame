@@ -1,7 +1,7 @@
 /// Welle-8 Round 23: Bestands-Report als Text → Share-Sheet.
 ///
 /// Generiert lesbare Übersicht über alle Asset-Klassen für Snapshot/
-/// Vater-Sohn-Diskussion oder Beleg an Beratungs-Gespräch.
+/// Eltern-Kind-Gespräch oder Beleg an Beratungs-Gespräch.
 library;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';

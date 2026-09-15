@@ -1,4 +1,4 @@
-# Spec 38 — Sohn-Feedback-Welle 3
+# Spec 38 — Feedback-Welle 3
 
 ## Goal
 
@@ -6,7 +6,7 @@ Bugs aus Welle 3 fixen, UX-Polish-Lücken schließen, Content-Erweiterungen vorb
 
 ## Why
 
-Sohn-Sideload-Feedback 2026-05-20. Specs 25–37 geshippt, aber konkrete Bugs + Wording-Probleme + Lücken bleiben. Keine echten Marken, kein Glücksspiel-Drift, Hardregeln aus CLAUDE.md.
+Sideload-Feedback 2026-05-20. Specs 25–37 geshippt, aber konkrete Bugs + Wording-Probleme + Lücken bleiben. Keine echten Marken, kein Glücksspiel-Drift, Hardregeln aus CLAUDE.md.
 
 ## Non-Goals
 

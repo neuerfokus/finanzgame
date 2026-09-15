@@ -9,7 +9,7 @@ Drei Polish-Achsen in einem Sprint:
 2. **Game-Feel** — Eruption-Cutscene auf Vulkan-Crash, Coin-Pop-Visual
    bei jeder Cash-Earn, Confetti bei Quest-Abschluss.
 3. **Balancing** — Konstanten an einer Stelle (`GameBalance` static
-   class) versammeln + Default-Werte nach erstem Spieltest mit Sohn
+   class) versammeln + Default-Werte nach erstem Spieltest mit dem Testspieler
    anpassen (Allowance-Höhe, Plant-Yield, ETF-Drift, Crash-Prob).
 
 ## Why

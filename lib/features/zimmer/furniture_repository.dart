@@ -15,7 +15,7 @@ part 'furniture_repository.g.dart';
 ///
 /// Welle-8: jetzt persistent (FurnitureTable, Drift v22). Vorher
 /// in-memory-only → Möbel gingen bei jedem App-Neustart verloren
-/// (Sohn-Bug "Stuhl weg nach Spiel verlassen").
+/// (Test-Bug "Stuhl weg nach Spiel verlassen").
 @Riverpod(keepAlive: true)
 class FurnitureRepository extends _$FurnitureRepository {
   @override

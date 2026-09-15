@@ -34,8 +34,18 @@ braucht ohnehin nur Tags ab heute.
 - [x] Vorname des zweiten Testers in 4 Code-/Test-Dateien → „Tester"
 - [x] Geräte-Seriennummer aus `tools/install_keep_data.ps1` → Parameter
 - [x] `CLAUDE.md`, `STATE.md`, `Recherche/` nicht ins öffentliche Repo
-      (generische „Sohn-Feedback"-Erwähnungen in Specs bleiben — kein
+      (generische „Test-Feedback"-Erwähnungen in Specs bleiben — kein
       Identifikator, und sie sind Teil der ehrlichen Projektgeschichte)
+- [x] **Nachtrag 2026-09-15:** Die Verwandtschafts-Erzählung ist raus. Docs,
+      Kommentare und Tests sprachen an 98 Stellen von „Vater-Sohn-Projekt",
+      „Sohn-Feedback" und „Sohn-Handy". Das war sachlich falsch — es gab
+      einen jugendlichen Testspieler, keine Vater-Sohn-Komponente. Ab jetzt
+      „Testspieler", „Test-Feedback", „Testgerät". Nebeneffekt, der ohnehin
+      fällig war: Die Elternrolle in der App heißt „Elternteil" statt
+      „Vater"; die Projektregel verlangt Geschlechtsneutralität, und
+      ausgerechnet das Eltern-Feature hielt sich nicht daran. Story-Texte in
+      `assets/quests/` bleiben unverändert — dort ist „dein Vater" eine
+      erfundene Figur, keine Projektbeschreibung.
 
 ### C — Öffentliches Repo
 - [x] `README.md` neu: was das ist, Screenshots, Build, Lizenz,

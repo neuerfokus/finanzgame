@@ -6,7 +6,7 @@ import '../xp/xp_repository.dart';
 
 part 'real_milestones_repository.g.dart';
 
-/// Welle-8 Round 24 (#10): ein vom Vater eingetragener echter Erfolg.
+/// Welle-8 Round 24 (#10): ein von einem Elternteil eingetragener echter Erfolg.
 /// Plain-Model (kein Drift-Row) — riverpod_generator kann generierte
 /// Drift-Rows nicht als Notifier-State-Generic verarbeiten.
 class RealMilestone {
@@ -42,7 +42,7 @@ class RealMilestone {
 /// Echtes Spar-/Lern-Verhalten fließt so ins Spiel (Level/Fortschritt).
 const int kRealMilestoneXp = 150;
 
-/// Echte Erfolge des Kindes, die der Vater im Eltern-Modus (PIN-geschützt)
+/// Echte Erfolge des Kindes, die ein Elternteil im Eltern-Modus (PIN-geschützt)
 /// einträgt. Reine Eltern-kuratierte Liste — keine Spiel-Mechanik, nur
 /// Anzeige in der Zimmer-Trophäenwand. Persistent via [RealMilestonesTable]
 /// (Drift v26). Neueste zuerst.

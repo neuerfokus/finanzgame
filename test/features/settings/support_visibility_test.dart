@@ -23,6 +23,10 @@ Future<void> _pumpSettings(WidgetTester tester, ProviderContainer c) async {
 void _expectSupportHidden() {
   expect(find.textContaining('Unterstützen'), findsNothing);
   expect(find.textContaining('Trinkgeld'), findsNothing);
+  // Beide Namen: 'Ko-fi' ist der aktuelle Anbieter, 'PayPal' stand bis
+  // 2026-09-15 im Knopf. Ein Rückfall auf die alte Beschriftung soll hier
+  // genauso auffallen.
+  expect(find.textContaining('Ko-fi'), findsNothing);
   expect(find.textContaining('PayPal'), findsNothing);
   expect(find.textContaining('erstatte'), findsNothing);
 }

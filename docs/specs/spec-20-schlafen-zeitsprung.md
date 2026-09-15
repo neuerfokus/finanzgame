@@ -8,7 +8,7 @@
 
 ## Why
 
-Sohn-Feedback: „Wenn man den Button Schlafen nimmt sollte das nicht
+Test-Feedback: „Wenn man den Button Schlafen nimmt sollte das nicht
 umsonst sein und es wäre noch ein endgültiger Zeitsprung cool."
 
 ## Non-Goals
@@ -89,5 +89,5 @@ Neuer Screen `lib/features/sleep/fast_forward_flow.dart`:
 
 ## Done When
 
-Sohn drückt Schlafen → 10ct weniger, sichtbar in Day-Summary. Drückt
+Testspieler drückt Schlafen → 10ct weniger, sichtbar in Day-Summary. Drückt
 ⏩ → wählt 30 Tage → kurzer Loader → Monatsbericht.

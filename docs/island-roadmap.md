@@ -22,7 +22,7 @@ Jede Pflanze hat:
 - **Wetteranfälligkeit** (Volatilität)
 - **Reife-Mehrfachertrag** (Zinseszins wenn stehengelassen)
 
-### Startwerte (iterativ verfeinern, Sohn als Testpilot)
+### Startwerte (iterativ verfeinern, jugendlicher Testspieler)
 
 | Pflanze | Kosten | Dauer | Ertrag | Wetter-Risk | Mehrfach |
 |---|---|---|---|---|---|
@@ -84,4 +84,4 @@ Lehrt: Notgroschen, Diversifikation, Liquidität.
 - **MVP (Phase 1)**: Heimathafen + Spar-Insel + Tageszyklus + Sleep-Loop + 5 Quests
 - **Phase 2**: ETF, Anleihen, Aktien-Archipel, Wetter, Vergleichs-UI
 - **Phase 3**: Vulkan, Inflation-Atoll, Krisen-Events, Schulden, Notgroschen
-- **Phase 4**: Zeitreise-Insel, Eltern-Modus, iOS, Polish, Privat-Release auf Sohn-Gerät
+- **Phase 4**: Zeitreise-Insel, Eltern-Modus, iOS, Polish, Privat-Release auf Testgerät

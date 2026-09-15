@@ -2,7 +2,7 @@
 
 ## Goal
 
-Sohn-Feedback Quick-Wins: Schrift lesbar, Save-Label sichtbar, Back-Button verlässlich, Schlaf-Text klar, Wochentag-Setting erklärt.
+Test-Feedback Quick-Wins: Schrift lesbar, Save-Label sichtbar, Back-Button verlässlich, Schlaf-Text klar, Wochentag-Setting erklärt.
 
 ## Why
 

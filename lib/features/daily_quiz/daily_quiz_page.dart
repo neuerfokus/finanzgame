@@ -29,7 +29,7 @@ import 'quiz_question.dart';
 class DailyQuizPage extends ConsumerStatefulWidget {
   const DailyQuizPage({super.key});
 
-  // Welle-8 Round 17 v2: nochmal hoch — Sohn-Feedback "immer noch wenig".
+  // Welle-8 Round 17 v2: nochmal hoch — Test-Feedback "immer noch wenig".
   // Easy 5€ · Mid 10€ · Hard 20€. Tagesziel + Allowance bleiben dominant,
   // aber Quiz wird spürbar belohnt für Schwierigkeitsstufen.
   static const Money correctCashReward = Money.cents(500);

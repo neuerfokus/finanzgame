@@ -2,13 +2,13 @@
 
 ## Goal
 
-Versende der Vater-Sohn-App als **signierte Android-APK** zum manuellen
-Installieren aufs Handy des Sohns. Kein Play-Store, keine Distribution
+Versende der App für Jugendliche als **signierte Android-APK** zum manuellen
+Installieren aufs Testgerät. Kein Play-Store, keine Distribution
 außerhalb der Familie.
 
 ## Why
 
-App ist Feature-fertig. Sohn soll sie endlich aufm eigenen Gerät spielen
+App ist Feature-fertig. Der Testspieler soll sie endlich aufm eigenen Gerät spielen
 können, ohne Dev-Setup. Signed Release-APK + sideload reicht.
 
 ## Non-Goals
@@ -97,7 +97,7 @@ flutter build apk --release --split-per-abi
 ```
 
 Generiert APKs unter `build/app/outputs/flutter-apk/`. Sideload-Pfad:
-APK auf Sohn-Handy kopieren, antippen, „Unbekannte Quellen" zulassen.
+APK auf Testgerät kopieren, antippen, „Unbekannte Quellen" zulassen.
 
 ### 6. Release-Checkliste (`docs/release-checklist.md`)
 
@@ -139,5 +139,5 @@ Markdown-Doc mit Schritten:
 ## Done When
 
 `flutter build apk --release` produziert eine signierte APK. Sideload
-auf Sohn-Handy installiert. Manueller Smoke-Test läuft durch ohne
+auf Testgerät installiert. Manueller Smoke-Test läuft durch ohne
 Crash. App ist offline + ohne PII.

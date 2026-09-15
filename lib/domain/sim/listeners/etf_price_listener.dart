@@ -136,7 +136,7 @@ class EtfPriceListener implements DayEventListener {
           wDelta +
           z * sigma +
           phaseMod;
-      // 2026-06-04 (Sohn-Bug „Cent-ETF → Zeitsprung → Millionär"): ETF-Kurse
+      // 2026-06-04 (Test-Bug „Cent-ETF → Zeitsprung → Millionär"): ETF-Kurse
       // dürfen NIEMALS auf Cent/einstellige € fallen. Der alte 1¢-Floor ließ
       // einen langen Bären-/Crash-Lauf den Kurs Richtung Cent drücken — dann
       // kaufte man riesige Stückzahlen für Centbeträge und der nächste

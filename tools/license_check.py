@@ -31,7 +31,7 @@ BULK_PATTERNS = [
      'Kenney composite'),
     (re.compile(r'^assets/images/furniture/.*\.png$'), 'CC-BY 4.0',
      'Twemoji'),
-    # Eigene Inhalte (Vater-Sohn): Quests, Branding-Icon, Reihenfolge.
+    # Eigene Inhalte (eigene Inhalte): Quests, Branding-Icon, Reihenfolge.
     (re.compile(r'^assets/quests/.*\.(yaml|md)$'), 'proprietary',
      'eigene Quest-Inhalte'),
     (re.compile(r'^assets/branding/.*'), 'proprietary',

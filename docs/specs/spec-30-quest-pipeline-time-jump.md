@@ -6,7 +6,7 @@ Mehr Quests mit klaren Lock-Triggern. Abgeschlossene Quests gesperrt. Zeitsprung
 
 ## Why
 
-Sohn-Feedback: zu wenig Quests, Freischalt-Logik unklar, abgehackte Quests neu öffenbar, Zeitsprung-UX dünn, Chart-Linien rätselhaft.
+Test-Feedback: zu wenig Quests, Freischalt-Logik unklar, abgehackte Quests neu öffenbar, Zeitsprung-UX dünn, Chart-Linien rätselhaft.
 
 ## Non-Goals
 

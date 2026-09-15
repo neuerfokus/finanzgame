@@ -2,12 +2,12 @@
 
 ## Goal
 
-Sohn-Feedback aus erstem Sideload abarbeiten. Quick-Fixes + Settings-Page
+Test-Feedback aus erstem Sideload abarbeiten. Quick-Fixes + Settings-Page
 + Heimathafen mit Inhalt.
 
 ## Why
 
-Erster echter Sohn-Test deckte tote UI auf: Settings-Stub statt Page,
+Erster echter Testlauf deckte tote UI auf: Settings-Stub statt Page,
 HomeBar-Mitte/Rechts ohne Funktion, Statusbar mit sinnlosem „100%",
 Heimathafen leer.
 
@@ -123,17 +123,17 @@ gleichen Stils wie spec-13/14.
 - [ ] Heimathafen mit Käpt'n + Navigation
 - [ ] Bestehende 266 Tests grün, neue Tests grün
 - [ ] `flutter analyze --fatal-infos` clean
-- [ ] Release-APK gebaut + auf Sohn-Handy reinstalliert
+- [ ] Release-APK gebaut + auf Testgerät reinstalliert
 - [ ] Commit: `feat(polish): settings + homebar + heimathafen base`
 
 ## Done When
 
-Sohn öffnet App, Statusbar zeigt sinnvolle Info. Mittlere Taste bringt
+Testspieler öffnet App, Statusbar zeigt sinnvolle Info. Mittlere Taste bringt
 zurück zum Springboard. Rechte Taste öffnet Settings. Settings editiert
 Taschengeld auf 30€. Heimathafen zeigt Käpt'n-Dialog mit Erklärung.
 
 ## Risiko
 
 `SettingsTable` ist 11. Tabelle bei `schemaVersion = 1`. Pre-Release-OK
-solange Sohn keine Daten verliert die er behalten will. Aktuell nichts
+solange der Testspieler keine Daten verliert die er behalten will. Aktuell nichts
 schützenswert da APK ganz neu.

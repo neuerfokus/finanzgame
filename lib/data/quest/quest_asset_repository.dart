@@ -59,7 +59,7 @@ const List<String> kQuestAssetPaths = [
   // Sprint C4: event-getriggerte Spezial-Quests.
   'assets/quests/q40_panic_sell_loss.yaml',
   'assets/quests/q41_held_through_crash.yaml',
-  // Welle-8 Round 17: Mini-Story-Quests #4 (Story-Arcs für späten Sohn).
+  // Welle-8 Round 17: Mini-Story-Quests #4 (Story-Arcs für spätere Spielphasen).
   'assets/quests/q50_onkel_bernd_aktie.yaml',
   'assets/quests/q51_klassenkamerad_krypto.yaml',
   'assets/quests/q52_droptok_influencer.yaml',

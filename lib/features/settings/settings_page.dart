@@ -29,15 +29,18 @@ import 'save_export_service.dart';
 import 'settings_repository.dart';
 
 /// Freiwilliger Trinkgeld-Link. LEER lassen = Sektion ausgeblendet.
-/// Zum Aktivieren die eigene PayPal.me- oder Ko-fi-URL eintragen, z. B.
-/// 'https://paypal.me/DEINNAME' oder 'https://ko-fi.com/DEINNAME'.
-/// Hinweis: PayPal.me ist hier sauberer, weil dort nichts verkauft wird —
-/// keine Gegenleistung, siehe [_SupportSection].
+///
+/// **Ko-fi statt PayPal.me (2026-09-15):** Eine `paypal.me`-Adresse trägt den
+/// Nachnamen des Empfängers in der URL — und die URL steht im Quelltext, im
+/// README, im F-Droid-Eintrag und über dem Repository. Ko-fi ist nur der
+/// Vermittler, gezahlt wird weiterhin über PayPal oder Stripe; nach außen
+/// sichtbar ist aber der Projektname. Eine Gegenleistung gibt es auch dort
+/// nicht, siehe [_SupportSection] — es bleibt ein Trinkgeld.
 ///
 /// Bewusst `final` statt `const`: bei `const ''` würde der Analyzer den
 /// Sichtbarkeits-Branch als toten Code + das Widget als ungenutzt melden.
 // ignore: prefer_const_declarations
-final String kDonationUrl = 'https://www.paypal.me/SLeipziger';
+final String kDonationUrl = 'https://ko-fi.com/finanzgame';
 
 /// Kontaktadresse für die Erstattungszusage im Unterstützen-Bereich.
 /// LEER lassen = die Zusage wird nicht angezeigt.
@@ -179,7 +182,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Welle-8 Round 22 v5: Version-Anzeige oben — Sohn weiß
+            // Welle-8 Round 22 v5: Version-Anzeige oben — Testspieler weiß
             // welche Version installiert ist.
             const _VersionRow(),
             const SizedBox(height: FgSpacing.s),
@@ -1049,7 +1052,7 @@ class _SupportSection extends ConsumerWidget {
     final passed = await showParentMathGate(
       context,
       ref,
-      purpose: 'Danach öffnet sich PayPal im Browser.',
+      purpose: 'Danach öffnet sich Ko-fi im Browser.',
     );
     if (!passed || !context.mounted) return;
 
@@ -1100,12 +1103,12 @@ class _SupportSection extends ConsumerWidget {
             'Wenn es gefällt, kann man die Weiterentwicklung freiwillig '
             'unterstützen — wie ein Trinkgeld. Ohne Gegenleistung: es '
             'schaltet nichts frei und ändert nichts im Spiel. Läuft über '
-            'PayPal.',
+            'Ko-fi.',
             style: FgTypography.bodyS,
           ),
           const SizedBox(height: FgSpacing.s),
           PixelButton(
-            label: '💛 Trinkgeld per PayPal',
+            label: '💛 Trinkgeld per Ko-fi',
             background: FgColors.secondary,
             foreground: FgColors.onPrimary,
             onPressed: () => _open(context, ref),

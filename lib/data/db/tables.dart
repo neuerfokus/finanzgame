@@ -172,7 +172,7 @@ class IslandDecorTable extends Table {
 
 /// Welle-8: Möbel im Zimmer. Eine Zeile pro gekauftem Item. Persistiert
 /// Besitz + welches Item pro Slot aktiv ist + User-Position + Sichtbarkeit.
-/// Vorher in-memory-only → ging bei App-Neustart verloren (Sohn-Bug:
+/// Vorher in-memory-only → ging bei App-Neustart verloren (Test-Bug:
 /// "Stuhl weg nach Spiel verlassen").
 @DataClassName('FurnitureRow')
 class FurnitureTable extends Table {
@@ -406,7 +406,7 @@ class AchievementsTable extends Table {
   Set<Column<Object>> get primaryKey => {id};
 }
 
-/// Welle-8 Round 24 (#10): Echte Erfolge, die der Vater im Eltern-Modus
+/// Welle-8 Round 24 (#10): Echte Erfolge, die ein Elternteil im Eltern-Modus
 /// (PIN-geschützt) einträgt — reale Spar-/Lern-Meilensteine des Kindes.
 /// Werden in der Zimmer-Trophäenwand als eigene Reihe „Echte Erfolge
 /// (von Papa)" angezeigt. Verbindet Spiel-Lernen mit echtem Verhalten.
@@ -475,10 +475,10 @@ class SettingsTable extends Table {
   BoolColumn get zeitreiseTutorialSeen =>
       boolean().withDefault(const Constant(false))();
 
-  /// Spec-23: music volume in percent (0..100). Default 25 — Sohn-Tag-2
+  /// Spec-23: music volume in percent (0..100). Default 25 — Test-Tag-2
   /// feedback: music at full volume is "nervig". Applied to the
   /// AudioPlayer at startMusic + on slider change.
-  // spec-32: music defaults to OFF — Sohn-Feedback Tag 3, der mitgelieferte
+  // spec-32: music defaults to OFF — Test-Feedback Tag 3, der mitgelieferte
   // Loop ist „schrecklich". Bleibt opt-in im Settings-Slider.
   IntColumn get musicVolume =>
       integer().withDefault(const Constant(0))();

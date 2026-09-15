@@ -13,7 +13,7 @@ part 'app_database.g.dart';
 /// Top-level Drift database for all persistent game state.
 ///
 /// schemaVersion = 1 — no migrations until first sideload APK lands on
-/// the Sohn's device. See spec-12.
+/// the tester's device. See spec-12.
 @DriftDatabase(
   tables: [
     GameClockTable,
@@ -169,7 +169,7 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        // spec-34: switched to additive migrations so the Sohn's saved
+        // spec-34: switched to additive migrations so the tester's saved
         // progress survives version bumps. Each version that adds a
         // SettingsTable column registers an explicit addColumn step.
         onUpgrade: (m, from, to) async {
@@ -298,7 +298,7 @@ class AppDatabase extends _$AppDatabase {
           }
           if (from < 22) {
             // Welle-8: Möbel waren in-memory-only → gingen bei
-            // App-Neustart verloren (Sohn-Bug "Stuhl weg"). Jetzt
+            // App-Neustart verloren (Test-Bug "Stuhl weg"). Jetzt
             // persistent.
             await m.createTable(furnitureTable);
           }

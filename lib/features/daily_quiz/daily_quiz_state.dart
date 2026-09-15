@@ -180,7 +180,7 @@ class DailyQuizState extends _$DailyQuizState {
   /// Bevorzugt Topic+Tier, sonst Topic-only. Wählt unter den Treffern eine
   /// ungesehene Frage random.
   ///
-  /// Round 29 (Sohn-Bug „Tagesfrage wiederholt sich oft"): KEIN Rückfall mehr
+  /// Round 29 (Test-Bug „Tagesfrage wiederholt sich oft"): KEIN Rückfall mehr
   /// auf den vollen Topic-Pool wenn alle Treffer schon gesehen sind. Ein dünnes
   /// Topic (1-2 Fragen) ist nach 1-2 Tagen erschöpft — vorher lieferte der
   /// Review dann stur dieselben Fragen Tag für Tag. Jetzt → null, der Aufrufer

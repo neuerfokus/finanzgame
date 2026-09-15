@@ -385,7 +385,7 @@ class SettingsRepository extends _$SettingsRepository {
   /// `.fgsave`, und die liegt (als ZIP mit SQLite drin) im öffentlichen
   /// Download-Ordner: mit jedem Datei-Manager + SQLite-Viewer auslesbar. Der
   /// PIN ist UX-Schutz, kein Krypto-Feature — aber er sollte wenigstens dem
-  /// „neugierigen Sohn" standhalten, dem eigentlichen Bedrohungsmodell.
+  /// „neugierigen Jugendlichen" standhalten, dem eigentlichen Bedrohungsmodell.
   void setParentPin(String pin) {
     state = state.copyWith(
       parentPin: pin.isEmpty ? '' : hashParentPin(pin),

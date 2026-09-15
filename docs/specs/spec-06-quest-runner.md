@@ -10,7 +10,7 @@ aus.
 ## Why
 
 Altes Repo: JSON + imperative Step-Renderer pro Typ → schwer zu erweitern,
-Inhalt mit Logik vermischt. Mit YAML + Step-Type-Registry kann der Vater
+Inhalt mit Logik vermischt. Mit YAML + Step-Type-Registry können die Eltern
 neue Quests schreiben ohne Dart anzufassen.
 
 ## Non-Goals

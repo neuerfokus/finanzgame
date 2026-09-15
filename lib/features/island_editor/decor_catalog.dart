@@ -119,5 +119,5 @@ DecorSpec? decorSpecById(String id) {
 }
 
 /// Welle-8: Cap auf 30 erhöht (war 8). Zimmer hat genug Platz,
-/// 8 war zu eng — Sohn wollte mehr sammeln.
+/// 8 war zu eng — Testspieler wollte mehr sammeln.
 const int kMaxDecorPerIsland = 30;

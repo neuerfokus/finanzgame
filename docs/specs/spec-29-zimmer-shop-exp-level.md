@@ -6,7 +6,7 @@ Zimmer einrichten mit Geld. EXP-System mit Stufen, Titeln, Rendite-Boost.
 
 ## Why
 
-Sohn-Feedback: Zimmer langweilig, Trophäen ohne EXP-Nutzen, will Levelsystem.
+Test-Feedback: Zimmer langweilig, Trophäen ohne EXP-Nutzen, will Levelsystem.
 
 ## Non-Goals
 

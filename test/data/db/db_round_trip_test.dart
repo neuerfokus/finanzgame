@@ -291,7 +291,7 @@ void main() {
 
     test('Furniture: buy → reopen → owned + active preserved (v22)',
         () async {
-      // Welle-8 Sohn-Bug: "Stuhl weg nach Spiel verlassen". Möbel waren
+      // Welle-8 Test-Bug: "Stuhl weg nach Spiel verlassen". Möbel waren
       // in-memory-only. Müssen jetzt persistieren.
       final db = AppDatabase.memory();
       addTearDown(db.close);

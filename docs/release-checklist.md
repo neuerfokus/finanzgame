@@ -86,7 +86,7 @@ Erzeugt unter `build/app/outputs/flutter-apk/`:
 
 Üblich: `arm64-v8a` Datei.
 
-## Sideload aufs Sohn-Handy
+## Sideload aufs Testgerät
 
 1. APK via USB / OneDrive / Mail aufs Gerät
 2. Auf Gerät antippen → „Unbekannte Quellen" zulassen

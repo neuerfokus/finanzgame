@@ -14,7 +14,7 @@ part of 'furniture_repository.dart';
 ///
 /// Welle-8: jetzt persistent (FurnitureTable, Drift v22). Vorher
 /// in-memory-only → Möbel gingen bei jedem App-Neustart verloren
-/// (Sohn-Bug "Stuhl weg nach Spiel verlassen").
+/// (Test-Bug "Stuhl weg nach Spiel verlassen").
 
 @ProviderFor(FurnitureRepository)
 final furnitureRepositoryProvider = FurnitureRepositoryProvider._();
@@ -25,7 +25,7 @@ final furnitureRepositoryProvider = FurnitureRepositoryProvider._();
 ///
 /// Welle-8: jetzt persistent (FurnitureTable, Drift v22). Vorher
 /// in-memory-only → Möbel gingen bei jedem App-Neustart verloren
-/// (Sohn-Bug "Stuhl weg nach Spiel verlassen").
+/// (Test-Bug "Stuhl weg nach Spiel verlassen").
 final class FurnitureRepositoryProvider
     extends $NotifierProvider<FurnitureRepository, Map<FurnitureSlot, String>> {
   /// Spec-29 + spec-38 P2-19: tracks owned furniture items (multiple per slot
@@ -34,7 +34,7 @@ final class FurnitureRepositoryProvider
   ///
   /// Welle-8: jetzt persistent (FurnitureTable, Drift v22). Vorher
   /// in-memory-only → Möbel gingen bei jedem App-Neustart verloren
-  /// (Sohn-Bug "Stuhl weg nach Spiel verlassen").
+  /// (Test-Bug "Stuhl weg nach Spiel verlassen").
   FurnitureRepositoryProvider._()
     : super(
         from: null,
@@ -71,7 +71,7 @@ String _$furnitureRepositoryHash() =>
 ///
 /// Welle-8: jetzt persistent (FurnitureTable, Drift v22). Vorher
 /// in-memory-only → Möbel gingen bei jedem App-Neustart verloren
-/// (Sohn-Bug "Stuhl weg nach Spiel verlassen").
+/// (Test-Bug "Stuhl weg nach Spiel verlassen").
 
 abstract class _$FurnitureRepository
     extends $Notifier<Map<FurnitureSlot, String>> {

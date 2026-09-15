@@ -50,7 +50,7 @@ abstract final class FgTypography {
   /// default (Roboto on Android) so mixed-case body text is legible.
   static const String? bodyFamily = null;
 
-  // Spec-43 follow-up: Schrift weiter bumpen (Sohn-Feedback "noch zu klein").
+  // Spec-43 follow-up: Schrift weiter bumpen (Test-Feedback "noch zu klein").
   // display 30→34, displayLarge 48→54, pixelLabel 18→22.
   // body 20/18/15 → 23/21/17.
   static const display = TextStyle(

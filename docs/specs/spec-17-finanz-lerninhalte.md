@@ -7,7 +7,7 @@ ausgebaut + Daily-Quiz-Overlay endlich gebaut.
 
 ## Why
 
-Sohn-Feedback: „Der Bezug zu den aktuellen Finanzthemen ist zu gering."
+Test-Feedback: „Der Bezug zu den aktuellen Finanzthemen ist zu gering."
 Das Spiel hat Mechaniken (sparen, ETF, Aktie, Inflation, Crash) aber
 zu wenig erklärenden Text und zu wenig Quest-Pool, um sie zu
 verankern.
@@ -49,7 +49,7 @@ Neuer Feature-Ordner `lib/features/daily_quiz/`:
   persistiert in `SettingsTable` (zusätzliche Spalte `lastQuizDayIndex`).
 
 Quiz erscheint nur einmal pro `gameClockProvider.dayIndex`. Skip-Button
-falls Sohn keinen Bock — kein Zwang.
+falls der Testspieler keinen Bock — kein Zwang.
 
 ### 3. Quest-Pool ausbauen
 
@@ -105,6 +105,6 @@ Tap öffnet Quiz direkt.
 
 ## Done When
 
-Sohn öffnet Spar-Insel → Header zeigt 1-Satz-Erklärung + „Was ist das?"-
+Testspieler öffnet Spar-Insel → Header zeigt 1-Satz-Erklärung + „Was ist das?"-
 Button mit Bottom-Sheet. Erster App-Start des Tages: Quiz-Frage. Quest-
 Liste hat 8 Quests in lernlogischer Reihenfolge.

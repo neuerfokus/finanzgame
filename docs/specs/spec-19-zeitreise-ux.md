@@ -6,7 +6,7 @@ Zeitreise wird intuitiv und vergleicht mehrere Assets in einem Chart.
 
 ## Why
 
-Sohn-Feedback: „Die Zeitreise ist schon ganz cool aber auch wenig
+Test-Feedback: „Die Zeitreise ist schon ganz cool aber auch wenig
 intuitiv, außerdem fehlt der Asset-Vergleich."
 
 ## Non-Goals
@@ -83,5 +83,5 @@ Erweitere `assetId`-Konvention: `cash`, `spar_yield`, `etf_index`,
 
 ## Done When
 
-Sohn öffnet Zeitreise, sieht Tutorial-Overlay, dismisst es. Tippt 3
+Testspieler öffnet Zeitreise, sieht Tutorial-Overlay, dismisst es. Tippt 3
 Chips, sieht 3 Linien. Y-Achse in €. Crash-Tag rot.

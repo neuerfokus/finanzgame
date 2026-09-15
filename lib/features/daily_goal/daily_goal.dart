@@ -179,7 +179,7 @@ const _goals = <DailyGoal>[
 /// Filtert Ziele die eine nicht-freigeschaltete Insel voraussetzen.
 /// [currentAgeYears] filtert zusätzlich Ziele die laut Spec-45 age-gated
 /// sind (Immobilien + Krypto erst ab 18) — sonst wäre das Ziel
-/// unerreichbar (Sohn-Bug "Tagesziel erste Immobilie" mit 13).
+/// unerreichbar (Test-Bug "Tagesziel erste Immobilie" mit 13).
 DailyGoal dailyGoalFor(
   int dayIndex,
   Set<String> unlockedIslands, {

@@ -55,7 +55,7 @@ braucht ohnehin nur Tags ab heute.
       description, changelogs/`<versionCode>.txt`, Screenshots) — F-Droid
       liest das direkt aus dem Repo
 - [x] Tag `v1.10.0+185` als Build-Anker
-- [ ] Build ohne `key.properties` prüfen (Fallback existiert; F-Droid
+- [x] Build ohne `key.properties` prüfen (Fallback existiert; F-Droid
       signiert selbst → **andere Signatur als die Sideload-APKs**, kein
       Update-Pfad für bestehende Installationen, nur Neuinstallation +
       Save-Import)
@@ -161,9 +161,26 @@ Release-Ordner übernehmen, dort normal committen.
 sind wieder heraus (nicht getrackt, in `.gitignore`); in der Historie tauchen
 sie nie auf, weil die betroffenen Commits vor dem Push neu geschnitten wurden.
 
-Vor dem Tag geprüft: 731 Tests grün, `flutter analyze --fatal-infos` ohne
-Befund, `license_check.py` 18 exakt / 107 bulk / 0 unbekannt / 0 verwaist.
+**Der Probebau ohne `key.properties` hat einen Totalausfall gefunden.** Der
+Release-Build brach seit dem Entfernen von `MANAGE_EXTERNAL_STORAGE` ab:
+`ManifestMerger2$MergeFailureException`, „Error parsing AndroidManifest.xml".
+Der Kommentar, der die entfernte Berechtigung erklärt, enthielt ein `--`, und
+das ist im Rumpf eines XML-Kommentars verboten. Die App war in keiner Variante
+mehr baubar, die Testsuite blieb trotzdem grün — kein Widget-Test fasst das
+Android-Manifest an. Behoben, dazu `test/android/manifest_test.dart` als
+Wächter (`--` in Kommentaren, kein INTERNET, kein `MANAGE_EXTERNAL_STORAGE`,
+`allowBackup="false"`), dessen Rot-Grün-Probe nachgewiesen ist.
 
-Unverändert offen: Release-Build ohne `key.properties` verifizieren, Repo auf
-öffentlich stellen (Entscheidung des Users), danach der Merge Request an
-fdroiddata.
+Der Probebau danach: `app-release.apk`, 66,2 MB, Signatur `CN=Android Debug`
+— genau die Ausgangslage, die F-Droid erwartet, bevor es die Signatur
+entfernt und selbst signiert. `aapt2 dump permissions` bestätigt
+`WRITE_EXTERNAL_STORAGE` (maxSdk 29) und `READ_EXTERNAL_STORAGE` (maxSdk 32),
+**kein INTERNET, kein MANAGE_EXTERNAL_STORAGE**. `versionCode=188`,
+`versionName=1.10.0` — passt zu `AutoUpdateMode: Version v%v+%c` und damit zum
+Tag `v1.10.0+188`. Der Dateiname deckt sich mit dem `output:` des Rezepts.
+
+Vor dem Tag geprüft: Tests grün, `flutter analyze --fatal-infos` ohne Befund,
+`license_check.py` 18 exakt / 107 bulk / 0 unbekannt / 0 verwaist.
+
+Unverändert offen: Repo auf öffentlich stellen (Entscheidung des Users),
+danach der Merge Request an fdroiddata.

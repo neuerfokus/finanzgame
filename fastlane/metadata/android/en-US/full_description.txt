@@ -22,4 +22,8 @@ PRIVACY
 
 Everything stays on the device. No account, no sign-up, no personal data. The app does not even request the INTERNET permission, so Android prevents it from opening any connection.
 
+SUPPORTING THE PROJECT
+
+The game is free, ad-free and has no in-app purchases. Anyone who wants to support its development can leave a tip — with nothing in return: it unlocks nothing and changes nothing in the game. The link lives in the source repository; inside the app it sits under Settings and is visible to adults only.
+
 Free software under the GPL-3.0.

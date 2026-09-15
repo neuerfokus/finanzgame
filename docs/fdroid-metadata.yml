@@ -21,6 +21,11 @@ AuthorName: neuerfokus
 SourceCode: https://github.com/neuerfokus/finanzgame
 IssueTracker: https://github.com/neuerfokus/finanzgame/issues
 Changelog: https://github.com/neuerfokus/finanzgame/releases
+# Der F-Droid-Client zeigt dafuer einen eigenen Knopf auf der App-Seite. Das
+# ist der einzige Ort, an dem das Trinkgeld ohne Umweg zu finden ist: in der
+# App liegt es hinter einer neutralen Altersabfrage, die laut
+# Play-Familienrichtlinie nicht verraten darf, was von ihr abhaengt.
+Donate: https://www.paypal.me/SLeipziger
 
 AutoName: Finanzgame
 

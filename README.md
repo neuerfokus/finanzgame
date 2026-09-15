@@ -102,6 +102,21 @@ Lizenzen*.
 
 Siehe [CONTRIBUTING.md](CONTRIBUTING.md). Fehler und Ideen gern als Issue.
 
+## Unterstützen
+
+Das Spiel ist kostenlos, werbefrei und ohne In-App-Käufe — und bleibt es. Wer
+die Weiterentwicklung freiwillig unterstützen möchte, kann ein Trinkgeld
+geben: [paypal.me/SLeipziger](https://www.paypal.me/SLeipziger)
+
+Ohne Gegenleistung. Es schaltet nichts frei, ändert nichts im Spiel, und es
+gibt kein Abzeichen dafür — sonst wäre es ein Kauf digitaler Inhalte statt
+einer freiwilligen Zuwendung.
+
+Derselbe Link liegt in der App unter *Einstellungen → Unterstützen*, sichtbar
+nur bei einem eingetragenen Geburtsjahr ab 18. Die Altersabfrage dort ist
+bewusst neutral gehalten und verrät nicht, was von ihr abhängt — das verlangt
+Googles Familienrichtlinie. Deshalb steht der Link hier.
+
 ## Kontakt
 
 sepp.github@gmail.com · [github.com/neuerfokus/finanzgame](https://github.com/neuerfokus/finanzgame)

@@ -1,0 +1,9 @@
+# Blendet den "Sponsor"-Knopf über dem Repository ein.
+#
+# Wirkt nur aus dem Standard-Branch heraus — auf einem Feature-Branch
+# passiert nichts.
+#
+# `custom` statt eines der vorkonfigurierten Felder: GitHub Sponsors würde
+# ein eingerichtetes Sponsoren-Profil voraussetzen, hier reicht der direkte
+# Link. Trinkgeld ohne Gegenleistung, siehe README.
+custom: ["https://www.paypal.me/SLeipziger"]

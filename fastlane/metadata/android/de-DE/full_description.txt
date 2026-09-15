@@ -23,4 +23,8 @@ DATENSCHUTZ
 
 Alles bleibt auf dem Gerät. Kein Konto, keine Registrierung, keine personenbezogenen Daten. Die App fordert die Internet-Berechtigung gar nicht erst an — Android lässt sie damit keine Verbindung aufbauen. Die App fragt nie nach Geschlecht, Adresse oder E-Mail. Der Spielername darf ein Spitzname sein.
 
+UNTERSTÜTZEN
+
+Das Spiel ist kostenlos, werbefrei und ohne In-App-Käufe. Wer die Weiterentwicklung freiwillig unterstützen möchte, kann ein Trinkgeld geben — ohne Gegenleistung: es schaltet nichts frei und ändert nichts im Spiel. Der Link steht im Quelltext-Repository; in der App liegt er unter Einstellungen und ist nur für Erwachsene sichtbar.
+
 Freie Software unter der GPL-3.0.

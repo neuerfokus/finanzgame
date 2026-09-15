@@ -10,6 +10,21 @@ jugendlichen Testspieler gewachsen.
 > **Das ist eine Simulation, keine Anlageberatung.** Alle Kurse, Firmen,
 > Renditen und Preise im Spiel sind erfunden. Echtes Geld verhält sich anders.
 
+## Installieren
+
+Fertige APK unter [Releases](https://github.com/neuerfokus/finanzgame/releases)
+— herunterladen, auf dem Gerät antippen, „Unbekannte Quellen" zulassen.
+
+Die Aufnahme bei **F-Droid** ist beantragt:
+[fdroiddata!49022](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/49022).
+Sobald sie durch ist, steht die App dort im Katalog und aktualisiert sich von
+selbst.
+
+Ein Hinweis für den Wechsel: F-Droid signiert mit einem eigenen Schlüssel. Eine
+Installation von dort lässt sich deshalb nicht über die APK aus den Releases
+legen und umgekehrt. Wer wechselt, sichert vorher den Spielstand über
+*Einstellungen → Spielstand sichern* und spielt ihn danach wieder ein.
+
 <p align="center">
   <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/1.png" width="19%" alt="Startseite mit Tag, Geld, Job und App-Icons">
   <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/2.png" width="19%" alt="Monetaria — die neun Inseln">

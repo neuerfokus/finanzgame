@@ -68,10 +68,16 @@ CurrentVersionCode: 188
 #    (braucht die fdroidserver-Werkzeuge, siehe
 #     https://f-droid.org/docs/Building_Applications/)
 #
-# 2. Die Flutter-Version im `srclibs`-Eintrag muss es in fdroiddata geben.
-#    Fehlt sie, gehört ein Update von `srclibs/flutter.yml` in denselben MR.
-#    Sie muss mindestens Dart 3.11.5 mitbringen — das verlangt `pubspec.yaml`,
-#    und mit einer älteren Fassung scheitert schon `flutter pub get`.
+# 2. `flutter@3.41.9` — am 15.09.2026 geprüft, die Sorge war unbegründet:
+#    `srclibs/flutter.yml` in fdroiddata nennt keine Versionsliste, sondern
+#    nur das Git-Repository. Der Teil hinter dem @ ist ein beliebiger Git-Ref,
+#    und `3.41.9` existiert als Tag in flutter/flutter. Ein Update von
+#    `srclibs/flutter.yml` braucht der MR also nicht.
+#    Genau diese Fassung hat den lokalen Probebau gemacht — F-Droid baut damit
+#    dasselbe. Sie bringt Dart 3.11.5 mit, das verlangt `pubspec.yaml`.
+#
+# 2b. Kategorien am 15.09.2026 gegen `config/categories.yml` geprüft:
+#    „Finance Manager" und „Educational Game" existieren beide.
 #
 # 3. `key.properties` existiert im öffentlichen Repo nicht, deshalb greift in
 #    `android/app/build.gradle.kts` der Debug-Keystore-Fallback. F-Droid

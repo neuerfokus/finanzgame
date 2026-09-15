@@ -75,6 +75,54 @@ void main() {
     });
   });
 
+  group('Schranke vor der Geburtsjahr-Eingabe', () {
+    const currentYear = 2026;
+
+    test('Nachholen ist frei: keine Angabe braucht keine Aufgabe', () {
+      // Der Erwachsene, der die Frage beim Start übersprungen hat, soll
+      // genau einmal rechnen — beim Trinkgeld, nicht schon davor.
+      expect(
+        birthYearEntryNeedsParentGate(null, currentYear: currentYear),
+        isFalse,
+      );
+    });
+
+    test('unplausible Angabe zählt wie keine', () {
+      expect(
+        birthYearEntryNeedsParentGate(
+          currentYear + 1,
+          currentYear: currentYear,
+        ),
+        isFalse,
+      );
+      expect(
+        birthYearEntryNeedsParentGate(0, currentYear: currentYear),
+        isFalse,
+      );
+    });
+
+    test('Ändern bleibt geschützt — auch von minderjährig aus', () {
+      // Sonst dreht ein Kind die eigene Angabe mit zwei Tipps zurück.
+      expect(
+        birthYearEntryNeedsParentGate(
+          currentYear - 12,
+          currentYear: currentYear,
+        ),
+        isTrue,
+      );
+    });
+
+    test('Ändern bleibt geschützt — auch von volljährig aus', () {
+      expect(
+        birthYearEntryNeedsParentGate(
+          currentYear - 40,
+          currentYear: currentYear,
+        ),
+        isTrue,
+      );
+    });
+  });
+
   group('Eltern-Rechenaufgabe', () {
     test('akzeptiert nur das richtige Ergebnis', () {
       const c = ParentGateChallenge(a: 17, b: 14);

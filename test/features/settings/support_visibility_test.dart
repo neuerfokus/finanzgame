@@ -81,13 +81,17 @@ void main() {
   // Der Änderungs-Eintrag muss in JEDEM Zustand da sein — sonst könnte sich
   // ein fälschlich als minderjährig eingestufter Erwachsener nie korrigieren,
   // und ein übersprungener Dialog wäre eine Sackgasse.
-  testWidgets('Geburtsjahr ändern ist auch ohne Angabe erreichbar',
+  testWidgets('Geburtsjahr nachholen ist ohne Angabe erreichbar',
       (tester) async {
     final c = ProviderContainer();
     addTearDown(c.dispose);
     await _pumpSettings(tester, c);
     expect(find.text('Geburtsjahr'), findsOneWidget);
-    expect(find.text('Ändern'), findsOneWidget);
+    // Ohne bestehende Angabe heißt der Knopf „Angeben": das ist das
+    // Nachholen der übersprungenen Frage, nicht das Ändern einer Aussage —
+    // und deshalb ohne Rechenaufgabe davor.
+    expect(find.text('Angeben'), findsOneWidget);
+    expect(find.text('Ändern'), findsNothing);
   });
 
   testWidgets('Geburtsjahr ändern ist auch für Minderjährige erreichbar',

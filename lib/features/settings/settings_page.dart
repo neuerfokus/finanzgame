@@ -1145,8 +1145,12 @@ class _SupportSection extends ConsumerWidget {
 /// könnte sich ein fälschlich als minderjährig eingestufter Erwachsener nie
 /// korrigieren, und ein übersprungener Dialog wäre eine Sackgasse.
 ///
-/// Die Änderung selbst steckt hinter der Eltern-Rechenaufgabe: ohne die wäre
-/// die ganze Konstruktion mit zwei Tipps in den Einstellungen ausgehebelt.
+/// Die Änderung einer **bestehenden** Angabe steckt hinter der
+/// Eltern-Rechenaufgabe: ohne die wäre die ganze Konstruktion mit zwei Tipps
+/// in den Einstellungen ausgehebelt. Das erstmalige Nachholen einer nie
+/// beantworteten Frage ist dagegen frei — Begründung an
+/// [birthYearEntryNeedsParentGate]. Der Knopf heißt deshalb je nach Lage
+/// „Angeben" oder „Ändern".
 class _BirthYearSection extends ConsumerWidget {
   const _BirthYearSection();
 
@@ -1154,6 +1158,10 @@ class _BirthYearSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final birthYear =
         ref.watch(settingsRepositoryProvider.select((s) => s.birthYear));
+    final needsGate = birthYearEntryNeedsParentGate(
+      birthYear,
+      currentYear: DateTime.now().year,
+    );
     return PixelPanel(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1170,17 +1178,19 @@ class _BirthYearSection extends ConsumerWidget {
           ),
           const SizedBox(height: FgSpacing.s),
           PixelButton(
-            label: 'Ändern',
+            label: needsGate ? 'Ändern' : 'Angeben',
             background: FgColors.info,
             foreground: FgColors.onPrimary,
             onPressed: () async {
-              final passed = await showParentMathGate(
-                context,
-                ref,
-                purpose: 'Das Geburtsjahr lässt sich nur von einem '
-                    'Erwachsenen ändern.',
-              );
-              if (!passed || !context.mounted) return;
+              if (needsGate) {
+                final passed = await showParentMathGate(
+                  context,
+                  ref,
+                  purpose: 'Das Geburtsjahr lässt sich nur von einem '
+                      'Erwachsenen ändern.',
+                );
+                if (!passed || !context.mounted) return;
+              }
               await showBirthYearPrompt(context, ref);
             },
           ),

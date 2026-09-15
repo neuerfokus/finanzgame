@@ -44,3 +44,24 @@ AgeState ageStateFor(int? birthYear, {required int currentYear}) {
   }
   return currentYear - birthYear >= 18 ? AgeState.adult : AgeState.minor;
 }
+
+/// Ob die Eingabe eines Geburtsjahrs hinter die Eltern-Rechenaufgabe gehört.
+///
+/// **Nachholen ist frei, Ändern nicht.** Steht noch nichts da
+/// ([AgeState.unknown] — übersprungen oder unplausibel), ist die Eingabe
+/// bloß die nachgeholte Antwort auf eine Frage, die beim ersten Start schon
+/// ohne Schranke gestellt wurde. Eine Aufgabe davor hielte niemanden auf: Wer
+/// sie hier löst, löst auch die vor dem Zahlungsanbieter — es ist dieselbe
+/// Multiplikation. Aufgehalten würde nur der Erwachsene, der die Frage
+/// übersprungen hat und nun zweimal rechnen müsste, obwohl die zweite
+/// Aufgabe direkt vor dem Verlassen der App ohnehin kommt.
+///
+/// Steht bereits ein Jahr da, bleibt die Änderung geschützt. Sonst wäre eine
+/// einmal gemachte Altersangabe mit zwei Tipps in den Einstellungen wieder
+/// zurückgedreht, und die Sichtbarkeitsregel des Unterstützen-Bereichs liefe
+/// ins Leere.
+///
+/// Die tragende Schranke bleibt in beiden Fällen dieselbe: die Rechenaufgabe
+/// unmittelbar vor dem Sprung zum Zahlungsanbieter.
+bool birthYearEntryNeedsParentGate(int? birthYear, {required int currentYear}) =>
+    ageStateFor(birthYear, currentYear: currentYear) != AgeState.unknown;

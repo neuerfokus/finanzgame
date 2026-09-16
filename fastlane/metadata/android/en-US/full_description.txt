@@ -1,4 +1,6 @@
-A game about money for teenagers, aged roughly 13 and up. Budget your allowance, save, invest, wait — and watch what grows. The interface is in German.
+**This game is in German only.** The interface, all 58 quests, the glossary and the quizzes are German; there is no English version and none is planned for now.
+
+A game about money for teenagers, aged roughly 13 and up. Budget your allowance, save, invest, wait — and watch what grows.
 
 Important: this is a learning simulation, not investment advice. Every price, company and return in the game is fictional. Real money behaves differently.
 

@@ -30,7 +30,7 @@ Repo: https://github.com/neuerfokus/finanzgame.git
 Builds:
   - versionName: 1.10.0
     versionCode: 190
-    commit: v1.10.0+190
+    commit: 7daf07f1c58aff9e71ff0bcc9db3dc9fc3cac3db
     sudo:
       - apt-get update
       - apt-get install -y curl unzip xz-utils

@@ -48,7 +48,6 @@ Builds:
       - $$flutter$$/bin/flutter pub get --enforce-lockfile
     scandelete:
       - .pub-cache
-      - build
     build:
       - export PUB_CACHE=$(pwd)/.pub-cache
       - $$flutter$$/bin/flutter build apk --release
@@ -95,6 +94,11 @@ CurrentVersionCode: 191
 #    (CC-BY-SA-4.0 fuer eigene Inhalte, CC-BY-4.0 fuer Twemoji, CC0-1.0 fuer
 #    Kenney) stehen pro Datei in ASSETS.md und in der App unter
 #    Einstellungen -> Ueber & Lizenzen.
+#
+# 6c. `scandelete` nennt NUR `.pub-cache`. Ein zusaetzliches `build` liess den
+#    Bau scheitern: "Unused scandelete path: build" — das Verzeichnis
+#    existiert zum Scan-Zeitpunkt nicht, und fdroidserver wertet einen ins
+#    Leere zeigenden Pfad als Fehler, nicht als Warnung.
 #
 # 7. Beschreibungen und Änderungsprotokolle werden NICHT hier gepflegt —
 #    F-Droid liest sie aus `fastlane/metadata/android/` im App-Repo.

@@ -1,0 +1,7 @@
+Korrektur an der Spar-Insel.
+
+• Das Bankgebäude trug den Schriftzug einer realen Bank samt nachempfundenem
+  Logo. Beides ist entfernt — im Spiel gibt es keine echten Marken, so wie es
+  von Anfang an gedacht war.
+• Die Herkunft der Inselbilder steht jetzt korrekt in ASSETS.md: Sie wurden
+  mit einem Bildgenerator erzeugt, nicht aus Kenney-Kacheln zusammengesetzt.

@@ -1,0 +1,7 @@
+A correction on the savings island.
+
+• The bank building carried the name and an imitation of a real bank's logo.
+  Both are gone — the game contains no real brands, as intended from the
+  start.
+• ASSETS.md now records where the island images actually come from: an image
+  generator, not a composition of Kenney tiles.

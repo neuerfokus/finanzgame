@@ -1,6 +1,6 @@
 # Datenschutzerklärung — Finanzgame
 
-Stand: 23. August 2026
+Stand: 16. September 2026
 
 ## Kurzfassung
 

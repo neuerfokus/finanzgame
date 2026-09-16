@@ -15,7 +15,7 @@
 Categories:
   - Finance Manager
   - Educational Game
-License: GPL-3.0-or-later AND CC-BY-SA-4.0 AND CC-BY-4.0 AND CC0-1.0
+License: GPL-3.0-or-later
 AuthorName: neuerfokus
 SourceCode: https://github.com/neuerfokus/finanzgame
 IssueTracker: https://github.com/neuerfokus/finanzgame/issues
@@ -88,6 +88,13 @@ CurrentVersionCode: 190
 #
 # 6. Anti-Features: keine. Weder Werbung noch Tracking noch proprietäre
 #    Abhängigkeiten. Der Trinkgeld-Link öffnet den externen Browser.
+#
+# 6b. `License:` nimmt nur EINEN Wert — Hinweis von @linsui im MR !49022.
+#    Eine SPDX-Verknuepfung mit AND ist dort nicht vorgesehen. Eingetragen
+#    ist deshalb die Lizenz des Quelltextes. Die Lizenzen der Assets
+#    (CC-BY-SA-4.0 fuer eigene Inhalte, CC-BY-4.0 fuer Twemoji, CC0-1.0 fuer
+#    Kenney) stehen pro Datei in ASSETS.md und in der App unter
+#    Einstellungen -> Ueber & Lizenzen.
 #
 # 7. Beschreibungen und Änderungsprotokolle werden NICHT hier gepflegt —
 #    F-Droid liest sie aus `fastlane/metadata/android/` im App-Repo.

@@ -6,16 +6,39 @@ Pro Asset: Pfad + Quelle + Lizenz + Datum. Pflicht beim Add.
 
 | Pfad | Quelle | Lizenz | Datum |
 |---|---|---|---|
-| assets/images/islands_composite/spar_insel.png | Composite: Kenney Iso-Landscape tile_067 + Nature-Kit tree_oak/flower_red*/stump_squareDetailedWide | CC0 | 2026-05-20 |
-| assets/images/islands_composite/etf_insel.png | Composite: Kenney Iso-Landscape tile_105 + Nature-Kit tree_pineTall* | CC0 | 2026-05-20 |
-| assets/images/islands_composite/vulkan.png | Composite: Kenney Iso-Landscape tile_086 + Nature-Kit rock_tallA/rock_largeC/tree_default_dark | CC0 | 2026-05-20 |
-| assets/images/islands_composite/goldmine.png | Composite: Kenney Iso-Landscape tile_086 + Nature-Kit rock_tallE/rock_largeA/stone_largeC | CC0 | 2026-05-20 |
-| assets/images/islands_composite/heimathafen.png | Composite: Kenney Iso-Landscape tile_105 + Nature-Kit stump_*/tree_default | CC0 | 2026-05-20 |
-| assets/images/islands_composite/mischwald.png | Composite: Kenney Iso-Landscape tile_067 + Nature-Kit tree_oak/pineTallA/default_fall/small | CC0 | 2026-05-20 |
-| assets/images/islands_composite/aktien_archipel.png | Composite: Kenney Iso-Landscape tile_105 + Nature-Kit stump_squareDetailedWide/tree_pineTallC_detailed | CC0 | 2026-05-20 |
-| assets/images/islands_composite/wohnviertel.png | Composite: Kenney Iso-Landscape tile_067 + Nature-Kit stump_*/tree_small | CC0 | 2026-05-20 |
-| assets/images/islands_composite/inflation_atoll.png | Composite: Kenney Iso-Landscape tile_086 + Nature-Kit rock_largeC/tallB/smallC/smallA | CC0 | 2026-05-20 |
+| assets/images/islands_composite/spar_insel.png | Google Gemini; Markenbezug am 16.09.2026 entfernt (tools/remove_brand_spar_insel.py) (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/etf_insel.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/vulkan.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/goldmine.png | Google Gemini; trägt sichtbares Gemini-Wasserzeichen (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/heimathafen.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/mischwald.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/aktien_archipel.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/wohnviertel.png | Google Gemini (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
+| assets/images/islands_composite/inflation_atoll.png | Google Gemini; trägt sichtbares Gemini-Wasserzeichen (Prompts: docs/ai_prompts/insel_prompts.md) | KI-erzeugt, siehe Hinweis unten | 2026-09-16 |
 | assets/images/ships/aurora.png | Kenney Pirate Pack 2D — ship (18), bbox-cropped, 256×192 | CC0 | 2026-05-20 |
+
+### Hinweis zu den KI-erzeugten Inselbildern
+
+Die neun Grafiken unter `assets/images/islands_composite/` wurden mit **Google
+Gemini** erzeugt. Bis zum 16.09.2026 stand hier fälschlich „Composite: Kenney
+Iso-Landscape …" — das beschrieb die programmatischen Fallback-Komposite, die
+`IslandMarker` nur noch verwendet, wenn eine dieser Dateien fehlt.
+
+Zur Lizenz: Google beansprucht kein Eigentum an den erzeugten Bildern. Ob an
+rein maschinell erzeugten Bildern überhaupt ein Urheberrecht entsteht, ist in
+Deutschland und der EU zweifelhaft, weil der menschliche Schöpfungsanteil
+fehlt. Dieses Projekt stellt sie deshalb **nicht** unter eine eigene Lizenz und
+behauptet keine Rechte daran — anders als bei den selbst geschriebenen Inhalten
+(Quests, Glossar), die unter CC-BY-SA-4.0 stehen.
+
+`goldmine.png` und `inflation_atoll.png` tragen sichtbar Googles
+Gemini-Wasserzeichen. Es bleibt bewusst stehen.
+
+`spar_insel.png` zeigte bis zum 16.09.2026 ein Bankgebäude mit dem Schriftzug
+„SPARKASSE" und einem nachempfundenen S-Symbol — eine reale Marke, im
+Widerspruch zur Projektregel „keine echten Marken". Schriftzug und Symbol sind
+entfernt; das Banner ist jetzt leer. Nachvollziehbar über
+`tools/remove_brand_spar_insel.py`.
 
 ## fonts/
 

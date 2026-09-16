@@ -13,7 +13,7 @@ transparenter Hintergrund. Lizenz in ASSETS.md ergänzen.
 ## Pro Insel
 
 **spar_insel.png**
-> Small cartoon island with a classical white-pillar Sparkasse bank
+> Small cartoon island with a classical white-pillar savings bank (no real brand names)
 > building in the center, a giant pink piggybank next to it, small
 > vegetable garden plots, golden coins scattered, a few green trees.
 > Isometric. Cheerful.

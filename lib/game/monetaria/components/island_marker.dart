@@ -39,7 +39,7 @@ class IslandMarker extends PositionComponent with TapCallbacks {
         );
 
   // Spec-39/41: AI-composite-PNGs brauchen mehr Platz damit die Details
-  // (Sparkasse, Sparschwein, Vulkan-Rauch, Schiffe) lesbar bleiben.
+  // (Bankgebäude, Sparschwein, Vulkan-Rauch, Schiffe) lesbar bleiben.
   // Spec-43 follow-up: Marker von 160 → 200 px für bessere Lesbarkeit
   // der detaillierten AI-Composite-Bilder.
   static const double _diameter = 200;
@@ -237,7 +237,7 @@ class IslandMarker extends PositionComponent with TapCallbacks {
   static const Map<String, List<(String, double, double, double)>>
       _decorations = {
     IslandId.sparInsel: [
-      ('iso/house.png', 28, 12, 50), // Sparkasse
+      ('iso/house.png', 28, 12, 50), // Bankgebäude
       ('iso/tree.png', 8, 32, 36),
     ],
     IslandId.etfInsel: [

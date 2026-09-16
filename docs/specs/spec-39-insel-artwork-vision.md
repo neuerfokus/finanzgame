@@ -17,13 +17,13 @@ Sprites zu einer kleinen Szene:
 
 | Insel | Soll-Komposition |
 |-------|------------------|
-| ETF-Insel | Glas-Hochhaus mit ETF-Logo + kleines Hafenboot + Bäume |
-| Spar-Insel | Sparkassen-Gebäude + Sparschwein + Münzhaufen + Pflanzen-Beete |
+| ETF-Insel | Glas-Hochhaus mit erfundenem Fonds-Schild + kleines Hafenboot + Bäume |
+| Spar-Insel | Bankgebäude mit Säulen + Sparschwein + Münzhaufen + Pflanzen-Beete |
 | Vulkan-Insel | Vulkan mit Rauch + Lava + kleine Hütten am Fuß + Bitcoin-Münzen |
 | Goldminen-Insel | Berg mit Förderturm + Loren + Goldhaufen |
 | Heimathafen | Hafen mit Stegen + Frachtcontainer + Schiffe + Fachwerk-Häuser |
 | Mischwald-Insel | Wald mit unterschiedlichen Baumarten + Pfad + Hütte |
-| Aktien-Archipel | Börsen-Tempel + Säulen + DAX-Display + Bonsai |
+| Aktien-Archipel | Börsen-Tempel + Säulen + Kurstafel mit erfundenen Kürzeln + Bonsai |
 | Immobilien-Insel | Häuser-Block + Mietshäuser + Strand |
 | Inflations-Atoll | Brennende Stadt + Strudel + Inflations-Pfeil + Trümmer |
 
@@ -64,6 +64,12 @@ Kenney-Style-Prompt für jede Insel. Lizenz dann selbst-erzeugt
 ## Constraints
 
 - Hardregel: keine echten Marken (kein „Apple", „Nike" auf Werbetafeln)
+- **Nachtrag 16.09.2026:** Die Tabelle oben verlangte ursprünglich
+  „Sparkassen-Gebäude", „DAX-Display" und „ETF-Logo" — im Widerspruch zu genau
+  dieser Hardregel. Das Bildmodell hat zwei davon ignoriert, den Sparkassen-
+  Schriftzug samt S-Symbol aber umgesetzt, und so ist er bis in die
+  veröffentlichte App gelangt. Entfernt am 16.09.2026, Prompts entschärft.
+  Lehre: Ein Prompt, der eine Marke nennt, ist bereits der Fehler.
 - CC0-only Sprites — keine kommerziellen Asset-Stores
 - Insel-Komposit-PNGs MÜSSEN in `ASSETS.md` mit Quelle + Lizenz
 - Max 320×320 px pro Insel (Flame-Render-Performance)

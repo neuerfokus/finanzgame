@@ -27,8 +27,9 @@ BULK_PATTERNS = [
     (re.compile(r'^assets/images/iso/.*\.png$'), 'CC0', 'Kenney Iso'),
     (re.compile(r'^assets/images/islands/tile_0\d\.png$'), 'CC0',
      'Kenney Pirate Pack tiles'),
-    (re.compile(r'^assets/images/islands_composite/.*\.png$'), 'CC0',
-     'Kenney composite'),
+    # Gemini-Bilder, kein Kenney-Composite (korrigiert 16.09.2026).
+    (re.compile(r'^assets/images/islands_composite/.*\.png$'), 'KI-erzeugt',
+     'Google Gemini, siehe Hinweis in ASSETS.md'),
     (re.compile(r'^assets/images/furniture/.*\.png$'), 'CC-BY 4.0',
      'Twemoji'),
     # Eigene Inhalte (eigene Inhalte): Quests, Branding-Icon, Reihenfolge.

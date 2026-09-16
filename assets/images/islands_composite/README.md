@@ -10,7 +10,7 @@ Kenney-Tile-Komposition zurück — kein Crash.
 | IslandId         | Dateiname              | Inhalt (User-Vision)                       |
 |------------------|------------------------|---------------------------------------------|
 | heimathafen      | `heimathafen.png`      | Hafen mit Stegen, Containern, Frachtschiff  |
-| spar_insel       | `spar_insel.png`       | Sparkasse + Sparschwein + Münzen + Beete    |
+| spar_insel       | `spar_insel.png`       | Bankgebäude + Sparschwein + Münzen + Beete    |
 | etf_insel        | `etf_insel.png`        | Glas-Hochhaus mit ETF-Logo + Bäume + Hafen  |
 | vulkan           | `vulkan.png`           | Vulkan mit Rauch + kleine Hütten            |
 | goldmine         | `goldmine.png`         | Berg + Förderturm + Loren + Goldhaufen      |

@@ -6,13 +6,12 @@
 # Sie liegt hier, damit die Werte versioniert sind und nicht bei jedem
 # Update neu zusammengesucht werden müssen.
 #
-# Voraussetzung für den MR: das öffentliche Repo existiert, hat einen
-# signierten Tag und einen Build, der ohne Geheimnisse durchläuft.
+# Aufgebaut nach `templates/build-flutter.yml` in fdroiddata, srclib-Variante.
+# Auf Bitte von @linsui im MR !49022 (16.09.2026): Die Flutter-Version steht
+# nicht mehr im Rezept, sondern in `.flutter-version` im App-Repo und wird im
+# prebuild ausgelesen. Damit zieht ein Toolchain-Wechsel keine Änderung am
+# Rezept nach sich.
 
-# ACHTUNG vor dem MR gegen `config/categories.yml` in `fdroiddata` pruefen:
-# die Taxonomie wurde erweitert, die alten Sammelnamen "Money" und "Games"
-# gibt es dort nicht mehr. Ein falscher Name laesst den Lint fehlschlagen,
-# bevor ueberhaupt gebaut wird.
 Categories:
   - Finance Manager
   - Educational Game
@@ -21,10 +20,6 @@ AuthorName: neuerfokus
 SourceCode: https://github.com/neuerfokus/finanzgame
 IssueTracker: https://github.com/neuerfokus/finanzgame/issues
 Changelog: https://github.com/neuerfokus/finanzgame/releases
-# Der F-Droid-Client zeigt dafuer einen eigenen Knopf auf der App-Seite. Das
-# ist der einzige Ort, an dem das Trinkgeld ohne Umweg zu finden ist: in der
-# App liegt es hinter einer neutralen Altersabfrage, die laut
-# Play-Familienrichtlinie nicht verraten darf, was von ihr abhaengt.
 Donate: https://ko-fi.com/finanzgame
 
 AutoName: Finanzgame
@@ -34,61 +29,65 @@ Repo: https://github.com/neuerfokus/finanzgame.git
 
 Builds:
   - versionName: 1.10.0
-    versionCode: 189
-    commit: v1.10.0+189
-    # KEIN `subdir`: fdroidserver fuehrt die Build-Schritte darin aus, und
-    # `pubspec.yaml` liegt im Wurzelverzeichnis. Mit `subdir: android/app`
-    # lief `flutter pub get` in einem Verzeichnis ohne pubspec.yaml und der
-    # Build brach im allerersten Schritt ab; zusaetzlich haette sich `output:`
-    # relativ dazu aufgeloest. Flutter-Rezepte setzen `subdir` nur, wenn das
-    # pubspec NICHT im Wurzelverzeichnis liegt.
+    versionCode: 190
+    commit: v1.10.0+190
     sudo:
       - apt-get update
       - apt-get install -y curl unzip xz-utils
     output: build/app/outputs/flutter-apk/app-release.apk
     srclibs:
-      - flutter@3.41.9
+      - flutter@stable
     prebuild:
+      # Version aus dem App-Repo lesen und im srclib auschecken
+      - flutterVersion=$(cat .flutter-version)
+      - '[[ $flutterVersion ]]'
+      - git -C $$flutter$$ checkout -f $flutterVersion
+      # Pub-Cache ins Projekt legen, damit der Scanner die Dart-Pakete sieht
+      - export PUB_CACHE=$(pwd)/.pub-cache
       - $$flutter$$/bin/flutter config --no-analytics
-      - $$flutter$$/bin/flutter pub get
+      - $$flutter$$/bin/flutter pub get --enforce-lockfile
     scandelete:
+      - .pub-cache
       - build
     build:
+      - export PUB_CACHE=$(pwd)/.pub-cache
       - $$flutter$$/bin/flutter build apk --release
 
 AutoUpdateMode: Version v%v+%c
 UpdateCheckMode: Tags
+UpdateCheckData: pubspec.yaml|version:\s.+\+(\d+)|.|version:\s(.+)\+
 CurrentVersion: 1.10.0
-CurrentVersionCode: 189
+CurrentVersionCode: 190
 
 # Hinweise zum MR
 #
-# 1. Vor dem Einreichen lokal prüfen:
-#      fdroid build -v -l com.finanzgame.finanzgame
-#    (braucht die fdroidserver-Werkzeuge, siehe
-#     https://f-droid.org/docs/Building_Applications/)
+# 1. `commit:` nimmt den vollen Hash, keinen Tag und keinen Branch — Bitte von
+#    @linsui im MR !49022. Ein Tag lässt sich nachträglich verschieben, ein
+#    Hash nicht; F-Droid baut damit nachweislich denselben Stand. Der Tag
+#    `v1.10.0+190` zeigt auf denselben Commit und bleibt für `AutoUpdateMode`
+#    zuständig.
 #
-# 2. `flutter@3.41.9` — am 15.09.2026 geprüft, die Sorge war unbegründet:
-#    `srclibs/flutter.yml` in fdroiddata nennt keine Versionsliste, sondern
-#    nur das Git-Repository. Der Teil hinter dem @ ist ein beliebiger Git-Ref,
-#    und `3.41.9` existiert als Tag in flutter/flutter. Ein Update von
-#    `srclibs/flutter.yml` braucht der MR also nicht.
-#    Genau diese Fassung hat den lokalen Probebau gemacht — F-Droid baut damit
-#    dasselbe. Sie bringt Dart 3.11.5 mit, das verlangt `pubspec.yaml`.
+# 1b. `.flutter-version` muss in genau diesem Commit liegen. v1.10.0+189
+#    enthält die Datei noch nicht; dort bräche der prebuild mit leerer
+#    Variable ab — was `[[ $flutterVersion ]]` bewusst erzwingt.
 #
-# 2b. Kategorien am 15.09.2026 gegen `config/categories.yml` geprüft:
-#    „Finance Manager" und „Educational Game" existieren beide.
+# 2. Kein `subdir`: `pubspec.yaml` liegt im Wurzelverzeichnis.
 #
-# 3. `key.properties` existiert im öffentlichen Repo nicht, deshalb greift in
-#    `android/app/build.gradle.kts` der Debug-Keystore-Fallback. F-Droid
-#    entfernt vorhandene Signaturen und signiert mit dem eigenen Schlüssel —
-#    die Folge ist die übliche: **eine F-Droid-Installation lässt sich nicht
-#    über eine bestehende Sideload-Installation drüberinstallieren.** Wer
-#    wechselt, exportiert vorher seinen Spielstand und importiert ihn danach.
+# 3. Kein `rm:`-Block: Das Repo enthält nur `android/`, keine ios-, linux-,
+#    macos-, web- oder windows-Verzeichnisse.
 #
-# 4. Anti-Features: keine. Die App hat weder Werbung noch Tracking noch
-#    proprietäre Abhängigkeiten. Der Spenden-Link öffnet den externen Browser
-#    und zählt deshalb nicht als NonFreeNet.
+# 4. Universelle APK statt `--split-per-abi`. Kann auf Wunsch umgestellt
+#    werden; dann braucht es drei Build-Blöcke plus `VercodeOperation`.
 #
-# 5. Beschreibungen und Änderungsprotokolle werden NICHT hier gepflegt —
-#    F-Droid liest sie direkt aus `fastlane/metadata/android/` im App-Repo.
+# 5. `key.properties` existiert im öffentlichen Repo nicht, deshalb greift in
+#    `android/app/build.gradle.kts` der Debug-Keystore-Fallback und die Datei
+#    heißt `app-release.apk` ohne `-unsigned`. F-Droid entfernt die Signatur
+#    und signiert selbst — eine F-Droid-Installation lässt sich deshalb nicht
+#    über eine bestehende Sideload-Installation legen. Wer wechselt,
+#    exportiert vorher den Spielstand.
+#
+# 6. Anti-Features: keine. Weder Werbung noch Tracking noch proprietäre
+#    Abhängigkeiten. Der Trinkgeld-Link öffnet den externen Browser.
+#
+# 7. Beschreibungen und Änderungsprotokolle werden NICHT hier gepflegt —
+#    F-Droid liest sie aus `fastlane/metadata/android/` im App-Repo.

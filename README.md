@@ -89,7 +89,10 @@ Details: [PRIVACY.md](PRIVACY.md).
 
 ## Bauen
 
-Flutter 3.41 / Dart 3.11.
+Flutter 3.41 / Dart 3.11. Die genaue Fassung steht in
+[`.flutter-version`](.flutter-version) — eine Zeile, maschinenlesbar. Der
+F-Droid-Build liest sie von dort, statt eine Version im Rezept zu verdrahten;
+wer selbst baut, kann sich daran halten.
 
 ```bash
 flutter pub get

@@ -1,0 +1,5 @@
+Nothing visible — this version only prepares the F-Droid submission.
+
+• The Flutter version in use now lives as a single line in
+  `.flutter-version` in the source tree. The F-Droid build reads it from
+  there instead of hard-coding it in the build recipe.

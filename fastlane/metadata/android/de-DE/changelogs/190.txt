@@ -1,0 +1,5 @@
+Nichts Sichtbares — diese Fassung bereitet nur die Aufnahme bei F-Droid vor.
+
+• Die verwendete Flutter-Version steht jetzt als eine Zeile in
+  `.flutter-version` im Quelltext. Der F-Droid-Build liest sie von dort,
+  statt sie im Bau-Rezept zu verdrahten.

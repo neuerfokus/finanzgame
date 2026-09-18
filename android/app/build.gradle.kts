@@ -50,6 +50,14 @@ android {
         }
     }
 
+    // Kein „Dependency metadata"-Signaturblock in APK und Bundle: Den kann
+    // nur Google lesen, und F-Droids `check apk` lehnt ihn als fremden
+    // Block ab.
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     buildTypes {
         release {
             // Real release signing when key.properties is present; debug

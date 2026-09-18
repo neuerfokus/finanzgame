@@ -75,9 +75,10 @@ class _ParentMathGateDialog extends StatefulWidget {
 
 class _ParentMathGateDialogState extends State<_ParentMathGateDialog> {
   // Bei JEDEM Öffnen neu — sonst lernt man nach dem zweiten Mal die Antwort
-  // auswendig statt sie zu rechnen.
+  // auswendig statt sie zu rechnen. `Random.secure()`, weil die Aufgabe eine
+  // Schranke ist und keine Spielmechanik — sie soll nicht vorhersagbar sein.
   late final ParentGateChallenge _challenge = ParentGateChallenge.generate(
-    math.Random(),
+    math.Random.secure(),
   );
   final _ctrl = TextEditingController();
   int _attemptsLeft = ParentGateLockout.maxAttempts;

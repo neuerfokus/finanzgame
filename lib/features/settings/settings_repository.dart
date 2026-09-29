@@ -13,6 +13,7 @@ import '../audio/sound_service.dart';
 import '../skills/skill_tree_data.dart';
 import '../xp/level_titles.dart';
 import '../xp/xp_repository.dart';
+import 'text_scale.dart';
 
 part 'settings_repository.g.dart';
 
@@ -63,6 +64,8 @@ class GameSettings {
     this.birthYear,
     this.birthYearAsked = false,
     this.parentGateLockedUntilMs = 0,
+    this.readableFont = true,
+    this.textScalePct = 100,
   });
 
   /// Default settings — used when no DB row exists yet.
@@ -102,7 +105,9 @@ class GameSettings {
         backupFolderUri = null,
         birthYear = null,
         birthYearAsked = false,
-        parentGateLockedUntilMs = 0;
+        parentGateLockedUntilMs = 0,
+        readableFont = true,
+        textScalePct = 100;
 
   final Money allowance;
   final Weekday allowanceWeekday;
@@ -222,6 +227,16 @@ class GameSettings {
   /// Drift v38: Sperrzeit der Eltern-Rechenaufgabe (ms seit Epoch).
   final int parentGateLockedUntilMs;
 
+  /// Drift v40: Fließtext in Systemschrift (true, Default) oder Pixel-Schrift
+  /// überall (false, alter Look). Überschriften/HUD/Zahlen bleiben Pixel.
+  final bool readableFont;
+
+  /// Drift v40: Schriftgröße in Prozent, siehe [TextScaleStufe].
+  final int textScalePct;
+
+  /// Die Stufe zu [textScalePct]; unbekannte Werte → Normal.
+  TextScaleStufe get textScale => TextScaleStufe.fromPct(textScalePct);
+
   GameSettings copyWith({
     Money? allowance,
     Weekday? allowanceWeekday,
@@ -259,6 +274,8 @@ class GameSettings {
     int? birthYear,
     bool? birthYearAsked,
     int? parentGateLockedUntilMs,
+    bool? readableFont,
+    int? textScalePct,
   }) {
     return GameSettings(
       allowance: allowance ?? this.allowance,
@@ -308,6 +325,8 @@ class GameSettings {
       birthYearAsked: birthYearAsked ?? this.birthYearAsked,
       parentGateLockedUntilMs:
           parentGateLockedUntilMs ?? this.parentGateLockedUntilMs,
+      readableFont: readableFont ?? this.readableFont,
+      textScalePct: textScalePct ?? this.textScalePct,
     );
   }
 }
@@ -363,6 +382,8 @@ class SettingsRepository extends _$SettingsRepository {
       birthYear: snap.birthYear,
       birthYearAsked: snap.birthYearAsked,
       parentGateLockedUntilMs: snap.parentGateLockedUntilMs,
+      readableFont: snap.readableFont,
+      textScalePct: TextScaleStufe.fromPct(snap.textScalePct).pct,
     );
     SoundService.instance.setMasterVolume(s.masterVolume / 100.0);
     SoundService.instance.setMusicVolume(s.musicVolume / 100.0);
@@ -437,6 +458,20 @@ class SettingsRepository extends _$SettingsRepository {
   void markBirthYearAsked() {
     if (state.birthYearAsked) return;
     state = state.copyWith(birthYearAsked: true);
+    _persist();
+  }
+
+  /// Drift v40: lesbare Schrift an/aus.
+  void setReadableFont(bool readable) {
+    if (state.readableFont == readable) return;
+    state = state.copyWith(readableFont: readable);
+    _persist();
+  }
+
+  /// Drift v40: Schriftgröße (Klein/Normal/Groß).
+  void setTextScale(TextScaleStufe stufe) {
+    if (state.textScalePct == stufe.pct) return;
+    state = state.copyWith(textScalePct: stufe.pct);
     _persist();
   }
 
@@ -871,6 +906,8 @@ class SettingsRepository extends _$SettingsRepository {
             birthYear: s.birthYear,
             birthYearAsked: s.birthYearAsked,
             parentGateLockedUntilMs: s.parentGateLockedUntilMs,
+            readableFont: s.readableFont,
+            textScalePct: s.textScalePct,
           )
           .catchError((Object _) {}),
     );

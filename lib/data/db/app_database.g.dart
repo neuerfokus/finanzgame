@@ -7311,6 +7311,33 @@ class $SettingsTableTable extends SettingsTable
     requiredDuringInsert: false,
     defaultValue: const Constant(''),
   );
+  static const VerificationMeta _readableFontMeta = const VerificationMeta(
+    'readableFont',
+  );
+  @override
+  late final GeneratedColumn<bool> readableFont = GeneratedColumn<bool>(
+    'readable_font',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("readable_font" IN (0, 1))',
+    ),
+    defaultValue: const Constant(true),
+  );
+  static const VerificationMeta _textScalePctMeta = const VerificationMeta(
+    'textScalePct',
+  );
+  @override
+  late final GeneratedColumn<int> textScalePct = GeneratedColumn<int>(
+    'text_scale_pct',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(100),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -7350,6 +7377,8 @@ class $SettingsTableTable extends SettingsTable
     savingsRatePct,
     lastClaimedGoalDay,
     parentPin,
+    readableFont,
+    textScalePct,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -7678,6 +7707,24 @@ class $SettingsTableTable extends SettingsTable
         parentPin.isAcceptableOrUnknown(data['parent_pin']!, _parentPinMeta),
       );
     }
+    if (data.containsKey('readable_font')) {
+      context.handle(
+        _readableFontMeta,
+        readableFont.isAcceptableOrUnknown(
+          data['readable_font']!,
+          _readableFontMeta,
+        ),
+      );
+    }
+    if (data.containsKey('text_scale_pct')) {
+      context.handle(
+        _textScalePctMeta,
+        textScalePct.isAcceptableOrUnknown(
+          data['text_scale_pct']!,
+          _textScalePctMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -7835,6 +7882,14 @@ class $SettingsTableTable extends SettingsTable
         DriftSqlType.string,
         data['${effectivePrefix}parent_pin'],
       )!,
+      readableFont: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}readable_font'],
+      )!,
+      textScalePct: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}text_scale_pct'],
+      )!,
     );
   }
 
@@ -7915,8 +7970,9 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
   final bool autoSaveDisabled;
 
   /// Drift v37: Storage-Access-Framework Tree-URI des vom Nutzer gewählten
-  /// Backup-Ordners. Null = kein Ordner gewählt (dann Legacy-Pfad über
-  /// MANAGE_EXTERNAL_STORAGE). Überlebt App-Neustart, NICHT Deinstall (die
+  /// Backup-Ordners. Null = kein Ordner gewählt — dann schreibt der Auto-Save
+  /// auf Android 11+ nirgendwohin mehr, seit MANAGE_EXTERNAL_STORAGE nicht
+  /// mehr deklariert ist. Überlebt App-Neustart, NICHT Deinstall (die
   /// DB wird mit deinstalliert) — nach Reinstall wählt der Nutzer neu.
   final String? backupFolderUri;
 
@@ -7986,6 +8042,15 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
   /// Wipe durch Kind. Plain-Text — keine Security-Critical-Daten,
   /// nur UX-Schutz. Drift v25.
   final String parentPin;
+
+  /// Drift v40 — Lesbarkeit (Play-Test-Feedback „Kann man die Schriftart
+  /// ändern?"). true = Fließtext in Systemschrift, Pixel-Schrift nur für
+  /// Überschriften, HUD und Zahlen. false = Pixel überall (alter Look).
+  final bool readableFont;
+
+  /// Drift v40 — Schriftgröße in Prozent (90 Klein / 100 Normal / 120 Groß),
+  /// siehe `TextScaleStufe`. Wird mit der System-Schriftgröße multipliziert.
+  final int textScalePct;
   const SettingsRow({
     required this.id,
     required this.allowanceCents,
@@ -8024,6 +8089,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     required this.savingsRatePct,
     required this.lastClaimedGoalDay,
     required this.parentPin,
+    required this.readableFont,
+    required this.textScalePct,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -8071,6 +8138,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     map['savings_rate_pct'] = Variable<int>(savingsRatePct);
     map['last_claimed_goal_day'] = Variable<int>(lastClaimedGoalDay);
     map['parent_pin'] = Variable<String>(parentPin);
+    map['readable_font'] = Variable<bool>(readableFont);
+    map['text_scale_pct'] = Variable<int>(textScalePct);
     return map;
   }
 
@@ -8117,6 +8186,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       savingsRatePct: Value(savingsRatePct),
       lastClaimedGoalDay: Value(lastClaimedGoalDay),
       parentPin: Value(parentPin),
+      readableFont: Value(readableFont),
+      textScalePct: Value(textScalePct),
     );
   }
 
@@ -8177,6 +8248,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       savingsRatePct: serializer.fromJson<int>(json['savingsRatePct']),
       lastClaimedGoalDay: serializer.fromJson<int>(json['lastClaimedGoalDay']),
       parentPin: serializer.fromJson<String>(json['parentPin']),
+      readableFont: serializer.fromJson<bool>(json['readableFont']),
+      textScalePct: serializer.fromJson<int>(json['textScalePct']),
     );
   }
   @override
@@ -8224,6 +8297,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       'savingsRatePct': serializer.toJson<int>(savingsRatePct),
       'lastClaimedGoalDay': serializer.toJson<int>(lastClaimedGoalDay),
       'parentPin': serializer.toJson<String>(parentPin),
+      'readableFont': serializer.toJson<bool>(readableFont),
+      'textScalePct': serializer.toJson<int>(textScalePct),
     };
   }
 
@@ -8265,6 +8340,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     int? savingsRatePct,
     int? lastClaimedGoalDay,
     String? parentPin,
+    bool? readableFont,
+    int? textScalePct,
   }) => SettingsRow(
     id: id ?? this.id,
     allowanceCents: allowanceCents ?? this.allowanceCents,
@@ -8308,6 +8385,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     savingsRatePct: savingsRatePct ?? this.savingsRatePct,
     lastClaimedGoalDay: lastClaimedGoalDay ?? this.lastClaimedGoalDay,
     parentPin: parentPin ?? this.parentPin,
+    readableFont: readableFont ?? this.readableFont,
+    textScalePct: textScalePct ?? this.textScalePct,
   );
   SettingsRow copyWithCompanion(SettingsTableCompanion data) {
     return SettingsRow(
@@ -8414,6 +8493,12 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
           ? data.lastClaimedGoalDay.value
           : this.lastClaimedGoalDay,
       parentPin: data.parentPin.present ? data.parentPin.value : this.parentPin,
+      readableFont: data.readableFont.present
+          ? data.readableFont.value
+          : this.readableFont,
+      textScalePct: data.textScalePct.present
+          ? data.textScalePct.value
+          : this.textScalePct,
     );
   }
 
@@ -8456,7 +8541,9 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
           ..write('startAgeYears: $startAgeYears, ')
           ..write('savingsRatePct: $savingsRatePct, ')
           ..write('lastClaimedGoalDay: $lastClaimedGoalDay, ')
-          ..write('parentPin: $parentPin')
+          ..write('parentPin: $parentPin, ')
+          ..write('readableFont: $readableFont, ')
+          ..write('textScalePct: $textScalePct')
           ..write(')'))
         .toString();
   }
@@ -8500,6 +8587,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     savingsRatePct,
     lastClaimedGoalDay,
     parentPin,
+    readableFont,
+    textScalePct,
   ]);
   @override
   bool operator ==(Object other) =>
@@ -8541,7 +8630,9 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
           other.startAgeYears == this.startAgeYears &&
           other.savingsRatePct == this.savingsRatePct &&
           other.lastClaimedGoalDay == this.lastClaimedGoalDay &&
-          other.parentPin == this.parentPin);
+          other.parentPin == this.parentPin &&
+          other.readableFont == this.readableFont &&
+          other.textScalePct == this.textScalePct);
 }
 
 class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
@@ -8582,6 +8673,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
   final Value<int> savingsRatePct;
   final Value<int> lastClaimedGoalDay;
   final Value<String> parentPin;
+  final Value<bool> readableFont;
+  final Value<int> textScalePct;
   const SettingsTableCompanion({
     this.id = const Value.absent(),
     this.allowanceCents = const Value.absent(),
@@ -8620,6 +8713,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
     this.savingsRatePct = const Value.absent(),
     this.lastClaimedGoalDay = const Value.absent(),
     this.parentPin = const Value.absent(),
+    this.readableFont = const Value.absent(),
+    this.textScalePct = const Value.absent(),
   });
   SettingsTableCompanion.insert({
     this.id = const Value.absent(),
@@ -8659,6 +8754,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
     this.savingsRatePct = const Value.absent(),
     this.lastClaimedGoalDay = const Value.absent(),
     this.parentPin = const Value.absent(),
+    this.readableFont = const Value.absent(),
+    this.textScalePct = const Value.absent(),
   });
   static Insertable<SettingsRow> custom({
     Expression<int>? id,
@@ -8698,6 +8795,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
     Expression<int>? savingsRatePct,
     Expression<int>? lastClaimedGoalDay,
     Expression<String>? parentPin,
+    Expression<bool>? readableFont,
+    Expression<int>? textScalePct,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -8746,6 +8845,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
       if (lastClaimedGoalDay != null)
         'last_claimed_goal_day': lastClaimedGoalDay,
       if (parentPin != null) 'parent_pin': parentPin,
+      if (readableFont != null) 'readable_font': readableFont,
+      if (textScalePct != null) 'text_scale_pct': textScalePct,
     });
   }
 
@@ -8787,6 +8888,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
     Value<int>? savingsRatePct,
     Value<int>? lastClaimedGoalDay,
     Value<String>? parentPin,
+    Value<bool>? readableFont,
+    Value<int>? textScalePct,
   }) {
     return SettingsTableCompanion(
       id: id ?? this.id,
@@ -8832,6 +8935,8 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
       savingsRatePct: savingsRatePct ?? this.savingsRatePct,
       lastClaimedGoalDay: lastClaimedGoalDay ?? this.lastClaimedGoalDay,
       parentPin: parentPin ?? this.parentPin,
+      readableFont: readableFont ?? this.readableFont,
+      textScalePct: textScalePct ?? this.textScalePct,
     );
   }
 
@@ -8961,6 +9066,12 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
     if (parentPin.present) {
       map['parent_pin'] = Variable<String>(parentPin.value);
     }
+    if (readableFont.present) {
+      map['readable_font'] = Variable<bool>(readableFont.value);
+    }
+    if (textScalePct.present) {
+      map['text_scale_pct'] = Variable<int>(textScalePct.value);
+    }
     return map;
   }
 
@@ -9003,7 +9114,9 @@ class SettingsTableCompanion extends UpdateCompanion<SettingsRow> {
           ..write('startAgeYears: $startAgeYears, ')
           ..write('savingsRatePct: $savingsRatePct, ')
           ..write('lastClaimedGoalDay: $lastClaimedGoalDay, ')
-          ..write('parentPin: $parentPin')
+          ..write('parentPin: $parentPin, ')
+          ..write('readableFont: $readableFont, ')
+          ..write('textScalePct: $textScalePct')
           ..write(')'))
         .toString();
   }
@@ -17002,6 +17115,8 @@ typedef $$SettingsTableTableCreateCompanionBuilder =
       Value<int> savingsRatePct,
       Value<int> lastClaimedGoalDay,
       Value<String> parentPin,
+      Value<bool> readableFont,
+      Value<int> textScalePct,
     });
 typedef $$SettingsTableTableUpdateCompanionBuilder =
     SettingsTableCompanion Function({
@@ -17042,6 +17157,8 @@ typedef $$SettingsTableTableUpdateCompanionBuilder =
       Value<int> savingsRatePct,
       Value<int> lastClaimedGoalDay,
       Value<String> parentPin,
+      Value<bool> readableFont,
+      Value<int> textScalePct,
     });
 
 class $$SettingsTableTableFilterComposer
@@ -17235,6 +17352,16 @@ class $$SettingsTableTableFilterComposer
 
   ColumnFilters<String> get parentPin => $composableBuilder(
     column: $table.parentPin,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get readableFont => $composableBuilder(
+    column: $table.readableFont,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get textScalePct => $composableBuilder(
+    column: $table.textScalePct,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -17432,6 +17559,16 @@ class $$SettingsTableTableOrderingComposer
     column: $table.parentPin,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<bool> get readableFont => $composableBuilder(
+    column: $table.readableFont,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get textScalePct => $composableBuilder(
+    column: $table.textScalePct,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$SettingsTableTableAnnotationComposer
@@ -17619,6 +17756,16 @@ class $$SettingsTableTableAnnotationComposer
 
   GeneratedColumn<String> get parentPin =>
       $composableBuilder(column: $table.parentPin, builder: (column) => column);
+
+  GeneratedColumn<bool> get readableFont => $composableBuilder(
+    column: $table.readableFont,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get textScalePct => $composableBuilder(
+    column: $table.textScalePct,
+    builder: (column) => column,
+  );
 }
 
 class $$SettingsTableTableTableManager
@@ -17689,6 +17836,8 @@ class $$SettingsTableTableTableManager
                 Value<int> savingsRatePct = const Value.absent(),
                 Value<int> lastClaimedGoalDay = const Value.absent(),
                 Value<String> parentPin = const Value.absent(),
+                Value<bool> readableFont = const Value.absent(),
+                Value<int> textScalePct = const Value.absent(),
               }) => SettingsTableCompanion(
                 id: id,
                 allowanceCents: allowanceCents,
@@ -17727,6 +17876,8 @@ class $$SettingsTableTableTableManager
                 savingsRatePct: savingsRatePct,
                 lastClaimedGoalDay: lastClaimedGoalDay,
                 parentPin: parentPin,
+                readableFont: readableFont,
+                textScalePct: textScalePct,
               ),
           createCompanionCallback:
               ({
@@ -17767,6 +17918,8 @@ class $$SettingsTableTableTableManager
                 Value<int> savingsRatePct = const Value.absent(),
                 Value<int> lastClaimedGoalDay = const Value.absent(),
                 Value<String> parentPin = const Value.absent(),
+                Value<bool> readableFont = const Value.absent(),
+                Value<int> textScalePct = const Value.absent(),
               }) => SettingsTableCompanion.insert(
                 id: id,
                 allowanceCents: allowanceCents,
@@ -17805,6 +17958,8 @@ class $$SettingsTableTableTableManager
                 savingsRatePct: savingsRatePct,
                 lastClaimedGoalDay: lastClaimedGoalDay,
                 parentPin: parentPin,
+                readableFont: readableFont,
+                textScalePct: textScalePct,
               ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))

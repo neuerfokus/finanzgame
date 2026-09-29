@@ -45,6 +45,8 @@ class SettingsSnapshot {
     this.birthYear,
     this.birthYearAsked = false,
     this.parentGateLockedUntilMs = 0,
+    this.readableFont = true,
+    this.textScalePct = 100,
   });
 
   final int allowanceCents;
@@ -144,6 +146,12 @@ class SettingsSnapshot {
 
   /// Drift v38: Sperre der Eltern-Rechenaufgabe (ms seit Epoch, 0 = frei).
   final int parentGateLockedUntilMs;
+
+  /// Drift v40: lesbare Schrift (Default AN).
+  final bool readableFont;
+
+  /// Drift v40: Schriftgröße in Prozent (90/100/120, Default 100).
+  final int textScalePct;
 }
 
 /// Sync snapshot of all DB tables, populated by [DatabaseWarmup.run] in
@@ -382,6 +390,8 @@ Future<DbSnapshot> loadDbSnapshot(AppDatabase db) async {
             birthYearAsked: settingsRow.birthYearAsked,
             parentGateLockedUntilMs:
                 settingsRow.parentGateLockedUntilMs,
+            readableFont: settingsRow.readableFont,
+            textScalePct: settingsRow.textScalePct,
           ),
     xpTotal: xpTotal,
     savingsCents: savingsCents,

@@ -56,7 +56,7 @@ final class TreeRepositoryProvider
   }
 }
 
-String _$treeRepositoryHash() => r'11118bf4845c6a73c4f7e2da21bdbe7d3e3799e1';
+String _$treeRepositoryHash() => r'0cfc0f0f442e37af40d5a9064af69b46398f5c21';
 
 /// Spec-45 H3: Mischwald-Wald-Wirtschaft.
 ///

@@ -55,7 +55,7 @@ final class CashStateProvider extends $NotifierProvider<CashState, Money> {
   }
 }
 
-String _$cashStateHash() => r'd17086f257efd1c33959094cfab2fe5efb617541';
+String _$cashStateHash() => r'b84223642ed0b4f4050c77ead690e285939f4a59';
 
 /// Player cash balance.
 ///

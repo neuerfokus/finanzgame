@@ -47,7 +47,7 @@ final class PlantRepositoryProvider
   }
 }
 
-String _$plantRepositoryHash() => r'20841446a3f13d26091c25610d77a8a9df4095ba';
+String _$plantRepositoryHash() => r'ddb2d4f3a67b0856a87909f476c951d85ca5997e';
 
 /// Persisted plant store. Seeds empty on first run; loads from
 /// [PlantsTable] during pre-warm.

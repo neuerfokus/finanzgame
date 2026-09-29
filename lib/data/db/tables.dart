@@ -633,6 +633,17 @@ class SettingsTable extends Table {
   TextColumn get parentPin =>
       text().withDefault(const Constant(''))();
 
+  /// Drift v40 — Lesbarkeit (Play-Test-Feedback „Kann man die Schriftart
+  /// ändern?"). true = Fließtext in Systemschrift, Pixel-Schrift nur für
+  /// Überschriften, HUD und Zahlen. false = Pixel überall (alter Look).
+  BoolColumn get readableFont =>
+      boolean().withDefault(const Constant(true))();
+
+  /// Drift v40 — Schriftgröße in Prozent (90 Klein / 100 Normal / 120 Groß),
+  /// siehe `TextScaleStufe`. Wird mit der System-Schriftgröße multipliziert.
+  IntColumn get textScalePct =>
+      integer().withDefault(const Constant(100))();
+
   @override
   Set<Column<Object>> get primaryKey => {id};
 }

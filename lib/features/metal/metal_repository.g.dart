@@ -47,7 +47,7 @@ final class MetalRepositoryProvider
   }
 }
 
-String _$metalRepositoryHash() => r'90285e8ce2ef9904bfa86f589967588ba64b9ef4';
+String _$metalRepositoryHash() => r'c0591af627d3bd91c3c56a2b0131c5883628412e';
 
 /// Persisted metal portfolio + quotes. Seeds from [MetalCatalog] when DB
 /// is empty. Spec-22.

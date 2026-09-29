@@ -47,7 +47,7 @@ final class CryptoRepositoryProvider
   }
 }
 
-String _$cryptoRepositoryHash() => r'68d4ad3e40e29e60c6ab106ddc90e644c7c53e4c';
+String _$cryptoRepositoryHash() => r'11889adf4c9dfcf7b041f35528571c2cbb8f9945';
 
 /// Persisted crypto portfolio + quotes. Seeds from [CryptoCatalog] when DB
 /// is empty. Spec-22.

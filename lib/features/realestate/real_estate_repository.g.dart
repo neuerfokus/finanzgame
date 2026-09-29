@@ -63,7 +63,7 @@ final class RealEstateRepositoryProvider
 }
 
 String _$realEstateRepositoryHash() =>
-    r'06e1a9ee2b5704c84406f3c88dad4149b02cf5cf';
+    r'49a36f4ae6b2885ef77bb9bfe06059418494ad08';
 
 /// spec-35 phase B + spec-44 sprint D: Immobilien-Portfolio.
 ///

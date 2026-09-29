@@ -784,6 +784,8 @@ class SettingsDao extends DatabaseAccessor<AppDatabase>
     int? birthYear,
     bool birthYearAsked = false,
     int parentGateLockedUntilMs = 0,
+    bool readableFont = true,
+    int textScalePct = 100,
   }) async {
     await into(settingsTable).insertOnConflictUpdate(
       SettingsTableCompanion.insert(
@@ -824,6 +826,8 @@ class SettingsDao extends DatabaseAccessor<AppDatabase>
         birthYear: Value(birthYear),
         birthYearAsked: Value(birthYearAsked),
         parentGateLockedUntilMs: Value(parentGateLockedUntilMs),
+        readableFont: Value(readableFont),
+        textScalePct: Value(textScalePct),
       ),
     );
   }

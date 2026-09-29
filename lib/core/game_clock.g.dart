@@ -62,7 +62,7 @@ final class AllowanceListenersProvider
 }
 
 String _$allowanceListenersHash() =>
-    r'c4a76f837f0e1540fae237d2d2d211bfb35a4fc8';
+    r'181cfc657e5d40cb3d765612057433ed806773b7';
 
 /// Listeners for the Interest stage.
 ///
@@ -768,7 +768,7 @@ final class GameClockProvider extends $NotifierProvider<GameClock, GameDay> {
   }
 }
 
-String _$gameClockHash() => r'222fb0f5133a5748663a5fb59c1967c3d817d0a1';
+String _$gameClockHash() => r'65a494920505059cd308a4c5a03ad106ca03c1f1';
 
 /// Player-initiated day-cycle service.
 ///

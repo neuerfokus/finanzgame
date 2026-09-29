@@ -42,7 +42,7 @@ final class SettingsRepositoryProvider
 }
 
 String _$settingsRepositoryHash() =>
-    r'adc89a5e0cf5a1d8c957fd515fc286d764715a68';
+    r'479a23559debe057a1d9cc964b0bf19fba4d62fb';
 
 abstract class _$SettingsRepository extends $Notifier<GameSettings> {
   GameSettings build();

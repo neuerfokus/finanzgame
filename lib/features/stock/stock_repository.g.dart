@@ -47,7 +47,7 @@ final class StockRepositoryProvider
   }
 }
 
-String _$stockRepositoryHash() => r'06ffe49b045a8aec39674ef9656813ebb12ba05b';
+String _$stockRepositoryHash() => r'3a606b60bc5824843c52e6545eabc7bca0fee435';
 
 /// Persisted stock portfolio + quotes. Seeds from [StockCatalog] when DB
 /// is empty.

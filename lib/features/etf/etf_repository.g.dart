@@ -53,7 +53,7 @@ final class EtfRepositoryProvider
   }
 }
 
-String _$etfRepositoryHash() => r'd9107ee999023b9a10c120adca3dcd3ca9b56bf3';
+String _$etfRepositoryHash() => r'46a141781e2e07b733623628fd1db20c1e9a40ff';
 
 /// Persisted ETF portfolio + price book.
 ///

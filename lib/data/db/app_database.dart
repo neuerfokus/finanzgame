@@ -97,7 +97,7 @@ class AppDatabase extends _$AppDatabase {
   factory AppDatabase.memory() => AppDatabase(NativeDatabase.memory());
 
   @override
-  int get schemaVersion => 39;
+  int get schemaVersion => 40;
 
   /// Setzt BTC-Stückelungen + ETF-Quotes auf ihre kanonischen Basispreise.
   /// Genutzt von Migrationen v28 (Preis-Korrektur) + v29 (Desync-Heilung).
@@ -416,6 +416,14 @@ class AppDatabase extends _$AppDatabase {
             // Nutzung pro Immobilie: selbst bewohnt oder vermietet.
             await _addColumnIfMissing(m, realEstateHoldingsTable,
                 realEstateHoldingsTable.usage);
+          }
+          if (from < 40) {
+            // Lesbarkeit: lesbare Schrift (Default AN) + Schriftgröße
+            // (Default 100 %). Alte Spielstände bekommen die Defaults.
+            await _addColumnIfMissing(m, settingsTable,
+                settingsTable.readableFont);
+            await _addColumnIfMissing(m, settingsTable,
+                settingsTable.textScalePct);
           }
         },
       );

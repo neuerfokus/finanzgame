@@ -83,7 +83,7 @@ final class HistoryRepositoryProvider
   }
 }
 
-String _$historyRepositoryHash() => r'01252f32c65938e808ae0bce79f243e5e3253932';
+String _$historyRepositoryHash() => r'e6694108402b225f404847c8720c809f5e0792a5';
 
 /// Per-asset daily history. Indexed by assetId.
 ///

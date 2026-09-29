@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/design_tokens.dart';
 import '../../core/game_clock.dart';
 import '../../domain/economy/money.dart';
+import '../../ui/widgets/answer_button.dart';
 import '../../ui/widgets/confetti.dart';
 import '../../ui/widgets/glossar_text.dart';
 import '../../ui/widgets/pixel_button.dart';
@@ -331,60 +332,20 @@ class _OptionTile extends StatelessWidget {
     final isPicked = picked == index;
     final wasWrong = wrongPicks.contains(index);
 
-    Color bg = FgColors.backgroundElevated;
-    if (finalised) {
-      if (isCorrect) {
-        bg = FgColors.success;
-      } else if (wasWrong || isPicked) {
-        bg = FgColors.alert;
-      }
-    } else if (wasWrong) {
-      // Falsch-Markierung bleibt sichtbar nach 1. Versuch.
-      bg = FgColors.alert.withValues(alpha: 0.6);
-    }
-
-    // Auf den eingefärbten Kacheln braucht der Text eine dunkle Farbe:
-    // `onSurface` #E8E8E8 kam auf `success` #4ED96A auf 1,50:1 und auf
-    // `alert` #FF6B9D auf 2,19:1 — die richtige Antwort war ausgerechnet im
-    // Moment des Auflösens am schlechtesten lesbar. Schwarz ergibt 11,46:1
-    // bzw. 7,84:1. Diese Kacheln sind rohe Container, laufen also nicht durch
-    // die Kontrast-Selbstheilung von PixelButton.
-    final eingefaerbt = bg != FgColors.backgroundElevated;
-    final textColor = eingefaerbt ? Colors.black : FgColors.onSurface;
-
-    // Das Ergebnis stand vorher NUR in der Hintergrundfarbe — kein Zeichen,
-    // kein Text, kein Semantics. Wer farbenblind ist, erfuhr es nicht; wer
-    // blind ist, überhaupt nicht. Das Präfix trägt es sichtbar UND vorlesbar.
-    final praefix = finalised
-        ? (isCorrect ? '✓ Richtig: ' : (wasWrong || isPicked ? '✗ Falsch: ' : ''))
-        : (wasWrong ? '✗ ' : '');
-
-    final tile = Semantics(
-      button: onTap != null,
+    // Derselbe gelbe Antwort-Button wie im Quest-Runner (Play-Test-Feedback:
+    // hier war er lila). Richtig/Falsch färbt weiterhin grün/rot, das
+    // Ergebnis steht zusätzlich als Präfix im Text und im Semantics-Label.
+    final feedback = answerFeedbackFor(
+      isCorrect: isCorrect,
+      wasWrong: wasWrong,
+      isPicked: isPicked,
+      finalised: finalised,
+    );
+    final tile = AnswerButton(
+      label: label,
+      onPressed: onTap,
+      feedback: feedback,
       selected: isPicked,
-      label: '$praefix$label',
-      child: ExcludeSemantics(
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: FgSpacing.m,
-              vertical: FgSpacing.m,
-            ),
-            decoration: BoxDecoration(
-              color: bg,
-              border: Border.all(color: FgColors.outline, width: 2),
-            ),
-            child: Text(
-              '$praefix$label',
-              softWrap: true,
-              overflow: TextOverflow.visible,
-              style: FgTypography.bodyM.copyWith(color: textColor),
-            ),
-          ),
-        ),
-      ),
     );
 
     // Juice: die richtige Antwort ploppt beim Auflösen kurz auf.

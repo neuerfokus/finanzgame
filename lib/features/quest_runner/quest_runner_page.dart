@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/design_tokens.dart';
 import '../../domain/quest/quest.dart';
+import '../../ui/widgets/answer_button.dart';
 import '../../ui/widgets/chat_bubble.dart';
 import '../../ui/widgets/compound_chart.dart';
 import '../../ui/widgets/confetti.dart';
@@ -150,14 +151,11 @@ class _ActionRow extends StatelessWidget {
                 s.quest.id,
                 s.stepIndex,
               )) ...[
-                SizedBox(
-                  width: double.infinity,
-                  child: PixelButton(
-                    label: o.label,
-                    onPressed: () => step is QuizStep
-                        ? onQuiz(o.id)
-                        : onChoice(o.id),
-                  ),
+                AnswerButton(
+                  label: o.label,
+                  onPressed: () => step is QuizStep
+                      ? onQuiz(o.id)
+                      : onChoice(o.id),
                 ),
                 const SizedBox(height: FgSpacing.s),
               ],

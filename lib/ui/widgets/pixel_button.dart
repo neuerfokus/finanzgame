@@ -14,6 +14,8 @@ class PixelButton extends StatefulWidget {
     this.foreground = FgColors.onPrimary,
     this.icon,
     this.semanticLabel,
+    this.disabledBackground,
+    this.selected,
     super.key,
   });
 
@@ -27,6 +29,15 @@ class PixelButton extends StatefulWidget {
   /// nur ein Emoji ist (z.B. '⏩', '🔄') — sonst liest der Screenreader den
   /// rohen Emoji-Namen vor. Default = [label].
   final String? semanticLabel;
+
+  /// Hintergrund im gesperrten Zustand. Default [FgColors.neutral] (grau).
+  /// Antwort-Buttons setzen hier Grün/Rot, damit das Ergebnis nach dem
+  /// Auflösen sichtbar bleibt, obwohl der Button nicht mehr tippbar ist.
+  final Color? disabledBackground;
+
+  /// Barrierefreiheit: markiert eine gewählte Antwort als „ausgewählt".
+  /// null = kein Auswahlzustand (normaler Button).
+  final bool? selected;
 
   @override
   State<PixelButton> createState() => _PixelButtonState();
@@ -63,7 +74,9 @@ class _PixelButtonState extends State<PixelButton> {
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onPressed != null;
-    final bg = enabled ? widget.background : FgColors.neutral;
+    final bg = enabled
+        ? widget.background
+        : (widget.disabledBackground ?? FgColors.neutral);
     final fg = readableForeground(bg, widget.foreground);
 
     final core = Container(
@@ -106,6 +119,7 @@ class _PixelButtonState extends State<PixelButton> {
     return Semantics(
       button: true,
       enabled: enabled,
+      selected: widget.selected,
       label: widget.semanticLabel ?? widget.label,
       child: ExcludeSemantics(
         child: GestureDetector(

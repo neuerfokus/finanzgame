@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/design_tokens.dart';
 import '../../core/game_clock.dart';
+import '../../ui/widgets/answer_button.dart';
 import '../../ui/widgets/confetti.dart';
 import '../zimmer/achievements_repository.dart';
 import '../../ui/widgets/glossar_text.dart';
@@ -348,53 +349,18 @@ class _OptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isCorrect = index == correctIndex;
-    final wasWrong = wrongPicks.contains(index);
-    Color bg = FgColors.backgroundElevated;
-    if (finalised) {
-      if (isCorrect) {
-        bg = FgColors.success;
-      } else if (wasWrong || index == picked) {
-        bg = FgColors.alert;
-      }
-    } else if (wasWrong) {
-      bg = FgColors.alert.withValues(alpha: 0.6);
-    }
-    // Siehe daily_quiz_page: `onSurface` auf `success` sind 1,50:1, auf
-    // `alert` 2,19:1 — schwarz ergibt 11,46:1 bzw. 7,84:1. Und das Ergebnis
-    // stand vorher nur in der Hintergrundfarbe.
-    final eingefaerbt = bg != FgColors.backgroundElevated;
-    final praefix = finalised
-        ? (isCorrect
-            ? '✓ Richtig: '
-            : (wasWrong || index == picked ? '✗ Falsch: ' : ''))
-        : (wasWrong ? '✗ ' : '');
-
+    // Gleicher gelber Antwort-Button wie Quest-Runner und Frage des Tages.
     return Padding(
       padding: const EdgeInsets.only(bottom: FgSpacing.s),
-      child: Semantics(
-        button: onTap != null,
+      child: AnswerButton(
+        label: label,
+        onPressed: onTap,
         selected: index == picked,
-        label: '$praefix$label',
-        child: ExcludeSemantics(
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onTap,
-            child: Container(
-              padding: const EdgeInsets.all(FgSpacing.m),
-              decoration: BoxDecoration(
-                color: bg,
-                border: Border.all(color: FgColors.outline, width: 2),
-              ),
-              child: Text(
-                '$praefix$label',
-                style: FgTypography.bodyM.copyWith(
-                  color: eingefaerbt ? Colors.black : FgColors.onSurface,
-                ),
-                softWrap: true,
-              ),
-            ),
-          ),
+        feedback: answerFeedbackFor(
+          isCorrect: index == correctIndex,
+          wasWrong: wrongPicks.contains(index),
+          isPicked: index == picked,
+          finalised: finalised,
         ),
       ),
     );

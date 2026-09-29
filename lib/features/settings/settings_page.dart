@@ -27,6 +27,7 @@ import 'import_failure_dialog.dart';
 import 'parent_math_gate.dart';
 import 'save_export_service.dart';
 import 'settings_repository.dart';
+import 'text_scale.dart';
 
 /// Freiwilliger Trinkgeld-Link. LEER lassen = Sektion ausgeblendet.
 ///
@@ -335,6 +336,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ],
               ),
             ),
+            const SizedBox(height: FgSpacing.m),
+            const _SchriftSection(),
             // Hier stand bis zur Analyse-Runde 2026-08 ein frei wählbarer
             // Steuerklassen-Selektor (spec-45 C4). Raus, siehe L11 im
             // SettingsRepository: die Wahl war ein bedingungsloser
@@ -1196,6 +1199,94 @@ class _BirthYearSection extends ConsumerWidget {
               }
               await showBirthYearPrompt(context, ref);
             },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Lesbarkeit (Drift v40): Schriftart und -größe. Wirkt sofort — die ganze
+/// App (auch diese Seite) stellt beim Umschalten um, der Vorschausatz zeigt
+/// es zusätzlich an einer festen Stelle.
+class _SchriftSection extends ConsumerWidget {
+  const _SchriftSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final readable =
+        ref.watch(settingsRepositoryProvider.select((s) => s.readableFont));
+    final stufe =
+        ref.watch(settingsRepositoryProvider.select((s) => s.textScale));
+    final notifier = ref.read(settingsRepositoryProvider.notifier);
+    return PixelPanel(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Semantics(
+            header: true,
+            child: const Text('Schrift', style: FgTypography.bodyS),
+          ),
+          const SizedBox(height: FgSpacing.xs),
+          // MergeSemantics wie beim Sound-Schalter: TalkBack liest Name,
+          // Erklärung und Zustand in einem Rutsch.
+          MergeSemantics(
+            child: Row(
+              children: [
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Lesbare Schrift', style: FgTypography.bodyM),
+                      Text(
+                        'Aus = Pixel-Schrift überall',
+                        style: FgTypography.bodyS,
+                      ),
+                    ],
+                  ),
+                ),
+                Switch(
+                  key: const Key('schrift_lesbar_switch'),
+                  value: readable,
+                  onChanged: notifier.setReadableFont,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: FgSpacing.m),
+          const Text('Schriftgröße', style: FgTypography.bodyM),
+          const SizedBox(height: FgSpacing.xs),
+          Wrap(
+            spacing: FgSpacing.s,
+            runSpacing: FgSpacing.xs,
+            children: [
+              for (final s in TextScaleStufe.values)
+                ChoiceChip(
+                  label: Text(s.label, style: FgTypography.bodyM),
+                  selected: s == stufe,
+                  selectedColor: FgColors.primary,
+                  labelStyle: TextStyle(
+                    color: s == stufe ? FgColors.onPrimary : FgColors.onSurface,
+                  ),
+                  tooltip: 'Schriftgröße ${s.label}',
+                  onSelected: (_) => notifier.setTextScale(s),
+                ),
+            ],
+          ),
+          const SizedBox(height: FgSpacing.m),
+          Container(
+            key: const Key('schrift_vorschau'),
+            width: double.infinity,
+            padding: const EdgeInsets.all(FgSpacing.m),
+            decoration: BoxDecoration(
+              color: FgColors.backgroundDeep,
+              border: Border.all(color: FgColors.outline, width: 2),
+            ),
+            child: const Text(
+              'Vorschau: Mia legt jeden Monat 20 € zurück und hat nach '
+              'einem Jahr genug für ihr Fahrrad.',
+              style: FgTypography.bodyM,
+            ),
           ),
         ],
       ),

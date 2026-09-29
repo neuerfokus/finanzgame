@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../core/design_tokens.dart';
+import 'scale_down_to_fit.dart';
 
 /// 56×56 phone-springboard icon with pixel border + drop shadow.
 ///
@@ -98,7 +99,9 @@ class _AppIconState extends State<AppIcon> {
           onTapUp: (_) => _setPressed(false),
           onTapCancel: () => _setPressed(false),
           onTap: widget.enabled ? widget.onTap : null,
-          child: tile
+          // Lesbarkeit: bei „Groß" auf 360 dp ragte das Label 8 px aus der
+          // Rasterzelle — jetzt schrumpft die Kachel minimal mit.
+          child: ScaleDownToFit(alignment: Alignment.topCenter, child: tile)
               .animate(target: _pressed ? 1.0 : 0.0)
               .scaleXY(
                 begin: 1.0,

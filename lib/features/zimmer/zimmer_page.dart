@@ -6,6 +6,7 @@ import '../../domain/wishlist/wish_item.dart';
 import '../../ui/widgets/phone_frame.dart';
 import '../settings/settings_repository.dart';
 import '../../ui/widgets/pixel_button.dart';
+import '../../ui/widgets/scale_down_to_fit.dart';
 import '../wishlist/wishlist_repository.dart';
 import '../island_editor/decor_catalog.dart';
 import '../island_editor/decor_repository.dart';
@@ -287,36 +288,46 @@ class _FurnitureSection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          // Lesbarkeit: Wrap statt Row — bei großer Schrift auf 360 dp
+          // passten Titel + zwei Buttons nicht in eine Zeile (32 px Overflow).
+          // Passt es, steht alles wie bisher nebeneinander; sonst rutschen
+          // die Buttons in die nächste Zeile.
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: FgSpacing.s,
             children: [
-              Expanded(
-                child: Text(
-                  'Einrichtung',
-                  style: FgTypography.display.copyWith(fontSize: 20),
-                ),
+              Text(
+                'Einrichtung',
+                style: FgTypography.display.copyWith(fontSize: 20),
               ),
-              Consumer(builder: (ctx, ref, _) {
-                final editing = ref.watch<bool>(roomEditModeProvider);
-                return PixelButton(
-                  label: editing ? '✓ Fertig' : '✏ Verschieben',
-                  background: editing ? FgColors.success : FgColors.info,
-                  foreground: FgColors.onSurface,
-                  onPressed: () =>
-                      ref.read(roomEditModeProvider.notifier).toggle(),
-                );
-              }),
-              const SizedBox(width: FgSpacing.s),
-              PixelButton(
-                label: 'Shop',
-                background: FgColors.primary,
-                foreground: FgColors.onPrimary,
-                onPressed: () {
-                  Navigator.of(context).push<void>(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const FurnitureShopPage(),
-                    ),
-                  );
-                },
+              Wrap(
+                spacing: FgSpacing.s,
+                runSpacing: FgSpacing.s,
+                children: [
+                  Consumer(builder: (ctx, ref, _) {
+                    final editing = ref.watch<bool>(roomEditModeProvider);
+                    return PixelButton(
+                      label: editing ? '✓ Fertig' : '✏ Verschieben',
+                      background: editing ? FgColors.success : FgColors.info,
+                      foreground: FgColors.onSurface,
+                      onPressed: () =>
+                          ref.read(roomEditModeProvider.notifier).toggle(),
+                    );
+                  }),
+                  PixelButton(
+                    label: 'Shop',
+                    background: FgColors.primary,
+                    foreground: FgColors.onPrimary,
+                    onPressed: () {
+                      Navigator.of(context).push<void>(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const FurnitureShopPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -603,21 +614,25 @@ class _SlotTile extends StatelessWidget {
           width: 2,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          item != null
-              ? FurnitureSprite(item: item, size: 36)
-              : const Text('➕', style: TextStyle(fontSize: 30)),
-          const SizedBox(height: FgSpacing.xs),
-          Text(
-            item?.name ?? FurnitureCatalog.labelForSlot(slot),
-            style: FgTypography.bodyS,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+      // Lesbarkeit: feste Rasterkachel — bei großer Schrift minimal
+      // verkleinern statt unten herauszuragen.
+      child: ScaleDownToFit(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            item != null
+                ? FurnitureSprite(item: item, size: 36)
+                : const Text('➕', style: TextStyle(fontSize: 30)),
+            const SizedBox(height: FgSpacing.xs),
+            Text(
+              item?.name ?? FurnitureCatalog.labelForSlot(slot),
+              style: FgTypography.bodyS,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -733,39 +748,42 @@ class _TrophyTile extends StatelessWidget {
               : FgColors.backgroundDeep,
           border: Border.all(color: color, width: 2),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Welle-8 Round 23: Geist-Teaser — Locked-Achievements
-            // zeigen das echte Emoji halbtransparent statt 🔒. Kid
-            // sieht was kommt, motivierender. Lock-Icon als Overlay.
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Opacity(
-                  opacity: unlocked ? 1.0 : 0.25,
-                  child: Text(
-                    achievement.emoji,
-                    style: const TextStyle(fontSize: 28),
+        // Lesbarkeit: siehe Möbel-Kachel — verkleinern statt Overflow.
+        child: ScaleDownToFit(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Welle-8 Round 23: Geist-Teaser — Locked-Achievements
+              // zeigen das echte Emoji halbtransparent statt 🔒. Kid
+              // sieht was kommt, motivierender. Lock-Icon als Overlay.
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Opacity(
+                    opacity: unlocked ? 1.0 : 0.25,
+                    child: Text(
+                      achievement.emoji,
+                      style: const TextStyle(fontSize: 28),
+                    ),
                   ),
-                ),
-                if (!unlocked)
-                  const Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Text('🔒', style: TextStyle(fontSize: 12)),
-                  ),
-              ],
-            ),
-            const SizedBox(height: FgSpacing.xs),
-            Text(
-              achievement.label,
-              style: FgTypography.bodyS.copyWith(color: color),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+                  if (!unlocked)
+                    const Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Text('🔒', style: TextStyle(fontSize: 12)),
+                    ),
+                ],
+              ),
+              const SizedBox(height: FgSpacing.xs),
+              Text(
+                achievement.label,
+                style: FgTypography.bodyS.copyWith(color: color),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ),
         ),

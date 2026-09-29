@@ -491,13 +491,17 @@ class _DiversificationCard extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Lesbarkeit: Titel darf umbrechen — bei großer Schrift auf
+          // 360 dp ragte die Zeile sonst 159 px rechts heraus.
           Row(
             children: [
               const Text('🎯', style: TextStyle(fontSize: 22)),
               const SizedBox(width: FgSpacing.s),
-              const Text('Streuung deines Geldes',
-                  style: FgTypography.bodyL),
-              const Spacer(),
+              const Expanded(
+                child: Text('Streuung deines Geldes',
+                    style: FgTypography.bodyL),
+              ),
+              const SizedBox(width: FgSpacing.s),
               Text('$classes / 6 Sorten',
                   style: FgTypography.bodyM.copyWith(color: color)),
             ],

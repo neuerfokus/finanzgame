@@ -108,7 +108,9 @@ class _LegendItem extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 6),
-        Text(text, style: FgTypography.bodyS),
+        // Flexible: bei großer Schrift bricht der Legendentext um, statt
+        // aus dem Wrap herauszuragen.
+        Flexible(child: Text(text, style: FgTypography.bodyS)),
       ],
     );
   }

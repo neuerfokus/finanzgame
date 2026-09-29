@@ -30,6 +30,6 @@ steps:
     options:
       - { id: a, label: "Alles auf Krypto setzen" }
       - { id: b, label: "Breit streuen und langfristig denken" }
-      - { id: c, label: "Möglichst schnell viel Geld ausgeben" }
+      - { id: c, label: "Erst sparen, wenn man älter ist" }
     correct: b
     explanation: "Diversifikation und langer Atem - die zwei wichtigsten Regeln."

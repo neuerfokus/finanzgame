@@ -8,6 +8,8 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import 'core/design_tokens.dart';
+import 'core/fg_text_scaler.dart';
+import 'core/fg_theme.dart';
 import 'data/db/app_database.dart';
 import 'data/db/app_database_provider.dart';
 import 'features/audio/sound_service.dart';
@@ -19,6 +21,7 @@ import 'features/settings/import_failure_dialog.dart';
 import 'features/settings/parent_gate.dart';
 import 'features/settings/save_export_service.dart';
 import 'features/settings/settings_repository.dart';
+import 'features/settings/text_scale.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -145,22 +148,29 @@ class FinanzgameApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Lesbarkeit (Drift v40): Schriftfamilie des Fließtexts und App-Faktor
+    // der Schriftgröße kommen aus den Einstellungen.
+    final readableFont = ref.watch(
+      settingsRepositoryProvider.select((s) => s.readableFont),
+    );
+    final textFaktor = ref.watch(
+      settingsRepositoryProvider.select((s) => s.textScale.faktor),
+    );
     return MaterialApp(
       title: 'Finanzgame',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: FgColors.backgroundDeep,
-        colorScheme: const ColorScheme.dark(
-          primary: FgColors.primary,
-          secondary: FgColors.secondary,
-          surface: FgColors.backgroundElevated,
-        ),
-        textTheme: ThemeData.dark().textTheme.apply(
-              fontFamily: FgTypography.pixelFamily,
-              bodyColor: FgColors.onSurface,
-              displayColor: FgColors.onSurface,
-            ),
-      ),
+      theme: buildFgTheme(readableFont: readableFont),
+      // System-Schriftgröße × App-Stufe, gedeckelt auf kMaxTextScale.
+      builder: (context, child) {
+        final mq = MediaQuery.of(context);
+        return MediaQuery(
+          data: mq.copyWith(
+            textScaler:
+                combineTextScale(mq.textScaler, textFaktor, kMaxTextScale),
+          ),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       // spec-34: show onboarding wizard on first run.
       //
       // Kein Resume-Catchup mehr (2026-08-11): der spulte beim Zurückkommen

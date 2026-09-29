@@ -95,7 +95,7 @@ void main() {
       await tester.pumpAndSettle();
       expect(
         tester.getSemantics(find.bySemanticsLabel('✓ Richtig: Antwort E')),
-        containsSemantics(
+        isSemantics(
           label: '✓ Richtig: Antwort E',
           isButton: true,
           isSelected: true,

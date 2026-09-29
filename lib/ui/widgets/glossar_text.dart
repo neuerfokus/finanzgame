@@ -28,9 +28,14 @@ class GlossarText extends StatelessWidget {
       // Kein Glossar-Treffer — normal rendern.
       return Text(text, style: style, textAlign: textAlign);
     }
-    return RichText(
-      textAlign: textAlign ?? TextAlign.start,
-      text: TextSpan(style: style, children: spans),
+    // Text.rich statt RichText: erbt wie jeder Text den DefaultTextStyle
+    // (Schrift aus dem Theme → Lesbarkeits-Einstellung) und die
+    // Schriftgröße aus MediaQuery. Das rohe RichText tat beides nicht —
+    // Glossar-Blasen standen deshalb immer in Roboto und unskaliert.
+    return Text.rich(
+      TextSpan(children: spans),
+      style: style,
+      textAlign: textAlign,
     );
   }
 

@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../../../core/design_tokens.dart';
 import '../../../features/monetaria/island_identity.dart';
 import '../state/monetaria_state.dart' show IslandId;
+import 'island_label_layout.dart';
 
 /// Visual island marker on the Monetaria map.
 ///
@@ -32,6 +33,8 @@ class IslandMarker extends PositionComponent with TapCallbacks {
     this.onLockedTap,
     this.onLongPressed,
     this.decorGlyphs = const <String>[],
+    this.readableLabel = false,
+    this.labelScale = 1.0,
   }) : super(
           position: worldPosition,
           size: Vector2.all(_diameter),
@@ -90,6 +93,12 @@ class IslandMarker extends PositionComponent with TapCallbacks {
 
   /// Spec-43 Stage 3: bis zu 3 Decor-Glyphs als Mini-Stack unter dem Label.
   final List<String> decorGlyphs;
+
+  /// Lesbarkeit (Build 194): Beschriftung in Plattformschrift statt Pixel.
+  final bool readableLabel;
+
+  /// Lesbarkeit (Build 194): Schriftfaktor aus System × App-Stufe.
+  final double labelScale;
 
   async.Timer? _longPressTimer;
   bool _longPressFired = false;
@@ -150,12 +159,16 @@ class IslandMarker extends PositionComponent with TapCallbacks {
 
     // Label box below the island — black 90 % bg + bold white text + gold
     // border for high contrast against the bright water tile (spec-28).
-    add(
-      _LabelBox(
-        text: label,
-        anchorTopCenter: Vector2(_diameter / 2, _diameter + 6),
-      ),
+    final labelLayout = layoutIslandLabel(
+      label,
+      readableFont: readableLabel,
+      scale: labelScale,
     );
+    final labelBox = _LabelBox(
+      layout: labelLayout,
+      anchorTopCenter: Vector2(_diameter / 2, _diameter + 6),
+    );
+    add(labelBox);
 
     // Spec-43 Stage 3: Decor-Mini-Stack unter Label.
     if (decorGlyphs.isNotEmpty) {
@@ -171,7 +184,10 @@ class IslandMarker extends PositionComponent with TapCallbacks {
             ),
           ),
           anchor: Anchor.topCenter,
-          position: Vector2(_diameter / 2, _diameter + 56),
+          position: Vector2(
+            _diameter / 2,
+            _diameter + 6 + labelBox.size.y + 4,
+          ),
         ),
       );
     }
@@ -369,19 +385,24 @@ class IslandMarker extends PositionComponent with TapCallbacks {
   }
 }
 
-/// Black-80% rounded rectangle with white pixel text inside. Sized to fit
-/// its label with 4-px padding. Anchor.topCenter on [anchorTopCenter] so
-/// callers can place it directly below the sprite.
+/// Black-80% rounded rectangle with white text inside. Sized to fit its
+/// label plus padding. Anchor.topCenter on [anchorTopCenter] so callers can
+/// place it directly below the sprite. Schrift, Größe und Umbruch kommen aus
+/// [layoutIslandLabel]; jede Zeile wird einzeln zentriert.
 class _LabelBox extends PositionComponent {
   _LabelBox({
-    required this.text,
+    required this.layout,
     required Vector2 anchorTopCenter,
   }) : super(
           position: anchorTopCenter,
           anchor: Anchor.topCenter,
+          size: Vector2(
+            layout.width + _padX * 2,
+            layout.height + _padY * 2,
+          ),
         );
 
-  final String text;
+  final IslandLabelLayout layout;
 
   // spec-43 v2: label noch größer + dickerer Rand für Lesbarkeit.
   static const double _padX = 14;
@@ -390,28 +411,21 @@ class _LabelBox extends PositionComponent {
   static const Color _bg = Color(0xF0000000);
   static const Color _border = FgColors.primary;
 
-  late final TextComponent _text;
-
   @override
   Future<void> onLoad() async {
-    _text = TextComponent(
-      text: text,
-      textRenderer: TextPaint(
-        style: FgTypography.pixelLabel.copyWith(
-          color: Colors.white,
-          fontSize: 38,
-          fontWeight: FontWeight.bold,
+    final lines = layout.text.split('\n');
+    final lineHeight = layout.height / lines.length;
+    final paint = TextPaint(style: layout.style);
+    for (var i = 0; i < lines.length; i++) {
+      add(
+        TextComponent(
+          text: lines[i],
+          textRenderer: paint,
+          anchor: Anchor.topCenter,
+          position: Vector2(size.x / 2, _padY + i * lineHeight),
         ),
-      ),
-      anchor: Anchor.topLeft,
-      position: Vector2(_padX, _padY),
-    );
-    add(_text);
-    // Size = text size + padding; cached after first layout pass.
-    size = Vector2(
-      _text.size.x + _padX * 2,
-      _text.size.y + _padY * 2,
-    );
+      );
+    }
   }
 
   @override

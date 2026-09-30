@@ -22,6 +22,8 @@ class MonetariaWorld extends FlameGame with HasGameReference {
     this.onIslandLockedTap,
     this.onIslandLongPressed,
     this.decorByIsland = const <String, List<String>>{},
+    this.readableLabels = false,
+    this.labelScale = 1.0,
   });
 
   // spec-41: world auf 720×1400 erweitert für die 160-px-Marker.
@@ -41,6 +43,11 @@ class MonetariaWorld extends FlameGame with HasGameReference {
 
   /// Spec-43 Stage 3: pro Insel die Decor-Glyphs (max 3 rendered).
   final Map<String, List<String>> decorByIsland;
+
+  /// Lesbarkeit (Build 194): Inselnamen folgen Schriftwahl und -größe aus
+  /// den Einstellungen. Flame-Text erbt beides nicht vom Flutter-Theme.
+  final bool readableLabels;
+  final double labelScale;
 
   final List<IslandMarker> islands = [];
   late final Boat boat;
@@ -99,6 +106,8 @@ class MonetariaWorld extends FlameGame with HasGameReference {
             ? null
             : (m) => onIslandLongPressed!(m.id),
         decorGlyphs: decorByIsland[spec.id] ?? const <String>[],
+        readableLabel: readableLabels,
+        labelScale: labelScale,
       );
       islands.add(marker);
       world.add(marker);

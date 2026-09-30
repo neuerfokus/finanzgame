@@ -34,16 +34,31 @@ class _MonetariaPageState extends ConsumerState<MonetariaPage> {
   /// XP gibt.
   Set<String>? _builtWith;
 
+  /// Mit welcher Schrift (lesbar?, Faktor) die Welt gebaut wurde — ändert
+  /// sich eins davon, wird sie neu erzeugt wie beim Freischalt-Stand.
+  (bool, double)? _builtFont;
+
   @override
   Widget build(BuildContext context) {
     final unlocked = ref.watch(monetariaStateProvider);
-    if (_game == null || !setEquals(_builtWith, unlocked)) {
+    final readable = ref.watch(
+      settingsRepositoryProvider.select((s) => s.readableFont),
+    );
+    // Enthält bereits System-Schriftgröße × App-Stufe (MaterialApp.builder).
+    final scale = MediaQuery.textScalerOf(context).scale(1);
+    final font = (readable, scale);
+    if (_game == null ||
+        !setEquals(_builtWith, unlocked) ||
+        _builtFont != font) {
       _game = MonetariaWorld(
         unlockedIslandIds: unlocked,
         onIslandSelected: _openIsland,
         onIslandLockedTap: _showLockHint,
+        readableLabels: readable,
+        labelScale: scale,
       );
       _builtWith = {...unlocked};
+      _builtFont = font;
     }
 
     return PhoneFrame(

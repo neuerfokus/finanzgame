@@ -81,7 +81,7 @@ void main() {
   });
 
   testWidgets(
-    'Musik-Lautstärke-Slider drag updates musicVolume state (spec-23)',
+    'genau ein Lautstärke-Regler, kein Master- und kein Musik-Regler',
     (tester) async {
       final container = ProviderContainer();
       addTearDown(container.dispose);
@@ -94,15 +94,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // spec-37: music removed entirely. First remaining slider is now
-      // the Master-Lautstärke. Verify the page renders + sliders work.
-      expect(
-        container.read(settingsRepositoryProvider).musicVolume,
-        0,
-      );
-      final sliders =
-          tester.widgetList<Slider>(find.byType(Slider)).toList();
-      expect(sliders, isNotEmpty);
+      // spec-37: keine Musik; Build 196: Master-Regler entfernt.
+      expect(find.text('Lautstärke'), findsOneWidget);
+      expect(find.text('Master-Lautstärke'), findsNothing);
+      expect(find.textContaining('Musik'), findsNothing);
+      expect(find.byType(Slider), findsOneWidget);
     },
   );
 }

@@ -137,7 +137,7 @@ class _CreditsBlock extends StatelessWidget {
           ),
           SizedBox(height: FgSpacing.xs),
           Text(
-            '• Grafik, Schriften, Geräusche und Musik: Kenney (kenney.nl), '
+            '• Grafik, Schriften und Geräusche: Kenney (kenney.nl), '
             'gemeinfrei unter CC0.',
             style: FgTypography.bodyS,
           ),

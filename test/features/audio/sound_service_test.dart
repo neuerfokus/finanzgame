@@ -19,22 +19,11 @@ void main() {
       expect(rec.played, [AudioKey.coin, AudioKey.crash]);
     });
 
-    test('startMusic / stopMusic toggle', () async {
-      final rec = RecordingSoundService();
-      SoundService.use(rec);
-      await SoundService.instance.startMusic();
-      expect(rec.musicStarted, isTrue);
-      await SoundService.instance.stopMusic();
-      expect(rec.musicStarted, isFalse);
-    });
-
     test('default instance is silent (no throw)', () async {
       // Reset → _NoopSoundService.
       SoundService.reset();
       // Must not throw.
       await SoundService.instance.playSfx(AudioKey.coin);
-      await SoundService.instance.startMusic();
-      await SoundService.instance.stopMusic();
     });
 
     test('CashState.earn triggers coin sound', () {
@@ -59,25 +48,22 @@ void main() {
       expect(rec.played, isEmpty);
     });
 
-    test('setMusicVolume clamps below 0 to 0 (spec-23)', () {
+    test('setSfxVolume begrenzt auf 0..1', () {
       final rec = RecordingSoundService();
       SoundService.use(rec);
-      SoundService.instance.setMusicVolume(-0.5);
-      expect(rec.musicVolume, 0.0);
+      SoundService.instance.setSfxVolume(-0.5);
+      expect(rec.sfxVolume, 0.0);
+      SoundService.instance.setSfxVolume(1.75);
+      expect(rec.sfxVolume, 1.0);
+      SoundService.instance.setSfxVolume(0.3);
+      expect(rec.sfxVolume, closeTo(0.3, 1e-9));
     });
 
-    test('setMusicVolume clamps above 1 to 1 (spec-23)', () {
-      final rec = RecordingSoundService();
-      SoundService.use(rec);
-      SoundService.instance.setMusicVolume(1.75);
-      expect(rec.musicVolume, 1.0);
-    });
-
-    test('setMusicVolume passes through valid range', () {
-      final rec = RecordingSoundService();
-      SoundService.use(rec);
-      SoundService.instance.setMusicVolume(0.3);
-      expect(rec.musicVolume, closeTo(0.3, 1e-9));
+    test('es gibt keine Musik mehr (spec-37, Build 196)', () {
+      expect(
+        AudioKey.values.where((k) => k.assetPath.startsWith('music/')),
+        isEmpty,
+      );
     });
   });
 }

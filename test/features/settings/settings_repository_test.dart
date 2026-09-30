@@ -205,31 +205,34 @@ void main() {
       expect(c.read(settingsRepositoryProvider).musicVolume, 0);
     });
 
-    test('setMusicVolume round-trips through DB (spec-23)', () async {
+    test('eine Lautstärke: alter Stand klingt nach dem Update gleich laut',
+        () {
+      // Default war Master 60 % × Effekt 40 % = 24 % hörbar.
+      final rec = RecordingSoundService();
+      SoundService.use(rec);
+      addTearDown(SoundService.reset);
+      final c = ProviderContainer();
+      addTearDown(c.dispose);
+      expect(c.read(settingsRepositoryProvider).volumePct, 24);
+      expect(rec.sfxVolume, closeTo(0.24, 1e-9));
+    });
+
+    test('setVolume setzt Master fest auf 100 und übersteht Neustart',
+        () async {
       final db = AppDatabase.memory();
       addTearDown(db.close);
 
       final c1 = _containerForDb(db);
-      c1.read(settingsRepositoryProvider.notifier).setMusicVolume(50);
+      c1.read(settingsRepositoryProvider.notifier).setVolume(70);
       await _flushWrites();
       c1.dispose();
 
       final snap = await loadDbSnapshot(db);
       final c2 = _containerForDb(db, snap: snap);
       addTearDown(c2.dispose);
-      expect(c2.read(settingsRepositoryProvider).musicVolume, 50);
-    });
-
-    test('spec-37: setMusicVolume always forwards 0 to SoundService', () {
-      // Music has been removed; the slider value is still persisted
-      // (for future reactivation) but the audio backend gets 0.
-      final rec = RecordingSoundService();
-      SoundService.use(rec);
-
-      final c = ProviderContainer();
-      addTearDown(c.dispose);
-      c.read(settingsRepositoryProvider.notifier).setMusicVolume(40);
-      expect(rec.musicVolume, 0.0);
+      final s = c2.read(settingsRepositoryProvider);
+      expect(s.volumePct, 70);
+      expect(s.masterVolume, 100);
     });
 
     test('startAgeYears round-trips through DB (Drift v21 regression)',
@@ -251,14 +254,13 @@ void main() {
       expect(c2.read(settingsRepositoryProvider).startAgeYears, 14);
     });
 
-    test('setMusicVolume clamps out-of-range percent input (state only)',
-        () {
+    test('setVolume begrenzt auf 0..100', () {
       final c = ProviderContainer();
       addTearDown(c.dispose);
-      c.read(settingsRepositoryProvider.notifier).setMusicVolume(-20);
-      expect(c.read(settingsRepositoryProvider).musicVolume, 0);
-      c.read(settingsRepositoryProvider.notifier).setMusicVolume(250);
-      expect(c.read(settingsRepositoryProvider).musicVolume, 100);
+      c.read(settingsRepositoryProvider.notifier).setVolume(-20);
+      expect(c.read(settingsRepositoryProvider).volumePct, 0);
+      c.read(settingsRepositoryProvider.notifier).setVolume(250);
+      expect(c.read(settingsRepositoryProvider).volumePct, 100);
     });
 
     // Der PIN lag als Klartext in der DB — und die DB steckt als SQLite in

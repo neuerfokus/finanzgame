@@ -56,12 +56,6 @@ entfernt; das Banner ist jetzt leer. Nachvollziehbar über
 | assets/sfx/crash_rumble.ogg | Kenney Digital Audio — lowDown.ogg | CC0 | 2026-05-19 |
 | assets/sfx/ui_tap.ogg | Kenney Interface Sounds — click_002.ogg | CC0 | 2026-05-19 |
 
-## music/
-
-| Pfad | Quelle | Lizenz | Datum |
-|---|---|---|---|
-| assets/music/monetaria_loop.ogg | Kenney Music Jingles — jingles_NES13.ogg | CC0 | 2026-05-19 |
-
 ## maps/
 
 | Pfad | Quelle | Lizenz | Datum |
@@ -100,7 +94,7 @@ Seit dem Open-Source-Release unter **CC-BY-SA-4.0** (siehe
 |---|---|
 | Quellcode (`lib/`, `test/`, `tools/`, `android/`) | GPL-3.0-or-later |
 | Eigene Inhalte (Quests, Glossar, Branding) | CC-BY-SA-4.0 |
-| Kenney-Assets (Bilder, Fonts, SFX, Musik) | CC0 — keine Attributionspflicht |
+| Kenney-Assets (Bilder, Fonts, SFX) | CC0 — keine Attributionspflicht |
 | Twemoji-PNGs (`assets/images/furniture/`) | CC-BY-4.0 — **Attribution Pflicht** |
 
 ## In-App-Credits

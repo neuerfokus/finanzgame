@@ -109,7 +109,7 @@ Entwickeln genau richtig.
 
 - **Quelltext**: [GPL-3.0-or-later](LICENSE)
 - **Eigene Inhalte** (Quests, Glossar, App-Icon): CC-BY-SA-4.0
-- **Kenney-Assets** (Grafik, Fonts, Sound, Musik): CC0
+- **Kenney-Assets** (Grafik, Fonts, Sound): CC0
 - **Twemoji** (Möbel-Symbole): CC-BY-4.0, © Twitter, Inc. und Mitwirkende
 
 Pro Datei nachgehalten in [ASSETS.md](ASSETS.md), Lizenztexte unter

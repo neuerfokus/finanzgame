@@ -121,14 +121,22 @@ class GameSettings {
   /// Spec-19: whether the Zeitreise tutorial overlay was already dismissed.
   final bool zeitreiseTutorialSeen;
 
-  /// Spec-23: music volume in percent (0..100). 0 = silent, 100 = max.
+  /// Spec-23: Altlast. Musik gibt es seit spec-37 nicht mehr; die Spalte
+  /// bleibt nur, damit ältere Spielstände ohne Migration lesbar sind.
   final int musicVolume;
 
-  /// Spec-27: master volume multiplier in percent (0..100).
+  /// Spec-27: früherer Master-Regler in Prozent. Seit Build 196 nicht mehr
+  /// einstellbar — ohne Musik regelte er dasselbe wie [sfxVolume]. Wird
+  /// beim nächsten Verschieben des Lautstärke-Reglers auf 100 gesetzt.
   final int masterVolume;
 
-  /// Spec-27: SFX-category volume multiplier in percent (0..100).
+  /// Spec-27: Effekt-Lautstärke in Prozent (0..100).
   final int sfxVolume;
+
+  /// Die EINE Lautstärke, die der Regler zeigt: was bisher aus Master ×
+  /// Effekt hörbar war. So klingt ein alter Spielstand nach dem Update
+  /// genauso laut wie vorher.
+  int get volumePct => (sfxVolume * masterVolume / 100).round();
 
   /// Spec-33: anti-glitch sleep state.
   final int lastSleepEpochMs;
@@ -385,9 +393,7 @@ class SettingsRepository extends _$SettingsRepository {
       readableFont: snap.readableFont,
       textScalePct: TextScaleStufe.fromPct(snap.textScalePct).pct,
     );
-    SoundService.instance.setMasterVolume(s.masterVolume / 100.0);
-    SoundService.instance.setMusicVolume(s.musicVolume / 100.0);
-    SoundService.instance.setSfxVolume(s.sfxVolume / 100.0);
+    SoundService.instance.setSfxVolume(s.volumePct / 100.0);
     // Mirror the persisted mute-flag onto the static [SoundService] so the
     // audio backend is immediately consistent on cold start.
     SoundService.instance.muted = !s.soundEnabled;
@@ -538,29 +544,12 @@ class SettingsRepository extends _$SettingsRepository {
     _persist();
   }
 
-  /// Spec-23: persist music-volume slider value (0..100) and forward to
-  /// the audio backend so the change is audible immediately.
-  void setMusicVolume(int percent) {
-    // spec-37: Musik komplett entfernt — Slider behält Wert für spätere
-    // Reaktivierung, aber kein startMusic-Trigger mehr.
+  /// Lautstärke der Effekte (0..100). Legt den früheren Master-Faktor
+  /// dabei fest auf 100, damit [GameSettings.volumePct] genau dem Regler
+  /// entspricht.
+  void setVolume(int percent) {
     final clamped = percent.clamp(0, 100);
-    state = state.copyWith(musicVolume: clamped);
-    SoundService.instance.setMusicVolume(0);
-    _persist();
-  }
-
-  /// Spec-27: master volume multiplier (0..100).
-  void setMasterVolume(int percent) {
-    final clamped = percent.clamp(0, 100);
-    state = state.copyWith(masterVolume: clamped);
-    SoundService.instance.setMasterVolume(clamped / 100.0);
-    _persist();
-  }
-
-  /// Spec-27: SFX volume multiplier (0..100).
-  void setSfxVolume(int percent) {
-    final clamped = percent.clamp(0, 100);
-    state = state.copyWith(sfxVolume: clamped);
+    state = state.copyWith(sfxVolume: clamped, masterVolume: 100);
     SoundService.instance.setSfxVolume(clamped / 100.0);
     _persist();
   }

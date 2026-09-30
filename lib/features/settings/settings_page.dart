@@ -286,52 +286,33 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       ],
                     ),
                   ),
-                  // spec-37: Musik-Slider entfernt (keine Musik mehr).
+                  // spec-37: keine Musik. Build 196: der Master-Regler ist
+                  // raus — ohne Musik regelte er dasselbe wie der
+                  // Effekt-Regler. Übrig ist EINE Lautstärke.
                   const SizedBox(height: FgSpacing.s),
                   Row(
                     children: [
                       const Expanded(
                         child: Text(
-                          'Master-Lautstärke',
+                          'Lautstärke',
                           style: FgTypography.bodyM,
                         ),
                       ),
                       Text(
-                        '${settings.masterVolume}%',
+                        '${settings.volumePct}%',
                         style: FgTypography.bodyS,
                       ),
                     ],
                   ),
                   Slider(
-                    value: settings.masterVolume.toDouble(),
+                    // Nicht auf die 5er-Raster runden: ein alter Stand mit
+                    // Master 60 × Effekt 40 steht bei 24 %.
+                    value: settings.volumePct.toDouble(),
                     min: 0,
                     max: 100,
-                    divisions: 20,
-                    label: '${settings.masterVolume}%',
-                    onChanged: (v) => notifier.setMasterVolume(v.round()),
-                  ),
-                  const SizedBox(height: FgSpacing.s),
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: Text(
-                          'Effekt-Lautstärke',
-                          style: FgTypography.bodyM,
-                        ),
-                      ),
-                      Text(
-                        '${settings.sfxVolume}%',
-                        style: FgTypography.bodyS,
-                      ),
-                    ],
-                  ),
-                  Slider(
-                    value: settings.sfxVolume.toDouble(),
-                    min: 0,
-                    max: 100,
-                    divisions: 20,
-                    label: '${settings.sfxVolume}%',
-                    onChanged: (v) => notifier.setSfxVolume(v.round()),
+                    label: '${settings.volumePct}%',
+                    semanticFormatterCallback: (v) => '${v.round()} Prozent',
+                    onChanged: (v) => notifier.setVolume(v.round()),
                   ),
                 ],
               ),

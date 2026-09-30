@@ -1,14 +1,16 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 
-/// Identifiers for every SFX + music asset the app plays.
+/// Identifiers for every sound effect the app plays.
+///
+/// Musik gibt es seit spec-37 nicht mehr (Test-Feedback: nervig); Build 196
+/// hat die tote Musik-Schleife samt Datei und Master-Regler entfernt.
 enum AudioKey {
   coin('sfx/coin.ogg', volume: 0.6),
   harvest('sfx/harvest.ogg', volume: 0.7),
   sleep('sfx/sleep_chime.ogg', volume: 0.5),
   crash('sfx/crash_rumble.ogg', volume: 0.9),
-  uiTap('sfx/ui_tap.ogg', volume: 0.3),
-  musicLoop('music/monetaria_loop.ogg', volume: 0.25);
+  uiTap('sfx/ui_tap.ogg', volume: 0.3);
 
   const AudioKey(this.assetPath, {required this.volume});
   final String assetPath;
@@ -36,21 +38,9 @@ abstract class SoundService {
   set muted(bool value);
 
   Future<void> playSfx(AudioKey key);
-  Future<void> startMusic();
-  Future<void> stopMusic();
 
-  /// Spec-23: set background-music volume in the range 0.0..1.0.
-  /// Values outside the range MUST be clamped by the implementation.
-  /// Effect is immediate if music is currently playing; otherwise the
-  /// volume is remembered for the next [startMusic] call.
-  void setMusicVolume(double v);
-
-  /// Spec-27: master volume multiplier (0..1). Applied to both music and
-  /// SFX on top of their per-category volume. Stored, not played live.
-  void setMasterVolume(double v);
-
-  /// Spec-27: SFX-category volume multiplier (0..1). Applied to
-  /// [AudioKey.volume] on each [playSfx]. Music is not affected.
+  /// Lautstärke der Effekte (0..1), multipliziert mit [AudioKey.volume].
+  /// Werte außerhalb MUSS die Implementierung begrenzen.
   void setSfxVolume(double v);
 }
 
@@ -76,16 +66,10 @@ class AudioplayersSoundService implements SoundService {
     ),
   );
 
-  final AudioPlayer _musicPlayer = AudioPlayer();
   bool _muted = false;
 
-  /// Cached volume (0..1). Default matches [AudioKey.musicLoop.volume];
-  /// gets overwritten by [setMusicVolume] and read by [startMusic].
-  double _musicVolume = AudioKey.musicLoop.volume;
-
-  /// spec-27: master + sfx multipliers.
-  double _masterVolume = 0.6;
-  double _sfxVolume = 0.4;
+  /// Standard = alter Stand Master 60 % × Effekt 40 %.
+  double _sfxVolume = 0.24;
 
   /// spec-27: throttle map — last play timestamp per key in ms-since-epoch.
   /// Prevents the same SFX firing twice within ~80 ms (tab-spam taps).
@@ -96,12 +80,7 @@ class AudioplayersSoundService implements SoundService {
   bool get muted => _muted;
 
   @override
-  set muted(bool value) {
-    _muted = value;
-    if (value) {
-      _musicPlayer.stop();
-    }
-  }
+  set muted(bool value) => _muted = value;
 
   @override
   Future<void> playSfx(AudioKey key) async {
@@ -123,7 +102,7 @@ class AudioplayersSoundService implements SoundService {
       final player = _sfxPool[_sfxSlot];
       _sfxSlot = (_sfxSlot + 1) % _sfxPool.length;
       final effective =
-          (key.volume * _sfxVolume * _masterVolume).clamp(0.0, 1.0);
+          (key.volume * _sfxVolume).clamp(0.0, 1.0);
       await player.setVolume(effective);
       await player.play(AssetSource(key.assetPath));
     } catch (e) {
@@ -142,45 +121,9 @@ class AudioplayersSoundService implements SoundService {
   int _sfxSlot = 0;
 
   @override
-  Future<void> startMusic() async {
-    if (_muted) return;
-    try {
-      await _musicPlayer.setReleaseMode(ReleaseMode.loop);
-      await _musicPlayer.setVolume(_effectiveMusicVolume);
-      await _musicPlayer.play(AssetSource(AudioKey.musicLoop.assetPath));
-    } catch (e) {
-      if (kDebugMode) {
-        debugPrint('SoundService.startMusic failed: $e');
-      }
-    }
-  }
-
-  @override
-  Future<void> stopMusic() async {
-    try {
-      await _musicPlayer.stop();
-    } catch (_) {}
-  }
-
-  @override
-  void setMusicVolume(double v) {
-    _musicVolume = v.clamp(0.0, 1.0);
-    _musicPlayer.setVolume(_effectiveMusicVolume).catchError((Object _) {});
-  }
-
-  @override
-  void setMasterVolume(double v) {
-    _masterVolume = v.clamp(0.0, 1.0);
-    _musicPlayer.setVolume(_effectiveMusicVolume).catchError((Object _) {});
-  }
-
-  @override
   void setSfxVolume(double v) {
     _sfxVolume = v.clamp(0.0, 1.0);
   }
-
-  double get _effectiveMusicVolume =>
-      (_musicVolume * _masterVolume).clamp(0.0, 1.0);
 }
 
 /// Default impl used in tests + before assets land. All methods are no-ops.
@@ -193,59 +136,25 @@ class _NoopSoundService implements SoundService {
   @override
   Future<void> playSfx(AudioKey key) async {}
   @override
-  Future<void> startMusic() async {}
-  @override
-  Future<void> stopMusic() async {}
-  @override
-  void setMusicVolume(double v) {}
-  @override
-  void setMasterVolume(double v) {}
-  @override
   void setSfxVolume(double v) {}
 }
 
 /// Recording impl for tests. Stores every key the code asked to play.
 ///
-/// Honours [muted] like the production backend: muted instances neither
-/// record SFX nor flip [musicStarted].
+/// Honours [muted] like the production backend: muted instances don't
+/// record SFX.
 class RecordingSoundService implements SoundService {
   final List<AudioKey> played = [];
-  bool musicStarted = false;
   @override
   bool muted = false;
 
-  /// Spec-23: last value passed to [setMusicVolume], post-clamp to 0..1.
-  /// Null until set — lets tests distinguish "never called" from "set to 0".
-  double? musicVolume;
+  /// Letzter an [setSfxVolume] übergebener Wert, begrenzt auf 0..1.
+  double? sfxVolume;
 
   @override
   Future<void> playSfx(AudioKey key) async {
     if (muted) return;
     played.add(key);
-  }
-
-  @override
-  Future<void> startMusic() async {
-    if (muted) return;
-    musicStarted = true;
-  }
-
-  @override
-  Future<void> stopMusic() async => musicStarted = false;
-
-  @override
-  void setMusicVolume(double v) {
-    musicVolume = v.clamp(0.0, 1.0);
-  }
-
-  /// spec-27: last value passed to [setMasterVolume].
-  double? masterVolume;
-  /// spec-27: last value passed to [setSfxVolume].
-  double? sfxVolume;
-
-  @override
-  void setMasterVolume(double v) {
-    masterVolume = v.clamp(0.0, 1.0);
   }
 
   @override

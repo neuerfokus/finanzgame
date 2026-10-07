@@ -12,18 +12,20 @@ jugendlichen Testspieler gewachsen.
 
 ## Installieren
 
-Fertige APK unter [Releases](https://github.com/neuerfokus/finanzgame/releases)
-— herunterladen, auf dem Gerät antippen, „Unbekannte Quellen" zulassen.
+**Google Play:**
+[Finanzgame im Play Store](https://play.google.com/store/apps/details?id=com.finanzgame.finanzgame)
+— aktualisiert sich von selbst.
 
-Die Aufnahme bei **F-Droid** ist beantragt:
-[fdroiddata!49022](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/49022).
-Sobald sie durch ist, steht die App dort im Katalog und aktualisiert sich von
-selbst.
+**Ohne Play:** fertige APK unter
+[Releases](https://github.com/neuerfokus/finanzgame/releases) —
+herunterladen, auf dem Gerät antippen, „Unbekannte Quellen" zulassen.
 
-Ein Hinweis für den Wechsel: F-Droid signiert mit einem eigenen Schlüssel. Eine
-Installation von dort lässt sich deshalb nicht über die APK aus den Releases
-legen und umgekehrt. Wer wechselt, sichert vorher den Spielstand über
-*Einstellungen → Spielstand sichern* und spielt ihn danach wieder ein.
+Ein Hinweis für den Wechsel: Google Play signiert mit einem eigenen
+Schlüssel. Eine Installation aus Play lässt sich deshalb nicht mit der APK aus
+den Releases überschreiben und umgekehrt. Wer wechselt, sichert vorher den
+Spielstand über *Einstellungen → Spielstand exportieren*, deinstalliert die
+App und spielt den Stand nach der Neuinstallation über *Spielstand
+importieren* wieder ein.
 
 <p align="center">
   <img src="fastlane/metadata/android/de-DE/images/phoneScreenshots/1.png" width="19%" alt="Startseite mit Tag, Geld, Job und App-Icons">
